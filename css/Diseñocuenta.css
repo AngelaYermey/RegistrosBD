@@ -1,0 +1,172 @@
+/* Importar la fuente */
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+/* Estilos para la sección principal */
+section {
+  position: relative;
+  width: 100%;
+  height: 108vh;
+  display: flex;
+  overflow: hidden; /* Para ocultar el desbordamiento */
+  border: 2px solid #e7ecef; /* Agregando borde al section */
+  box-sizing: border-box; /* Asegurando que el borde esté dentro del tamaño del section */
+  position: relative; /* Ajustando la posición para el pseudo-elemento */
+}
+
+/* Estilos para el contenido */
+section {
+  background-image: url("/inclusion.jpg"); /* Reemplaza 'ruta/de/la/imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+}
+
+section .contentbx {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para el formulario */
+section .contentbx .form {
+  width: 60%;
+  margin-top: 20px;
+}
+
+/* Estilos para el título del formulario */
+section .contentbx .form h2 {
+  color: #494a48;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #6096ba;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+/* Estilos para los campos del formulario */
+section .contentbx .form .inputbx {
+  margin-bottom: 20px;
+  margin-top: 14px;
+}
+
+.form-floating label {
+  font-size: 18px; /* Tamaño de fuente */
+  color: #495057; /* Color de texto */
+  margin-top: 10px;
+  margin-bottom: -1px;
+  display: block; /* Hacer que los labels ocupen una línea completa */
+  font-weight: 590; /* Peso de la fuente */
+}
+
+/* Estilos para los inputs del formulario */
+section .contentbx .form .inputbx input {
+  width: 100%;
+  padding: 12px 20px;
+  font-weight: 300;
+  border: 1px solid #20272a;
+  font-size: 18px;
+  letter-spacing: 1px;
+  background: transparent;
+  border-radius: 10px;
+  margin-top: 6px; /* Ajusta según sea necesario */
+}
+
+
+/* Estilos para el campo Tipo de Usuario */
+section .contentbx .form .inputbx select {
+  width: 100%;
+  padding: 12px 20px;
+  font-weight: 300;
+  border: 1px solid #20272a;
+  font-size: 18px;
+  letter-spacing: 1px;
+  background: transparent;
+  border-radius: 10px;
+  margin-top: 6px; /* Ajusta según sea necesario */
+}
+
+/* Estilos para el campo Tipo de Usuario al enfocarse */
+section .contentbx .form .inputbx select:focus {
+  border-color: #6096ba;
+}
+
+/* Estilos para las opciones del campo Tipo de Usuario */
+section .contentbx .form .inputbx select option {
+  font-size: 18px;
+  color: #495057;
+}
+
+
+/* Estilos para el botón de enviar del formulario */
+section .contentbx .form .inputbx input[type="submit"] {
+  background: #274c77;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Estilos para el botón de enviar del formulario al pasar el cursor sobre él */
+section .contentbx .form .inputbx input[type="submit"]:hover {
+  background: #65a0c7;
+}
+
+/* Estilos para mensajes en el formulario */
+section .contentbx .form .inputbx p {
+  color: #0d70a2;
+  font-size: 18px;
+}
+
+/* Estilos para enlaces del formulario */
+section .contentbx .form .inputbx p a {
+  color: #f51515;
+  font-size: 18px;
+}
+
+section .contentbx .form {
+  width: 50%;
+  padding: 40px;
+  background: rgba(255 255 255 / 0.9);
+  margin: 50px;
+}
+
+/* Estilos para el contenido al estar en dispositivos con ancho máximo de 768px */
+@media (max-width: 768px) {
+  section .imgbx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  section .contentbx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* Estilos para subtítulos del formulario */
+  section .contentbx .form h3 {
+    color: #607d8b;
+    text-align: center;
+    margin: 30px 0 10px;
+    font-weight: 500;
+  }
+}
+
