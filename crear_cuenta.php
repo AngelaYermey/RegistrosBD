@@ -2,52 +2,51 @@
 error_reporting(E_ALL);
 echo '<style>
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #FFFFFF; /* Blanco para el fondo */
+   font-family: Arial, sans-serif;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   margin: 0;
+   background-color: #FFFFFF; /* Blanco para el fondo */
 }
 
 .card {
-    width: 350px;
-    padding: 30px;
-    border-radius: 12px;
-    background-color: #FDF0D5; 
-    color: #333; /* Texto oscuro */
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+   width: 350px;
+   padding: 30px;
+   border-radius: 12px;
+   background-color: #FDF0D5; 
+   color: #333; /* Texto oscuro */
+   text-align: center;
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .card p {
-    font-size: 30px; /* Tamaño de fuente más grande para el título */
-    margin-bottom: 20px; /* Espacio adicional debajo del título */
+   font-size: 30px; /* Tamaño de fuente más grande para el título */
+   margin-bottom: 20px; /* Espacio adicional debajo del título */
 }
 
 .error-message {
-    color: #EF233C; /* Rojo oscuro */
-    font-weight: bold;
+   color: #EF233C; /* Rojo oscuro */
+   font-weight: bold;
 }
 
 .card-success {
-    width: 350px;
-    padding: 30px;
-    border-radius: 12px;
-    background-color: #EDF2F4; /* Gris claro */
-    color: #780000; /* Rojo oscuro */
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+   width: 350px;
+   padding: 30px;
+   border-radius: 12px;
+   background-color: #EDF2F4;
+   color: #780000; /* Rojo oscuro */
+   text-align: center;
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .success-message {
-    color: #C1121F; /* Rojo oscuro */
-    font-weight: bold;
+   color: #C1121F; /* Rojo oscuro */
+   font-weight: bold;
 }
 </style>
 ';
-
 
 include 'conexiones/conector.php';
 if (isset($_POST['crear'])) {
