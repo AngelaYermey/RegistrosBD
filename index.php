@@ -17,7 +17,7 @@
 
     <div class="holy-grail-body">
         <?php
-        include("FormularioInicioSesion.php");
+        include("FormularioInicioSesion.html");
         ?>
 
     </div>

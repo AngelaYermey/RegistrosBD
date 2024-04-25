@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexiones/conector.php';
+include 'conector.php';
 
 if (isset($_POST['iniciar'])) {
     $con = new Conexion();
@@ -14,7 +14,7 @@ if (isset($_POST['iniciar'])) {
     $fila_estudiante = $resultado_estudiante->fetch_assoc();
 
     // Consultar si el usuario es un profesor
-    $resultado_profesor = $mysqli->query('SELECT cedula FROM profesores WHERE ced_profesor="' . $cedula . '" AND contraseña="' . $pass . '"');
+    $resultado_profesor = $mysqli->query('SELECT cedula FROM profesores WHERE cedula="' . $cedula . '" AND contraseña="' . $pass . '"');
     $fila_profesor = $resultado_profesor->fetch_assoc();
 
     if (!empty($fila_estudiante['cedula'])) {
@@ -45,51 +45,58 @@ if (isset($_POST['iniciar'])) {
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #007bff; /* Azul brillante */
-            color: #fff; /* Texto blanco */
+            background-color: #e9f0f6; /* Azul pálido para el fondo */
         }
-
+        
         .card {
-            width: 300px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff; /* Fondo blanco */
-            color: #007bff; /* Texto azul */
+            width: 350px;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: #cce0f5; /* Azul claro */
+            color: #333; /* Texto oscuro */
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
         }
-
+        
+        .card p {
+            font-size: 28px; /* Tamaño de fuente más grande para el título */
+            margin-bottom: 20px; /* Espacio adicional debajo del título */
+        }
+        
         .error-message {
-            color: #dc3545; /* Rojo oscuro */
+            color: #dc3545; /* Rojo */
             font-weight: bold;
         }
-
+        
         .card-success {
-            width: 300px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff; /* Fondo blanco */
-            color: #28a745; /* Texto verde */
+            width: 350px;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: #d2e9f7; /* Azul claro */
+            color: #007bff; /* Azul */
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
         }
-
+        
         .success-message {
-            color: #28a745; /* Verde */
+            color: #007bff; /* Azul */
             font-weight: bold;
         }
-    </style>';
+        </style>
+        ';
         // Si el usuario no es ni estudiante ni profesor, mostrar mensaje de error
-        $error_message = 'No existe el usuario o la contraseña es incorrecta';
         echo '<div class="card">
-        <p class="error-message">¡Error! cédula o contraseña incorrecta.</p>
-    </div>';
+        <p class="error-message">¡Error!</br> Cédula o contraseña incorrecta.</p>
+         </div>';
+         
+         echo "<script>
+         // Esperar 4 segundos antes de redirigir
+         setTimeout(function() {
+             // Redirigir a otra página
+             window.location.href = 'FormularioInicioSesion.html';
+         }, 3000); 
+     </script>";
     }
 }
 ?>
 
-<?php if (isset($error_message)) : ?>
-   <div class="error">
-     <?php echo $error_message; ?>
-      </div>
-<?php endif; ?> 

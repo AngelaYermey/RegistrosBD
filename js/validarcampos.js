@@ -45,3 +45,15 @@ window.onload = function() {
         }
     });
 };
+
+
+function mostrarCamposExtra() {
+    var tipoUsuario = document.getElementById("tipo_usuario").value;
+    var infoExtraEstudiante = document.getElementById("info_extra_estudiante");
+
+    if (tipoUsuario === "estudiantes") {
+        infoExtraEstudiante.style.display = "block";
+    } else {
+        infoExtraEstudiante.style.display = "none";
+    }
+}

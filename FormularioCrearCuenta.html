@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/Diseñocuenta.css">
+    <script src="js\validarcampos.js"></script>
     <title>Login</title>
 </head>
 
@@ -14,7 +15,7 @@
         <div class="contentbx">
             <div class="form">
                 <h2>Registrarse</h2>
-                <form action="/conexiones/crear_cuenta.php" method="POST" class="formulario_Crear_Cuenta" method="POST">
+                <form action="conexiones\crear_cuenta.php" method="POST" class="formulario_Crear_Cuenta" >
                     <div class="inputbx">
                         <div class="form-floating mb-3">
                             <label for="nom">Nombre</label>
@@ -34,7 +35,7 @@
 
                         <div class="form-floating mb-3">
                             <label for="correo">Correo Institucional</label>
-                            <input type="email" id="correo" name="correo" class="form-control" data-form-email required>
+                            <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " data-form-email required>
                             <span id="mensajeError" style="color: red;"></span><br>
                         </div>
 
@@ -61,7 +62,7 @@
 
                         </div>
                     </div>
-                    <div class="enviar">
+                    <div class="inputbx">
                         <input type="submit" class="btnCrear_Cuenta" value="Crear Cuenta" name="crear">
                     </div>
 
@@ -70,7 +71,7 @@
                             <p>¿Ya tienes una cuenta? <a href="FormularioInicioSesion.html">Iniciar sesión</a></p>
                         </center>
                     </div>
-                    <script src="js/validarcampos.js"></script>
+                    
                 </form>
 
 
@@ -80,17 +81,5 @@
     </section>
 
 </body>
-<script>
-    function mostrarCamposExtra() {
-        var tipoUsuario = document.getElementById("tipo_usuario").value;
-        var infoExtraEstudiante = document.getElementById("info_extra_estudiante");
-
-        if (tipoUsuario === "estudiantes") {
-            infoExtraEstudiante.style.display = "block";
-        } else {
-            infoExtraEstudiante.style.display = "none";
-        }
-    }
-</script>
 
 </html>

@@ -77,14 +77,17 @@ if (isset($_POST['crear'])) {
         }
 
         // Mostrar mensaje de éxito y redirigir al usuario a la página de inicio de sesión
-        echo "<script>
-        // Esperar 4 segundos antes de redirigir
-        setTimeout(function() {
-            // Redirigir a otra página
-            window.location.href = 'conexiones/inicio_sesion.php';
-        }, 3000); // 4000 milisegundos = 4 segundos
-    </script>";
-        echo '<script language="javascript">alert("Cuenta creada correctamente");window.location.href="/conexiones/inicio_sesion.php";</script>';
+        echo '<div class="card-success">
+        <p class="success-message">Se ha creado su cuenta correctamente</p>
+    </div>';
+    echo "<script>
+    // Esperar 5 segundos antes de redirigir
+    setTimeout(function() {
+        // Redirigir a otra página
+        window.location.href = 'inicio_sesion.php';
+    }, 4000); // 5000 milisegundos = 5 segundos
+</script>";
+        echo '<script language="javascript">alert("Cuenta creada correctamente");window.location.href="inicio_sesion.php";</script>';
         // Cerrar la conexión
         mysqli_close($mysqli);
     } else {
