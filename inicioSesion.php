@@ -31,65 +31,65 @@ if (isset($_POST['iniciar'])) {
         $_SESSION['cedula'] = $fila_profesor['cedula'];
 
 
-       // agregar pagina despues de iniciar sesión ejemplo header('Location: admin_profesor.php');
-       header('Location: guardarNotas.php');
-       
+        // agregar pagina despues de iniciar sesión ejemplo header('Location: admin_profesor.php');
+        header('Location: guardarNotas.php');
+
 
         exit;
     } else {
-        echo '<style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #e9f0f6; /* Azul pálido para el fondo */
-        }
-        
-        .card {
-            width: 350px;
-            padding: 30px;
-            border-radius: 12px;
-            background-color: #cce0f5; /* Azul claro */
-            color: #333; /* Texto oscuro */
-            text-align: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        }
-        
-        .card p {
-            font-size: 28px; /* Tamaño de fuente más grande para el título */
-            margin-bottom: 20px; /* Espacio adicional debajo del título */
-        }
-        
-        .error-message {
-            color: #dc3545; /* Rojo */
-            font-weight: bold;
-        }
-        
-        .card-success {
-            width: 350px;
-            padding: 30px;
-            border-radius: 12px;
-            background-color: #d2e9f7; /* Azul claro */
-            color: #007bff; /* Azul */
-            text-align: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        }
-        
-        .success-message {
-            color: #007bff; /* Azul */
-            font-weight: bold;
-        }
-        </style>
-        ';
+ echo '<style>
+ body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #FFFFFF; /* Blanco para el fondo */
+}
+
+.card {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #FDF0D5; 
+    color: #333; /* Texto oscuro */
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.card p {
+    font-size: 30px; /* Tamaño de fuente más grande para el título */
+    margin-bottom: 20px; /* Espacio adicional debajo del título */
+}
+
+.error-message {
+    color: #EF233C; /* Rojo oscuro */
+    font-weight: bold;
+}
+
+.card-success {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #EDF2F4; /* Gris claro */
+    color: #780000; /* Rojo oscuro */
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.success-message {
+    color: #C1121F; /* Rojo oscuro */
+    font-weight: bold;
+}
+</style>
+';
         // Si el usuario no es ni estudiante ni profesor, mostrar mensaje de error
         echo '<div class="card">
         <p class="error-message">¡Error!</br> Cédula o contraseña incorrecta.</p>
          </div>';
-         
-         echo "<script>
+
+        echo "<script>
          // Esperar 4 segundos antes de redirigir
          setTimeout(function() {
              // Redirigir a otra página
@@ -98,5 +98,3 @@ if (isset($_POST['iniciar'])) {
      </script>";
     }
 }
-?>
-

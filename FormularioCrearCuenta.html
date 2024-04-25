@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/Diseñocuenta.css">
-    <script src="js/validarcampos.js"></script>
     <title>Login</title>
 </head>
 
@@ -24,7 +23,7 @@
 
                         <div class="form-floating mb-3">
                             <label for="ape">Apellido</label>
-                            <input type="text" id="ape" class="form-control" name="ape" data-form-name pattern="[A-Za-z ]+" title="Solo se permiten letras mayúsculas, minúsculas y espacios" required>
+                            <input type="text" id="ape" class="form-control" name="ape" data-form-lastname pattern="[A-Za-z ]+" title="Solo se permiten letras mayúsculas, minúsculas y espacios" required>
                             
                         </div>
 
@@ -35,8 +34,7 @@
 
                         <div class="form-floating mb-3">
                             <label for="correo">Correo Institucional</label>
-                            <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " data-form-email required>
-                            <span id="mensajeError" style="color: red;"></span><br>
+                            <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " data-form-email pattern="^[\w.%+-]+@([a-zA-Z0-9-]+\.)*utp\.ac\.pa$"  required>
                         </div>
 
                         <div class="form-floating mb-3">
@@ -50,28 +48,27 @@
 
                         <div id="info_extra_estudiante" style="display: none;" class="form-floating mb-3">
                             <label for="facultad">Facultad</label>
-                            <input type="text" id="facultad" name="facultad" required title="Por favor, ingrese su facultad."><br><br>
+                            <input type="text" id="facultad" name="facultad"  title="Por favor, ingrese su facultad."><br><br>
 
                             <label for="carrera">Carrera</label>
-                            <input type="text" id="carrera" name="carrera" required title="Por favor, ingrese su carrera."><br><br>
+                            <input type="text" id="carrera" name="carrera"  title="Por favor, ingrese su carrera."><br><br>
                         </div>
 
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
                             <input type="password" id="pass" name="pass" class="form-control"  data-form-pass required>
-
                         </div>
                     </div>
                     <div class="inputbx">
-                        <input type="submit" class="btnCrear_Cuenta" value="Crear Cuenta" name="crear">
-                    </div>
+                        <button type="submit" class="btnCrear_Cuenta" data-form-btn name="crear">Crear Cuenta</button>
+                    </div>   
 
                     <div class="inputbx">
                         <center>
                             <p>¿Ya tienes una cuenta? <a href="FormularioInicioSesion.html">Iniciar sesión</a></p>
                         </center>
                     </div>
-                    
+                    <script src="js/validarcampos.js"></script>
                 </form>
 
 
@@ -79,7 +76,5 @@
 
         </div>
     </section>
-
 </body>
-
 </html>
