@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conector.php';
+include 'conexiones\conector.php';
 
 if (isset($_POST['iniciar'])) {
     $con = new Conexion();
@@ -94,7 +94,7 @@ if (isset($_POST['iniciar'])) {
          setTimeout(function() {
              // Redirigir a otra página
              window.location.href = 'FormularioInicioSesion.html';
-         }, 3000); 
+         }, 4000); 
      </script>";
     }
 }
