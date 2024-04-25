@@ -1,0 +1,23 @@
+CREATE DATABASE DB_retina;
+
+USE DB_retina;
+
+CREATE TABLE estudiantes (
+    cedula VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    facultad VARCHAR(50) NOT NULL,
+    carrera VARCHAR(50) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL
+
+);
+
+CREATE TABLE profesores (
+   cedula VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL
+);
+

@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Diseñocuenta.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <section>
+        <div class="contentbx">
+            <div class="form">
+                <h2>Iniciar sesión</h2>
+                <form action="/conexiones/inicio_sesion.php" method="POST">
+                    <div class="inputbx">
+                        <label>Cédula</label>
+                        <input type="text" name="cedula" data-form-id pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX" required>
+                    </div>
+
+                    <div class="inputbx">
+                        <label>Contraseña</label>
+                        <input type="password" name="pass" required>
+                    </div>
+                    <span id="error_message" style="color: red;"></span><br>
+                    <div class="inputbx">
+                        <br><br><br><br>
+                        <input type="submit" value="Iniciar sesión" name="iniciar" data-form-pass required>
+                    </div>
+
+                    <div class="inputbx">
+                        <br><br>
+                        <center>
+                            <p>¿No tienes una cuenta? <a href="FormularioCrearCuenta.html">Registrarme</a></p>
+                        </center>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

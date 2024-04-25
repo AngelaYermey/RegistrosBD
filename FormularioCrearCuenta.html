@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Diseñocuenta.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <section>
+        <div class="contentbx">
+            <div class="form">
+                <h2>Registrarse</h2>
+                <form action="/conexiones/crear_cuenta.php" method="POST" class="formulario_Crear_Cuenta" method="POST">
+                    <div class="inputbx">
+                        <div class="form-floating mb-3">
+                            <label for="nom">Nombre</label>
+                            <input type="text" id="nom" class="form-control" name="nom" data-form-name pattern="[A-Za-z ]+" title="Solo se permiten letras mayúsculas, minúsculas y espacios" required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <label for="ape">Apellido</label>
+                            <input type="text" id="ape" class="form-control" name="ape" data-form-name pattern="[A-Za-z ]+" title="Solo se permiten letras mayúsculas, minúsculas y espacios" required>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <label for="cedula">Cédula</label>
+                            <input type="text" id="cedula" name="cedula" class="form-control" data-form-id pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX" required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <label for="correo">Correo Institucional</label>
+                            <input type="email" id="correo" name="correo" class="form-control" data-form-email required>
+                            <span id="mensajeError" style="color: red;"></span><br>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <label for="tipo_usuario">Tipo de Usuario:</label>
+                            <select id="tipo_usuario" name="tipo_usuario" class="form-select" required title="Por favor, escoja una opción." onchange="mostrarCamposExtra()">
+                                <option value="">Escoger opción...</option>
+                                <option value="estudiantes">Estudiante</option>
+                                <option value="profesores">Profesor</option>
+                            </select>
+                        </div>
+
+                        <div id="info_extra_estudiante" style="display: none;" class="form-floating mb-3">
+                            <label for="facultad">Facultad</label>
+                            <input type="text" id="facultad" name="facultad" required title="Por favor, ingrese su facultad."><br><br>
+
+                            <label for="carrera">Carrera</label>
+                            <input type="text" id="carrera" name="carrera" required title="Por favor, ingrese su carrera."><br><br>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <label for="pass">Contraseña</label>
+                            <input type="password" id="pass" name="pass" class="form-control"  data-form-pass required>
+
+                        </div>
+                    </div>
+                    <div class="enviar">
+                        <input type="submit" class="btnCrear_Cuenta" value="Crear Cuenta" name="crear">
+                    </div>
+
+                    <div class="inputbx">
+                        <center>
+                            <p>¿Ya tienes una cuenta? <a href="FormularioInicioSesion.html">Iniciar sesión</a></p>
+                        </center>
+                    </div>
+                    <script src="js/validarcampos.js"></script>
+                </form>
+
+
+            </div>
+
+        </div>
+    </section>
+
+</body>
+<script>
+    function mostrarCamposExtra() {
+        var tipoUsuario = document.getElementById("tipo_usuario").value;
+        var infoExtraEstudiante = document.getElementById("info_extra_estudiante");
+
+        if (tipoUsuario === "estudiantes") {
+            infoExtraEstudiante.style.display = "block";
+        } else {
+            infoExtraEstudiante.style.display = "none";
+        }
+    }
+</script>
+
+</html>
