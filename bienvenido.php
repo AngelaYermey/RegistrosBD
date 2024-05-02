@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>HoLA</h1>
+    <h1>Hola: Interfaz de estudiante</h1>
 </body>
 </html>
