@@ -46,7 +46,6 @@ CREATE TABLE estudiantes (
     facultad VARCHAR(50) NOT NULL,
     carrera VARCHAR(50) NOT NULL,
     contraseña VARCHAR(100) NOT NULL
-
 );
 
 CREATE TABLE profesores (

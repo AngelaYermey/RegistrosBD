@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 echo '<style>
 body {
    font-family: Arial, sans-serif;
@@ -58,7 +57,7 @@ if (isset($_POST['crear'])) {
     $nombre = $_POST['nom'];
     $apellido = $_POST['ape'];
     $email = $_POST['correo'];
-    $contraseña = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hashear la contraseña para almacenamiento seguro
+    $contraseña = $_POST['pass']; // Hashear la contraseña para almacenamiento seguro
 
     // Verificar qué tipo de usuario se está registrando
     $tipo_usuario = $_POST['tipo_usuario'];
