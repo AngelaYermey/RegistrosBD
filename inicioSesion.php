@@ -21,11 +21,11 @@ if (isset($_POST['iniciar'])) {
             break;
         case 'profesor':
             $tabla = 'profesores';
-            $redireccion = 'bienvenido.php'; // Cambiar por la página de profesor
+            $redireccion = 'bienvenido.html'; // Cambiar por la página de profesor
             break;
         case 'estudiante':
             $tabla = 'estudiantes';
-            $redireccion = 'bienvenido.php'; // Cambiar por la página de estudiante
+            $redireccion = 'bienvenido.html'; // Cambiar por la página de estudiante
             break;
         default:
             mostrarMensajeError();
