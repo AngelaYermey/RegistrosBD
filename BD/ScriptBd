@@ -1,3 +1,39 @@
+
+----base de datos modificada
+
+USE DB_retina;
+
+CREATE TABLE administradores (
+    cedula VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE estudiantes (
+    cedula VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    facultad VARCHAR(50) NOT NULL,
+    carrera VARCHAR(50) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    admin_cedula VARCHAR(30),
+    FOREIGN KEY (admin_cedula) REFERENCES administradores(cedula)
+);
+
+CREATE TABLE profesores (
+    cedula VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    admin_cedula VARCHAR(30),
+    FOREIGN KEY (admin_cedula) REFERENCES administradores(cedula)
+);
+
+--- base de datos antigua
+
 CREATE DATABASE DB_retina;
 
 USE DB_retina;
@@ -20,4 +56,3 @@ CREATE TABLE profesores (
     email VARCHAR(100) NOT NULL,
     contraseña VARCHAR(100) NOT NULL
 );
-

@@ -4,7 +4,7 @@ class Conexion
     public $server = "localhost";
     public $user = "root";
     public $password = "";
-    public $db = "DB_retina";
+    public $db = "DB_retinaprueva";
     // Create connection
     public function conectar()
     {
