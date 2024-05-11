@@ -48,6 +48,7 @@ body {
 ';
 
 include 'conexiones/conector.php';
+
 if (isset($_POST['crear'])) {
     $con = new Conexion();
     $mysqli = $con->conectar();
@@ -70,15 +71,18 @@ if (isset($_POST['crear'])) {
     if (empty($fila['cedula'])) {
         // Insertar el nuevo usuario en la tabla correspondiente según el tipo de usuario
         if ($tipo_usuario === 'estudiantes') {
+
             $facultad = $_POST['facultad'];
             $carrera = $_POST['carrera'];
 
             mysqli_query($mysqli,  'INSERT INTO estudiantes(cedula, nombre, apellido, email, facultad, carrera, contraseña) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $facultad . '", "' . $carrera . '", "' . $contraseña . '")');
+       
         } elseif ($tipo_usuario === 'profesores') {
 
             mysqli_query($mysqli,  'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '")');
         }
 
+        echo '<div class="alert alert-success">Registrado correctamente</div>';
         // Mostrar mensaje de éxito y redirigir al usuario a la página de inicio de sesión
         echo '<div class="card-success">
         <p class="success-message">Cuenta creada correctamente</p>
@@ -87,12 +91,13 @@ if (isset($_POST['crear'])) {
     // Esperar 5 segundos antes de redirigir
     setTimeout(function() {
         // Redirigir a otra página
-        window.location.href = 'FormularioInicioSesion.html';
+        window.location.href = 'FormularioCrearCuenta.html';
     }, 5000); // 5000 milisegundos = 5 segundos
 </script>";
         // Cerrar la conexión
         mysqli_close($mysqli);
     } else {
+        echo '<div class="alert alert-danger">Registrado correctamente</div>';
         // Si ya existe un usuario con esa cédula, mostrar un mensaje de error
         echo '<div class="card-success">
         <p class="success-message">Ya existe una cuenta registrada</p>

@@ -133,6 +133,51 @@ section .contentbx .form h3 {
   font-weight: 500;
 }
 
+
+
+
+/* Estilos para el título del formulario */
+section .contentbx .admin h2 {
+  color: #494a48;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #6096ba;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+/* Estilos para los botones del formulario */
+section .contentbx .form .inputbx a.btn_regUsuario,
+section .contentbx .form .inputbx a.btn_tabProf,
+section .contentbx .form .inputbx a.btn_tabEstud,
+section .contentbx .form .inputbx a.btnvolver {
+  display: inline-block;
+  background: #274c77;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 12px 20px; 
+  font-size: 18px;
+  border-radius: 10px;
+  margin-top: 5px;
+  box-sizing: border-box; 
+  width: 100%;
+  text-align: center; /* Centrar texto */
+  text-decoration: none; /* Quitar subrayado del enlace */
+}
+
+
+/* Estilos para los botones del formulario al pasar el cursor sobre ellos */
+section .contentbx .form .inputbx a.btn_reistrar:hover,
+section .contentbx .form .inputbx a.btn_modificar:hover,
+section .contentbx .form .inputbx a.btnCrear_eliminar:hover {
+  background: #65a0c7;
+}
+
+
+
 /* Estilos para el contenido al estar en dispositivos con ancho máximo de 1024px */
 @media (max-width: 1024px) {
   section .contentbx .form {
@@ -146,3 +191,6 @@ section .contentbx .form h3 {
     width: 100%; /* Ancho completo en dispositivos pequeños */
   }
 }
+
+
+
