@@ -152,6 +152,7 @@ section .contentbx .admin h2 {
 section .contentbx .form .inputbx a.btn_regUsuario,
 section .contentbx .form .inputbx a.btn_tabProf,
 section .contentbx .form .inputbx a.btn_tabEstud,
+section .contentbx .form .inputbx a.btnsalir,
 section .contentbx .form .inputbx a.btnvolver {
   display: inline-block;
   background: #274c77;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexiones\conector.php';
+include 'db_Conexion/conector.php'; // Incluir el archivo de conexión
 
 if (isset($_POST['iniciar'])) {
     $con = new Conexion();
@@ -8,8 +8,11 @@ if (isset($_POST['iniciar'])) {
 
     $cedula = $_POST['cedula'];
     $pass = $_POST['pass'];
-    $tipo_usuario = $_POST['tipo_usuario']; // Agregamos la obtención del tipo de usuario
 
+    $_SESSION['usuario'] = $cedula;
+    
+    $tipo_usuario = $_POST['tipo_usuario']; // Agregamos la obtención del tipo de usuario
+    
     $tabla = ''; //almacena el nombre de la tabla según el tipo de usuario
     $redireccion = ''; // almacena la página de redireccion según el tipo de usuario
 
@@ -17,7 +20,7 @@ if (isset($_POST['iniciar'])) {
     switch ($tipo_usuario) {
         case 'administrador':
             $tabla = 'administradores';
-            $redireccion = 'formularioCrearcuenta.html'; // Cambiar por la página de administrador
+            $redireccion = 'administrador/adminUsuario.html'; // Cambiar por la página de administrador          
             break;
         case 'profesor':
             $tabla = 'profesores';

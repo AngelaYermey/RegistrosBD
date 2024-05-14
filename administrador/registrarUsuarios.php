@@ -47,9 +47,10 @@ body {
 </style>
 ';
 
-include 'conexiones/conector.php';
+include '../db_Conexion/conector.php';
 
-if (isset($_POST['crear'])) {
+session_start();
+if (isset($_POST['btnCrearCuenta'])) {
     $con = new Conexion();
     $mysqli = $con->conectar();
 
@@ -60,54 +61,50 @@ if (isset($_POST['crear'])) {
     $email = $_POST['correo'];
     $contraseña = $_POST['pass']; // Hashear la contraseña para almacenamiento seguro
 
+    // Obtener la cédula del administrador de la sesión
+    $admin_cedula = $_SESSION['usuario'];
+
     // Verificar qué tipo de usuario se está registrando
     $tipo_usuario = $_POST['tipo_usuario'];
 
     // Consultar si ya existe un usuario con la cédula proporcionada
     $resultado = $mysqli->query('SELECT cedula FROM ' . $tipo_usuario . ' WHERE cedula="' . $cedula . '"');
-    $fila = $resultado->fetch_assoc();
 
-    // Si no existe un usuario con esa cédula, proceder con el registro
-    if (empty($fila['cedula'])) {
+    // Verificar el número de filas devueltas por la consulta
+    if ($resultado->num_rows > 0) {
+        echo '<div class="alert alert-danger"></div>';
+        echo '<div class="card-success">
+        <p class="success-message">Error: Ya existe una cuenta registrada con esta cédula</p>
+    </div>';
+        echo "<script>
+        // Esperar 4 segundos antes de redirigir
+        setTimeout(function() {
+            // Redirigir a otra página
+            window.location.href = 'formCrearcuenta.html';
+        }, 4000); // 4000 milisegundos = 4 segundos
+    </script>";
+    } else {
+
         // Insertar el nuevo usuario en la tabla correspondiente según el tipo de usuario
         if ($tipo_usuario === 'estudiantes') {
-
             $facultad = $_POST['facultad'];
             $carrera = $_POST['carrera'];
-
-            mysqli_query($mysqli,  'INSERT INTO estudiantes(cedula, nombre, apellido, email, facultad, carrera, contraseña) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $facultad . '", "' . $carrera . '", "' . $contraseña . '")');
-       
+            mysqli_query($mysqli, 'INSERT INTO estudiantes(cedula, nombre, apellido, email, facultad, carrera, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $facultad . '", "' . $carrera . '", "' . $contraseña . '", "' . $admin_cedula . '")');
         } elseif ($tipo_usuario === 'profesores') {
-
-            mysqli_query($mysqli,  'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '")');
+            mysqli_query($mysqli, 'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '", "' . $admin_cedula . '")');
         }
-
-        echo '<div class="alert alert-success">Registrado correctamente</div>';
-        // Mostrar mensaje de éxito y redirigir al usuario a la página de inicio de sesión
         echo '<div class="card-success">
-        <p class="success-message">Cuenta creada correctamente</p>
+        <p class="success-message">Registrado correctamente</p>
     </div>';
         echo "<script>
-    // Esperar 5 segundos antes de redirigir
-    setTimeout(function() {
-        // Redirigir a otra página
-        window.location.href = 'FormularioCrearCuenta.html';
-    }, 5000); // 5000 milisegundos = 5 segundos
-</script>";
-        // Cerrar la conexión
-        mysqli_close($mysqli);
-    } else {
-        echo '<div class="alert alert-danger">Registrado correctamente</div>';
-        // Si ya existe un usuario con esa cédula, mostrar un mensaje de error
-        echo '<div class="card-success">
-        <p class="success-message">Ya existe una cuenta registrada</p>
-    </div>';
-        echo "<script>
-    // Esperar 5 segundos antes de redirigir
-    setTimeout(function() {
-        // Redirigir a otra página
-        window.location.href = 'FormularioCrearCuenta.html';
-    }, 5000); // 5000 milisegundos = 5 segundos
-</script>";
+        // Esperar 4 segundos antes de redirigir
+        setTimeout(function() {
+            // Redirigir a otra página
+            window.location.href = 'formCrearcuenta.php';
+        }, 4000); // 4000 milisegundos = 4segundos
+    </script>";
     }
+
+    // Cerrar la conexión
+    mysqli_close($mysqli);
 }
