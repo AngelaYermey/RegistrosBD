@@ -50,21 +50,13 @@ if ($validar == null || $validar = '') {
                         </div>
 
                         <div class="form-floating mb-3">
-                            <label for="tipo_usuario">Tipo de Usuario:</label>
-                            <select id="tipo_usuario" name="tipo_usuario" class="form-select" required title="Por favor, escoja una opción." onchange="mostrarCamposExtra()">
-                                <option value="">Escoger opción...</option>
-                                <option value="estudiantes">Estudiante</option>
-                                <option value="profesores">Profesor</option>
-                            </select>
-                        </div>
-
-                        <div id="info_extra_estudiante" style="display: none;" class="form-floating mb-3">
                             <label for="facultad">Facultad</label>
                             <input type="text" id="facultad" name="facultad"  title="Por favor, ingrese su facultad."><br>
+                        </div>
+ <div class="form-floating mb-3">
                             <label for="carrera">Carrera</label>
                             <input type="text" id="carrera" name="carrera"  title="Por favor, ingrese su carrera."><br>
                         </div>
-
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
                             <input type="password" id="pass" name="pass" class="form-control"  data-form-pass required>
