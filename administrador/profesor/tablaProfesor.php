@@ -1,4 +1,15 @@
+<?php
+session_start();
+error_reporting(0);
 
+$validar = $_SESSION['usuario'];
+
+if ($validar == null || $validar = '') {
+
+  header("Location: ../../formularioIniciosesion.html");
+  die();
+}    
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +21,7 @@
 
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../../css/estiloSearch.css">
+    <link rel="stylesheet" href="../../css/tabla.css">
 </head>
 
 <body>
@@ -19,7 +30,7 @@
     <div class="container">
     <form action="" method="GET" class="d-flex justify-content-between mb-3">
         <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"> Volver </i></a>
+            <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
         </div>
         <div class="group">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -29,7 +40,7 @@
             <button type="submit" name="buscar" class="btn btn-primary">Buscar</button>
         </div>
         <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="formCrearcuentaProfesor.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"> Agregar </i></a>
+            <a href="formCrearcuentaProfesor.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
         </div>
     </form>
         
@@ -75,8 +86,8 @@
                                 <td><?php echo $datos->email; ?></td>
                                 <td><?php echo $datos->contraseña; ?></td>
                                 <td>
-                                    <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i></a>
+                                    <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                    <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
                                 </td>
                             </tr>
                         <?php

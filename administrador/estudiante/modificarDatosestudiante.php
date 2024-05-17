@@ -19,6 +19,7 @@ if ($validar == null || $validar = '') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/formModificar.css">
     <title>Modificar</title>
 </head>
 
@@ -73,9 +74,8 @@ if(isset($_GET["cedEst"])) {
 ?>
 
 <body>
-    <form method="POST" class="col-4 p-4 m-auto">
-
-        <h2 class="text-center p-4">Modificar Estudiante</h2><br>
+<form method="POST" class="custom-form-style">
+    <br><h3>Modificar Estudiante</h3><br>
         <div class="col-md-12">
         <?php include "actualizar_estudiante.php"; ?>
             <label for="nom" class="form-label">Nombre</label>

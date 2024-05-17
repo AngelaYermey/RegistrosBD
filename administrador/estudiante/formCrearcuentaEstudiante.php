@@ -18,7 +18,7 @@ if ($validar == null || $validar = '') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/diseñoCuenta.css">
+    <link rel="stylesheet" href="../../css/DiseñoCuenta.css">
     <title>Reistro de usuarios</title>
 </head>
 
@@ -27,7 +27,7 @@ if ($validar == null || $validar = '') {
         <div class="contentbx">
             <div class="form">
                 <h2>Registrar usuarios</h2><br>
-                <form action="registrarUsuarios.php" method="POST" class="formulario_Crear_Cuenta" >
+                <form action="registroEstudiante.php" method="POST" class="formulario_Crear_Cuenta" >
                     <div class="inputbx">
                         <div class="form-floating mb-3">
                             <label for="nom">Nombre</label>
@@ -63,13 +63,12 @@ if ($validar == null || $validar = '') {
                         </div>
                     </div>
                     <div class="inputbx">
-                        <button type="submit" class="btnCrear_Cuenta" data-form-btn name="btnCrearCuenta">Crear Cuenta</button>
+                        <button type="submit" class="btnCrear_Cuenta" data-form-btn name="btnCrear">Crear Cuenta</button>
                     </div>   
                     <div class="inputbx">
-                        <a href="adminUsuario.html" name="volver" class="btnvolver" data-form-btn>Volver Atrás</a>
+                        <a href="tablaEstudiante.php" name="volver" class="btnvolver" data-form-btn>Volver Atrás</a>
                     </div>
 
-                    <script src="../js/validarcampos.js"></script>
                 </form>
           
             </div>

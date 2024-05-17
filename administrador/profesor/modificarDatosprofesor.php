@@ -20,6 +20,7 @@ if ($validar == null || $validar = '') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/formModificar.css">
     <title>Modificar</title>
 </head>
 
@@ -74,9 +75,10 @@ if(isset($_GET["cedProf"])) {
 ?>
 
 <body>
-    <form method="POST" class="col-4 p-4 m-auto">
-
-        <h2 class="text-center p-4">Modificar Profesor</h2><br>
+<div class="form-style-2">
+    
+    <form method="POST" class="custom-form-style">
+    <br><h3>Modificar Profesor</h3><br>
         <div class="col-md-12">
         <?php include "actualizar_profesor.php"; ?>
             <label for="nom" class="form-label">Nombre</label>
@@ -110,8 +112,9 @@ if(isset($_GET["cedProf"])) {
                 <center><a href="tablaProfesor.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
             </div>
         </div>
-
+        </div>
     </form>
+ 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

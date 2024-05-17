@@ -1,18 +1,14 @@
 <?php
-
 session_start();
 error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
 if ($validar == null || $validar = '') {
-
   header("Location: ../../formularioIniciosesion.html");
   die();
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +19,8 @@ if ($validar == null || $validar = '') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../../css/estiloSearch.css">
-
+   
+    <link rel="stylesheet" href="../../css/tabla.css">
 </head>
 
 <body>
@@ -33,7 +29,7 @@ if ($validar == null || $validar = '') {
     <div class="container">
     <form action="" method="GET" class="d-flex justify-content-between mb-3">
         <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"> Volver </i></a>
+            <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
         </div>
         <div class="group">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -43,7 +39,7 @@ if ($validar == null || $validar = '') {
             <button type="submit" name="buscar" class="btn btn-primary">Buscar</button>
         </div>
         <div class="col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="formCrearcuentaProfesor.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"> Agregar </i></a>
+            <a href="formCrearcuentaEstudiante.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
         </div>
     </form>
         <?php

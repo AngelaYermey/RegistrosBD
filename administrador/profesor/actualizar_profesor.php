@@ -39,7 +39,7 @@ if (isset($_POST["btnModificar"])) {
             <script>
                 setTimeout(function() {
                     window.location.href = 'tablaprofesor.php';
-                }, 3000);
+                }, 4000);
             </script>
             <?php
             exit; // Finalizar la ejecución del script después de la redirección

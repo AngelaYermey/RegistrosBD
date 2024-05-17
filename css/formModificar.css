@@ -1,0 +1,82 @@
+/* Estilo personalizado para el formulario */
+.custom-form-style {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* Estilo para el título del formulario */
+.custom-form-style h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    position: relative; /* Posición relativa para la línea */
+}
+
+/* Estilo para la línea debajo del título */
+.custom-form-style h3::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: #427AA1; /* Color de la línea */
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Estilo para las etiquetas del formulario */
+.custom-form-style label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Estilo para los campos de entrada del formulario */
+.custom-form-style input[type="text"],
+.custom-form-style input[type="email"],
+.custom-form-style input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #427AA1;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilo al enfocar los campos de entrada */
+.custom-form-style input[type="text"]:focus,
+.custom-form-style input[type="email"]:focus,
+.custom-form-style input[type="password"]:focus {
+    outline: none;
+    border-color: #bc4749; /* Color de resaltado al enfocar */
+    box-shadow: 0 0 5px rgba(255, 133, 0, 0.5); /* Sombra al enfocar */
+}
+
+/* Estilo para los botones del formulario */
+.custom-form-style .btn-success,
+.custom-form-style .btn-secondary {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* Estilo al hacer hover sobre los botones */
+.custom-form-style .btn-success:hover {
+    background-color: #5bba6f; /* Cambio de color al hacer hover */
+    color: #fff;
+}
+
+/* Estilo al hacer hover sobre los botones */
+.custom-form-style .btn-secondary:hover {
+    background-color: #c2c5aa; /* Cambio de color al hacer hover */
+    color: #fff;
+}

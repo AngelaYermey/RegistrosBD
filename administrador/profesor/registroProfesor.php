@@ -64,11 +64,9 @@ if (isset($_POST['btnCrearCuenta'])) {
     // Obtener la cédula del administrador de la sesión
     $admin_cedula = $_SESSION['usuario'];
 
-    // Verificar qué tipo de usuario se está registrando
-    $tipo_usuario = $_POST['tipo_usuario'];
 
     // Consultar si ya existe un usuario con la cédula proporcionada
-    $resultado = $mysqli->query('SELECT cedula FROM ' . $tipo_usuario . ' WHERE cedula="' . $cedula . '"');
+    $resultado = $mysqli->query('SELECT cedula FROM profesores WHERE cedula="' . $cedula . '"');
 
     // Verificar el número de filas devueltas por la consulta
     if ($resultado->num_rows > 0) {
@@ -85,14 +83,9 @@ if (isset($_POST['btnCrearCuenta'])) {
     </script>";
     } else {
 
-        // Insertar el nuevo usuario en la tabla correspondiente según el tipo de usuario
-        if ($tipo_usuario === 'estudiantes') {
-            $facultad = $_POST['facultad'];
-            $carrera = $_POST['carrera'];
-            mysqli_query($mysqli, 'INSERT INTO estudiantes(cedula, nombre, apellido, email, facultad, carrera, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $facultad . '", "' . $carrera . '", "' . $contraseña . '", "' . $admin_cedula . '")');
-        } elseif ($tipo_usuario === 'profesores') {
-            mysqli_query($mysqli, 'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '", "' . $admin_cedula . '")');
-        }
+      
+      mysqli_query($mysqli, 'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '", "' . $admin_cedula . '")');
+    
         echo '<div class="card-success">
         <p class="success-message">Registrado correctamente</p>
     </div>';
