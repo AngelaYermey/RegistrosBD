@@ -34,3 +34,64 @@ CREATE TABLE profesores (
     admin_cedula VARCHAR(30),
     FOREIGN KEY (admin_cedula) REFERENCES administradores(cedula)
 );
+
+
+-------------------------------------------------------------------------------------------
+-- base de datos de pruevas
+CREATE DATABASE IF NOT EXISTS DB_Universidad;
+USE DB_Universidad;
+
+-- Tabla de administradores
+CREATE TABLE administradores (
+    cedula_admin VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL
+);
+
+-- Tabla de estudiantes
+CREATE TABLE estudiantes (
+    cedula_estudiante VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    facultad VARCHAR(50) NOT NULL,
+    carrera VARCHAR(100) NOT NULL,
+    sede VARCHAR(100)NOT NULL,
+    año INT NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    cedula_admin VARCHAR(30),
+    FOREIGN KEY (cedula_admin) REFERENCES administradores(cedula_admin)
+);
+
+-- Tabla de profesores
+CREATE TABLE profesores (
+    cedula_prof VARCHAR(30) PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    cedula_admin VARCHAR(30),
+    FOREIGN KEY (cedula_admin) REFERENCES administradores(cedula_admin)
+);
+
+-- Tabla de asignaturas
+CREATE TABLE Asignaturas (
+    codigo_asignatura VARCHAR(20) PRIMARY KEY,
+    nombre VARCHAR(100)NOT NULL,
+    centro_regional VARCHAR(100)NOT NULL
+);
+
+-- Tabla de registros de clase
+CREATE TABLE Clases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_asignatura VARCHAR(20)NOT NULL,
+    cedula_prof VARCHAR(30)NOT NULL,
+    nombre_clase VARCHAR(20)NOT NULL,
+    texto_clase TEXT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    FOREIGN KEY (codigo_asignatura) REFERENCES Asignaturas(codigo_asignatura),
+    FOREIGN KEY (cedula_prof) REFERENCES Profesores(cedula_prof)
+);
+
