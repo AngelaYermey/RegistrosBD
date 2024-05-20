@@ -5,8 +5,8 @@ error_reporting(0);
 $validar = $_SESSION['usuario'];
 
 if ($validar == null || $validar = '') {
-  header("Location: ../../formularioIniciosesion.html");
-  die();
+    header("Location: ../../formularioIniciosesion.html");
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ if ($validar == null || $validar = '') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
-   
+
     <link rel="stylesheet" href="../../css/tabla.css">
 </head>
 
@@ -27,7 +27,7 @@ if ($validar == null || $validar = '') {
     <h2 class="text-center p-4">Tabla de Estudiantes</h2>
 
     <div class="containerTabla">
-    <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
+        <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="col-md-4 mb-2 mb-md-0">
                 <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
             </div>
@@ -43,17 +43,17 @@ if ($validar == null || $validar = '') {
         </form>
 
         <?php
-       include '../../db_Conexion/conector.php';
+        include '../../db_Conexion/conector.php';
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
         if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
-            $busqueda = $_GET['busqueda']; 
+            $busqueda = $_GET['busqueda'];
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
             $stmt = $conn->prepare("SELECT * FROM estudiantes WHERE cedula_estudiante LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR facultad LIKE ? OR carrera LIKE ? OR sede LIKE ? OR año LIKE ? OR contraseña LIKE ?");
-            $stmt->bind_param("sssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda); // Asociar parámetros
+            $stmt->bind_param("ssssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda); // Asociar parámetros
             $stmt->execute(); // Ejecutar la consulta preparada
             $result = $stmt->get_result(); // Obtener los resultados de la consulta
         } else {
@@ -71,35 +71,41 @@ if ($validar == null || $validar = '') {
                             <th scope="col">Correo</th>
                             <th scope="col">Facultad</th>
                             <th scope="col">Carrera</th>
+                            <th scope="col">Centro Regional</th>
+                            <th scope="col">Año</th>
                             <th scope="col">Contraseña</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <?php
-                        while ($datos = $result->fetch_object()) {
-                        ?>
+                        <?php if ($result->num_rows === 0) : ?>
                             <tr>
-                                <th scope="row"><?php echo $datos->cedula; ?></th>
-                                <td><?php echo $datos->nombre; ?></td>
-                                <td><?php echo $datos->apellido; ?></td>
-                                <td><?php echo $datos->email; ?></td>
-                                <td><?php echo $datos->facultad; ?></td>
-                                <td><?php echo $datos->carrera; ?></td>
-                                <td><?php echo $datos->contraseña; ?></td>
-                                <td>
-                                    <a href="modificarDatosestudiante.php?cedEst=<?= $datos->cedula ?>" class="btn btn-small btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->cedula ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                                </td>
+                                <td colspan="10" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
                             </tr>
-                        <?php
-                        }
-                        ?>
+                        <?php else : ?>
+                            <?php while ($datos = $result->fetch_object()) : ?>
+                                <tr>
+                                    <th scope="row"><?php echo $datos->cedula_estudiante; ?></th>
+                                    <td><?php echo $datos->nombre; ?></td>
+                                    <td><?php echo $datos->apellido; ?></td>
+                                    <td><?php echo $datos->email; ?></td>
+                                    <td><?php echo $datos->facultad; ?></td>
+                                    <td><?php echo $datos->carrera; ?></td>
+                                    <td><?php echo $datos->sede; ?></td>
+                                    <td><?php echo $datos->año; ?></td>
+                                    <td><?php echo $datos->contraseña; ?></td>
+                                    <td>
+                                        <a href="modificarDatosestudiante.php?cedEst=<?= $datos->cedula_estudiante ?>" class="btn btn-small btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->cedula_estudiante ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     </tbody>
-
                 </table>
             </div>
         </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

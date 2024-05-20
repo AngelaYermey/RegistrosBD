@@ -51,8 +51,8 @@
 .custom-form-style input[type="email"]:focus,
 .custom-form-style input[type="password"]:focus {
     outline: none;
-    border-color: #bc4749; /* Color de resaltado al enfocar */
-    box-shadow: 0 0 5px rgba(255, 133, 0, 0.5); /* Sombra al enfocar */
+    border-color: #d1292b; /* Color de resaltado al enfocar */
+    box-shadow: 0 0 5px rgba(175, 53, 45, 0.5); /* Sombra al enfocar */
 }
 
 /* Estilo para los botones del formulario */

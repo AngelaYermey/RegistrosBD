@@ -95,3 +95,37 @@ CREATE TABLE Clases (
     FOREIGN KEY (cedula_prof) REFERENCES Profesores(cedula_prof)
 );
 
+
+
+llenando tablas
+
+-- Insertar administradores
+INSERT INTO administradores (cedula_admin, nombre, apellido, contraseña)
+VALUES ('8-987-65', 'Juan', 'Pérez', 'contraseña1'),
+       ('9-876-54', 'María', 'González', 'contraseña2'),
+       ('7-654-32', 'Luis', 'Martínez', 'contraseña3'),
+       ('2-750-818', 'angela', 'carrión', '123456789');
+
+-- Insertar estudiantes
+INSERT INTO estudiantes (cedula_estudiante, nombre, apellido, email, facultad, carrera, sede, año, contraseña, cedula_admin)
+VALUES ('1-123-45', 'Pedro', 'Rodríguez', 'pedro@example.com', 'Ingeniería', 'Ingeniería Civil', 'Panamá', 3, 'contraseña4', '2-750-818'),
+       ('2-234-56', 'Ana', 'Sánchez', 'ana@example.com', 'Ciencias', 'Biología', 'Chiriquí', 2, 'contraseña5', '2-750-818'),
+       ('3-345-67', 'Carlos', 'López', 'carlos@example.com', 'Arquitectura', 'Arquitectura', 'Veraguas', 4, 'contraseña6', '2-750-818');
+
+-- Insertar profesores
+INSERT INTO profesores (cedula_prof, nombre, apellido, email, contraseña, cedula_admin)
+VALUES ('4-456-78', 'Laura', 'Díaz', 'laura@example.com', 'contraseña7', '2-750-818'),
+       ('5-567-89', 'Roberto', 'Hernández', 'roberto@example.com', 'contraseña8', '2-750-818'),
+       ('6-678-90', 'Sofía', 'Martínez', 'sofia@example.com', 'contraseña9', '2-750-818');
+
+-- Insertar asignaturas
+INSERT INTO Asignaturas (codigo_asignatura, nombre, centro_regional)
+VALUES ('MAT101', 'Matemáticas I', 'Centro Regional de Panamá Oeste'),
+       ('BIO201', 'Biología Celular', 'Centro Regional de Chiriquí'),
+       ('ARQ301', 'Diseño Arquitectónico', 'Centro Regional de Veraguas');
+
+-- Insertar clases
+INSERT INTO Clases (codigo_asignatura, cedula_prof, nombre_clase, texto_clase, fecha, hora)
+VALUES ('MAT101', '4-456-78', 'Clase 1', 'Introducción a los números reales', '2024-05-20', '08:00:00'),
+       ('BIO201', '5-567-89', 'Clase 1', 'Estructura celular', '2024-05-21', '09:30:00'),
+       ('ARQ301', '6-678-90', 'Clase 1', 'Principios del diseño arquitectónico', '2024-05-22', '10:45:00');

@@ -79,7 +79,7 @@ if(isset($_GET["cedEst"])) {
         <div class="col-md-12">
         <?php include "actualizar_estudiante.php"; ?>
             <label for="nom" class="form-label">Nombre</label>
-            <input type="text" id="nom" class="form-control" name="nom" pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" value="<?php echo $datos->nombre; ?>" required>
+            <input type="text" id="nom" class="form-control" name="nom" pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" value="<?php echo $datos->cedula_estudiante; ?>" required>
         </div>
         <div class="col-md-12">
             <label for="ape" class="form-label">Apellido</label>
@@ -87,9 +87,9 @@ if(isset($_GET["cedEst"])) {
         </div>
         <div class="col-12">
             <label for="cedula" class="form-label">Cédula</label>
-            <input type="text" id="cedula" name="nueva_cedula" class="form-control" pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX"  value="<?php echo $datos->cedula; ?>" required>
+            <input type="text" id="cedula" name="nueva_cedula" class="form-control" pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX"  value="<?php echo $datos->cedula_estudiante; ?>" required>
             <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
-            <input type="hidden" name="cedAntigua" value="<?php echo $datos->cedula; ?>">
+            <input type="hidden" name="cedAntigua" value="<?php echo $datos->cedula_estudiante; ?>">
         </div>
         <div class="col-12">
             <label for="correo" class="form-label">Correo Institucional</label>

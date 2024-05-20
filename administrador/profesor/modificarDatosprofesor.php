@@ -90,9 +90,9 @@ if(isset($_GET["cedProf"])) {
         </div>
         <div class="col-12">
             <label for="cedula" class="form-label">Cédula</label>
-            <input type="text" id="cedula" name="nueva_cedula" class="form-control" pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX"  value="<?php echo $datos->cedula; ?>" required>
+            <input type="text" id="cedula" name="nueva_cedula" class="form-control" pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX"  value="<?php echo $datos->cedula_prof; ?>" required>
             <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
-            <input type="hidden" name="cedAntigua" value="<?php echo $datos->cedula; ?>">
+            <input type="hidden" name="cedAntigua" value="<?php echo $datos->cedula_prof; ?>">
         </div>
         <div class="col-12">
             <label for="correo" class="form-label">Correo Institucional</label>

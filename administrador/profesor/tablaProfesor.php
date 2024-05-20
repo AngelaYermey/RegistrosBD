@@ -47,54 +47,60 @@ if ($validar == null || $validar = '') {
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
         if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
-            $busqueda = $_GET['buscar'];
-            $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
+            $busqueda = $_GET['busqueda']; // obtener el valor de 'busqueda'
+            $busqueda = "%$busqueda%"; // comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
             $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
-               $stmt->bind_param("s", $busqueda); // Asociar parámetro
+            // Asociar parámetros
+            $stmt->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+
             $stmt->execute(); // Ejecutar la consulta preparada
             $result = $stmt->get_result(); // Obtener los resultados de la consulta
+
         } else {
             $result = $conn->query("SELECT * FROM profesores"); // Consulta por defecto si no hay búsqueda
         }
 
         ?>
-        <div class="row justify-content-center">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="table-light">
+ <div class="row justify-content-center">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <?php if ($result->num_rows === 0) : ?>
+                    <tr>
+                        <td colspan="6" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
+                    </tr>
+                <?php else : ?>
+                    <?php while ($datos = $result->fetch_object()) : ?>
                         <tr>
-                            <th scope="col">Cédula</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Contraseña</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="row"><?php echo $datos->cedula_prof; ?></th>
+                            <td><?php echo $datos->nombre; ?></td>
+                            <td><?php echo $datos->apellido; ?></td>
+                            <td><?php echo $datos->email; ?></td>
+                            <td><?php echo $datos->contraseña; ?></td>
+                            <td>
+                                <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <?php
-                        while ($datos = $result->fetch_object()) {
-                        ?>
-                            <tr>
-                                <th scope="row"><?php echo $datos->cedula; ?></th>
-                                <td><?php echo $datos->nombre; ?></td>
-                                <td><?php echo $datos->apellido; ?></td>
-                                <td><?php echo $datos->email; ?></td>
-                                <td><?php echo $datos->contraseña; ?></td>
-                                <td>
-                                    <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                    <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
