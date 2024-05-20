@@ -56,7 +56,7 @@ if(isset($_POST['eliminar'])){
         $conn = $conexion_obj->conectar();
 
         // Prepara la consulta SQL para eliminar con la cédula especificada
-        $eliminar_estudiante = $conn->prepare("DELETE FROM profesores WHERE cedula = ?");
+        $eliminar_estudiante = $conn->prepare("DELETE FROM profesores WHERE cedula_prof  = ?");
         
         // Vincula el parámetro de la consulta
         $eliminar_estudiante->bind_param("s", $cedula);

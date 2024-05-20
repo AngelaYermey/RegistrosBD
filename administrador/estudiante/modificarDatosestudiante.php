@@ -36,8 +36,8 @@ if(isset($_GET["cedEst"])) {
     $ced = $_GET["cedEst"];
 
     // Ejecutar la consulta SQL
-    $sql = $conn->prepare("SELECT * FROM estudiantes WHERE cedula = ?");
-    $sql->bind_param("i", $ced);
+    $sql = $conn->prepare("SELECT * FROM estudiantes WHERE cedula_estudiante = ?");
+    $sql->bind_param("s", $ced);
     $sql->execute();
 
     $result = $sql->get_result();

@@ -46,7 +46,7 @@ if ($validar == null || $validar = '') {
 
                         <div class="form-floating mb-3">
                             <label for="correo">Correo Institucional</label>
-                            <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " data-form-email pattern="^[\w.%+-]+@([a-zA-Z0-9-]+\.)*utp\.ac\.pa$"  required>
+                            <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " data-form-email pattern="^[\w.%+-]+@(?:[a-zA-Z0-9-]+\.)+utp\.ac\.pa$" required>
                         </div>
 
                         <div class="form-floating mb-3">

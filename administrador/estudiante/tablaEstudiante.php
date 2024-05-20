@@ -38,7 +38,7 @@ if ($validar == null || $validar = '') {
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="formCrearcuentaProfesor.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
+                <a href="formCrearcuentaEstudiante.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
             </div>
         </form>
 
@@ -52,7 +52,7 @@ if ($validar == null || $validar = '') {
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
-            $stmt = $conn->prepare("SELECT * FROM estudiantes WHERE cedula LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR facultad LIKE ? OR carrera LIKE ? OR contraseña LIKE ?");
+            $stmt = $conn->prepare("SELECT * FROM estudiantes WHERE cedula_estudiante LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR facultad LIKE ? OR carrera LIKE ? OR sede LIKE ? OR año LIKE ? OR contraseña LIKE ?");
             $stmt->bind_param("sssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda); // Asociar parámetros
             $stmt->execute(); // Ejecutar la consulta preparada
             $result = $stmt->get_result(); // Obtener los resultados de la consulta

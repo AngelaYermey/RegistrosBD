@@ -55,22 +55,27 @@ if (isset($_POST['btnCrear'])) {
     $mysqli = $con->conectar();
 
     // Inicializar variables
-    $cedula = $_POST['cedula'];
     $nombre = $_POST['nom'];
     $apellido = $_POST['ape'];
-    $email = $_POST['correo'];
+    $cedula = $_POST['cedula'];
+    $correo = $_POST['correo'];
     $facultad = $_POST['facultad'];
     $carrera = $_POST['carrera'];
-    $contraseña = $_POST['pass']; // Hashear la contraseña para almacenamiento seguro
+    $año = $_POST['año'];
+    $centro_regional = $_POST['cr'];
+    $contraseña = $_POST['pass'];
 
     // Obtener la cédula del administrador de la sesión
     $admin_cedula = $_SESSION['usuario'];
 
-    // Consultar si ya existe un usuario con la cédula proporcionada
-    $resultado = $mysqli->query('SELECT cedula FROM estudantes WHERE cedula="' . $cedula . '"');
+    // Verificar si ya existe un usuario con la cédula proporcionada
+    $stmt = $conn->prepare("SELECT cedula_estudiante FROM estudiantes WHERE cedula_estudiante = ?");
+    $stmt->bind_param("s", $cedula);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     // Verificar el número de filas devueltas por la consulta
-    if ($resultado->num_rows > 0) {
+    if ($resul->num_rows > 0) {
         echo '<div class="alert alert-danger"></div>';
         echo '<div class="card-success">
         <p class="success-message">Error: Ya existe una cuenta registrada con esta cédula</p>
@@ -84,19 +89,24 @@ if (isset($_POST['btnCrear'])) {
     </script>";
     } else {
 
-        // Insertar el nuevo usuario en la tabla correspondiente 
-         mysqli_query($mysqli, 'INSERT INTO estudiantes(cedula, nombre, apellido, email, facultad, carrera, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $facultad . '", "' . $carrera . '", "' . $contraseña . '", "' . $admin_cedula . '")');
-        
-        echo '<div class="card-success">
-        <p class="success-message">Registrado correctamente</p>
-    </div>';
-        echo "<script>
-        // Esperar 4 segundos antes de redirigir
-        setTimeout(function() {
-            // Redirigir a otra página
-            window.location.href = 'formCrearcuenta.php';
-        }, 4000); // 4000 milisegundos = 4segundos
-    </script>";
+        // Insertar nuevo usuario en la tabla de estudiantes
+        $stmt = $conn->prepare("INSERT INTO estudiantes (nombre, apellido, cedula_estudiante, correo, facultad, carrera, año, centro_regional, contraseña, admin_cedula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssssss", $nombre, $apellido, $cedula, $correo, $facultad, $carrera, $año, $centro_regional, $contraseña, $admin_cedula);
+        if ($stmt->execute()) {
+            echo '<div class="card-success">
+       <p class="success-message">Registrado correctamente</p>
+   </div>';
+            echo "<script>
+       // Esperar 4 segundos antes de redirigir
+       setTimeout(function() {
+           // Redirigir a otra página
+           window.location.href = 'formCrearcuentaEstudiante.php';
+       }, 4000); // 4000 milisegundos = 4 segundos
+   </script>";
+        } else {
+            echo "Error al registrar usuario: " . $stmt->error;
+        }
+        $stmt->close();
     }
 
     // Cerrar la conexión

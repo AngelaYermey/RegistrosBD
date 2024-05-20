@@ -47,14 +47,19 @@ body {
 </style>
 ';
 
+// Incluir el archivo de conexión a la base de datos
 include '../db_Conexion/conector.php';
 
+// Iniciar sesión
 session_start();
+
+// Verificar si se ha enviado el formulario para crear una cuenta
 if (isset($_POST['btnCrearCuenta'])) {
+    // Crear una instancia de la clase Conexion para establecer la conexión a la base de datos
     $con = new Conexion();
     $mysqli = $con->conectar();
 
-    // Inicializar variables
+    // Inicializar variables con los datos enviados desde el formulario
     $cedula = $_POST['cedula'];
     $nombre = $_POST['nom'];
     $apellido = $_POST['ape'];
@@ -64,12 +69,12 @@ if (isset($_POST['btnCrearCuenta'])) {
     // Obtener la cédula del administrador de la sesión
     $admin_cedula = $_SESSION['usuario'];
 
-
     // Consultar si ya existe un usuario con la cédula proporcionada
-    $resultado = $mysqli->query('SELECT cedula FROM profesores WHERE cedula="' . $cedula . '"');
+    $resultado = $mysqli->query('SELECT cedula_prof FROM profesores WHERE cedula_prof="' . $cedula . '"');
 
     // Verificar el número de filas devueltas por la consulta
     if ($resultado->num_rows > 0) {
+        // Mostrar mensaje de error si ya existe un usuario con la cédula proporcionada
         echo '<div class="alert alert-danger"></div>';
         echo '<div class="card-success">
         <p class="success-message">Error: Ya existe una cuenta registrada con esta cédula</p>
@@ -82,10 +87,10 @@ if (isset($_POST['btnCrearCuenta'])) {
         }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
     } else {
-
-      
-      mysqli_query($mysqli, 'INSERT INTO profesores(cedula, nombre, apellido, email, contraseña, admin_cedula) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '", "' . $admin_cedula . '")');
-    
+        // Insertar un nuevo registro en la tabla profesores con los datos proporcionados
+        mysqli_query($mysqli, 'INSERT INTO profesores(cedula_prof, nombre, apellido, email, contraseña, cedula_admin) VALUES ("' . $cedula . '", "' . $nombre . '", "' . $apellido . '", "' . $email . '", "' . $contraseña . '", "' . $admin_cedula . '")');
+        
+        // Mostrar mensaje de éxito después de registrar al nuevo profesor
         echo '<div class="card-success">
         <p class="success-message">Registrado correctamente</p>
     </div>';
@@ -94,10 +99,11 @@ if (isset($_POST['btnCrearCuenta'])) {
         setTimeout(function() {
             // Redirigir a otra página
             window.location.href = 'formCrearcuenta.php';
-        }, 4000); // 4000 milisegundos = 4segundos
+        }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
     }
 
     // Cerrar la conexión
     mysqli_close($mysqli);
 }
+?>

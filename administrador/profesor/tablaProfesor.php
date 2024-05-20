@@ -5,8 +5,8 @@ error_reporting(0);
 $validar = $_SESSION['usuario'];
 
 if ($validar == null || $validar = '') {
-  header("Location: ../../formularioIniciosesion.html");
-  die();
+    header("Location: ../../formularioIniciosesion.html");
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -41,24 +41,24 @@ if ($validar == null || $validar = '') {
             </div>
         </form>
 
-
         <?php
         include '../../db_Conexion/conector.php';
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
         if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
-            $busqueda = $_GET['busqueda'];
+            $busqueda = $_GET['buscar'];
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
-            $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
-            $stmt->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda); // Asociar parámetros
+            $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
+               $stmt->bind_param("s", $busqueda); // Asociar parámetro
             $stmt->execute(); // Ejecutar la consulta preparada
             $result = $stmt->get_result(); // Obtener los resultados de la consulta
         } else {
             $result = $conn->query("SELECT * FROM profesores"); // Consulta por defecto si no hay búsqueda
         }
+
         ?>
         <div class="row justify-content-center">
             <div class="table-responsive">
