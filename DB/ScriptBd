@@ -1,45 +1,14 @@
--- Crear la base de datos
-CREATE DATABASE IF NOT EXISTS DB_retinaprueva;
-USE DB_retinaprueva;
-
--- Crear la tabla de administradores
-CREATE TABLE administradores (
-    cedula VARCHAR(30) PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL,
-    apellido VARCHAR(30) NOT NULL,
-    contraseña VARCHAR(100) NOT NULL
-);
-
-
--- Crear la tabla de estudiantes
-CREATE TABLE estudiantes (
-    cedula VARCHAR(30) PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL,
-    apellido VARCHAR(30) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    facultad VARCHAR(50) NOT NULL,
-    carrera VARCHAR(50) NOT NULL,
-    contraseña VARCHAR(100) NOT NULL,
-    admin_cedula VARCHAR(30),
-    FOREIGN KEY (admin_cedula) REFERENCES administradores(cedula)
-);
-
--- Crear la tabla de profesores
-CREATE TABLE profesores (
-    cedula VARCHAR(30) PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL,
-    apellido VARCHAR(30) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    contraseña VARCHAR(100) NOT NULL,
-    admin_cedula VARCHAR(30),
-    FOREIGN KEY (admin_cedula) REFERENCES administradores(cedula)
-);
-
 
 -------------------------------------------------------------------------------------------
--- base de datos de pruevas
+-- Base de datos de pruebas
 CREATE DATABASE IF NOT EXISTS DB_Universidad;
 USE DB_Universidad;
+
+-- Tabla de centros regionales
+CREATE TABLE centros_regionales (
+    id_centroRegional INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_centro VARCHAR(100) NOT NULL UNIQUE
+);
 
 -- Tabla de administradores
 CREATE TABLE administradores (
@@ -57,10 +26,11 @@ CREATE TABLE estudiantes (
     email VARCHAR(100) NOT NULL,
     facultad VARCHAR(50) NOT NULL,
     carrera VARCHAR(100) NOT NULL,
-    sede VARCHAR(100)NOT NULL,
+    id_centroRegional INT NOT NULL,
     año INT NOT NULL,
     contraseña VARCHAR(100) NOT NULL,
     cedula_admin VARCHAR(30),
+    FOREIGN KEY (id_centroRegional) REFERENCES centros_regionales(id_centroRegional),
     FOREIGN KEY (cedula_admin) REFERENCES administradores(cedula_admin)
 );
 
@@ -76,56 +46,65 @@ CREATE TABLE profesores (
 );
 
 -- Tabla de asignaturas
-CREATE TABLE Asignaturas (
+CREATE TABLE asignaturas (
     codigo_asignatura VARCHAR(20) PRIMARY KEY,
-    nombre VARCHAR(100)NOT NULL,
-    centro_regional VARCHAR(100)NOT NULL
+    nombre VARCHAR(100) NOT NULL,
+    id_centroRegional INT NOT NULL,
+    FOREIGN KEY (id_centroRegional) REFERENCES centros_regionales(id_centroRegional)
 );
 
 -- Tabla de registros de clase
-CREATE TABLE Clases (
+CREATE TABLE clases (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_asignatura VARCHAR(20)NOT NULL,
-    cedula_prof VARCHAR(30)NOT NULL,
-    nombre_clase VARCHAR(20)NOT NULL,
+    codigo_asignatura VARCHAR(20) NOT NULL,
+    cedula_prof VARCHAR(30) NOT NULL,
+    nombre_clase VARCHAR(100) NOT NULL,
     texto_clase TEXT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    FOREIGN KEY (codigo_asignatura) REFERENCES Asignaturas(codigo_asignatura),
-    FOREIGN KEY (cedula_prof) REFERENCES Profesores(cedula_prof)
+    FOREIGN KEY (codigo_asignatura) REFERENCES asignaturas(codigo_asignatura),
+    FOREIGN KEY (cedula_prof) REFERENCES profesores(cedula_prof)
 );
 
 
 
 llenando tablas
 
--- Insertar administradores
-INSERT INTO administradores (cedula_admin, nombre, apellido, contraseña)
-VALUES ('8-987-65', 'Juan', 'Pérez', 'contraseña1'),
-       ('9-876-54', 'María', 'González', 'contraseña2'),
-       ('7-654-32', 'Luis', 'Martínez', 'contraseña3'),
-       ('2-750-818', 'angela', 'carrión', '123456789');
+-- Datos para la tabla de centros_regionales
+INSERT INTO centros_regionales (nombre_centro) VALUES 
+('Azuero'),
+('Coclé'),
+('Veraguas'),
+('Bocas del Toro'),
+('Chiriquí'),
+('Colón'),
+('Panamá Oeste');
 
--- Insertar estudiantes
-INSERT INTO estudiantes (cedula_estudiante, nombre, apellido, email, facultad, carrera, sede, año, contraseña, cedula_admin)
-VALUES ('1-123-45', 'Pedro', 'Rodríguez', 'pedro@example.com', 'Ingeniería', 'Ingeniería Civil', 'Panamá', 3, 'contraseña4', '2-750-818'),
-       ('2-234-56', 'Ana', 'Sánchez', 'ana@example.com', 'Ciencias', 'Biología', 'Chiriquí', 2, 'contraseña5', '2-750-818'),
-       ('3-345-67', 'Carlos', 'López', 'carlos@example.com', 'Arquitectura', 'Arquitectura', 'Veraguas', 4, 'contraseña6', '2-750-818');
 
--- Insertar profesores
-INSERT INTO profesores (cedula_prof, nombre, apellido, email, contraseña, cedula_admin)
-VALUES ('4-456-78', 'Laura', 'Díaz', 'laura@example.com', 'contraseña7', '2-750-818'),
-       ('5-567-89', 'Roberto', 'Hernández', 'roberto@example.com', 'contraseña8', '2-750-818'),
-       ('6-678-90', 'Sofía', 'Martínez', 'sofia@example.com', 'contraseña9', '2-750-818');
+-- Datos para la tabla de administradores
+INSERT INTO administradores (cedula_admin, nombre, apellido, contraseña) VALUES 
+('8-123-456', 'Carlos', 'Rodríguez', 'contraseña123'),
+('3-987-654', 'María', 'López', 'contraseña456');
 
--- Insertar asignaturas
-INSERT INTO Asignaturas (codigo_asignatura, nombre, centro_regional)
-VALUES ('MAT101', 'Matemáticas I', 'Centro Regional de Panamá Oeste'),
-       ('BIO201', 'Biología Celular', 'Centro Regional de Chiriquí'),
-       ('ARQ301', 'Diseño Arquitectónico', 'Centro Regional de Veraguas');
+-- Datos para la tabla de estudiantes
+INSERT INTO estudiantes (cedula_estudiante, nombre, apellido, email, facultad, carrera, id_centroRegional, año, contraseña, cedula_admin) VALUES 
+('8-765-432', 'Ana', 'González', 'ana.gonzalez@example.com', 'Facultad de Ingeniería', 'Ingeniería Civil', 1, 2023, 'estudiante123', '8-123-456'),
+('9-876-543', 'Luis', 'Martínez', 'luis.martinez@example.com', 'Facultad de Ciencias', 'Biología', 2, 2022, 'estudiante456', '3-987-654'),
+('7-654-321', 'Carmen', 'Pérez', 'carmen.perez@example.com', 'Facultad de Medicina', 'Medicina', 3, 2024, 'estudiante789', '8-123-456');
 
--- Insertar clases
-INSERT INTO Clases (codigo_asignatura, cedula_prof, nombre_clase, texto_clase, fecha, hora)
-VALUES ('MAT101', '4-456-78', 'Clase 1', 'Introducción a los números reales', '2024-05-20', '08:00:00'),
-       ('BIO201', '5-567-89', 'Clase 1', 'Estructura celular', '2024-05-21', '09:30:00'),
-       ('ARQ301', '6-678-90', 'Clase 1', 'Principios del diseño arquitectónico', '2024-05-22', '10:45:00');
+-- Datos para la tabla de profesores
+INSERT INTO profesores (cedula_prof, nombre, apellido, email, contraseña, cedula_admin) VALUES 
+('4-321-654', 'Roberto', 'Fernández', 'roberto.fernandez@example.com', 'profesor123', '8-123-456'),
+('5-432-765', 'Elena', 'Jiménez', 'elena.jimenez@example.com', 'profesor456', '3-987-654');
+
+-- Datos para la tabla de asignaturas
+INSERT INTO asignaturas (codigo_asignatura, nombre, id_centroRegional) VALUES 
+('MATH101', 'Matemáticas Básicas', 1),
+('BIO102', 'Biología General', 2),
+('MED103', 'Introducción a la Medicina', 3);
+
+-- Datos para la tabla de clases
+INSERT INTO clases (codigo_asignatura, cedula_prof, nombre_clase, texto_clase, fecha, hora) VALUES 
+('MATH101', '4-321-654', 'Clase 1', 'Introducción a las matemáticas básicas', '2024-05-21', '08:00:00'),
+('BIO102', '5-432-765', 'Clase 1', 'Introducción a la biología general', '2024-05-22', '09:00:00');
+

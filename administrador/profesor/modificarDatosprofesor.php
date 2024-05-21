@@ -38,7 +38,7 @@ if(isset($_GET["cedProf"])) {
 
     // Ejecutar la consulta SQL
     $sql = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof = ?");
-    $sql->bind_param("i", $ced);
+    $sql->bind_param("s", $ced);
     $sql->execute();
 
     $result = $sql->get_result();
@@ -106,7 +106,7 @@ if(isset($_GET["cedProf"])) {
 
         <div class="row p-4 ">
             <div class="col-6">
-                <center><button type="submit" class="btn btn-success" name="btnModificar" value="ok">Modificar</button></center>
+                <center><button type="submit" class="btn btn-success" name="btn_Modificar" value="ok">Modificar</button></center>
             </div>
             <div class="col-6">
                 <center><a href="tablaProfesor.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>

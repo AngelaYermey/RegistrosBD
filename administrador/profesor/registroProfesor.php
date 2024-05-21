@@ -48,7 +48,7 @@ body {
 ';
 
 // Incluir el archivo de conexión a la base de datos
-include '../db_Conexion/conector.php';
+include '../../db_Conexion/conector.php';
 
 // Iniciar sesión
 session_start();
@@ -83,7 +83,7 @@ if (isset($_POST['btnCrearCuenta'])) {
         // Esperar 4 segundos antes de redirigir
         setTimeout(function() {
             // Redirigir a otra página
-            window.location.href = 'formCrearcuenta.html';
+            window.location.href = 'formCrearcuentaProfesor.html';
         }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
     } else {
@@ -98,7 +98,7 @@ if (isset($_POST['btnCrearCuenta'])) {
         // Esperar 4 segundos antes de redirigir
         setTimeout(function() {
             // Redirigir a otra página
-            window.location.href = 'formCrearcuenta.php';
+            window.location.href = 'formCrearcuentaProfesor.php';
         }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
     }

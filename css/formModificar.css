@@ -37,7 +37,8 @@
 /* Estilo para los campos de entrada del formulario */
 .custom-form-style input[type="text"],
 .custom-form-style input[type="email"],
-.custom-form-style input[type="password"] {
+.custom-form-style input[type="password"],
+.custom-form-style select {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -49,7 +50,8 @@
 /* Estilo al enfocar los campos de entrada */
 .custom-form-style input[type="text"]:focus,
 .custom-form-style input[type="email"]:focus,
-.custom-form-style input[type="password"]:focus {
+.custom-form-style input[type="password"]:focus,
+.custom-form-style select:focus{
     outline: none;
     border-color: #d1292b; /* Color de resaltado al enfocar */
     box-shadow: 0 0 5px rgba(175, 53, 45, 0.5); /* Sombra al enfocar */

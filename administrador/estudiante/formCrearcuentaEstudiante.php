@@ -9,6 +9,14 @@ if ($validar == null || $validar = '') {
     die();
 }
 
+
+include '../../db_Conexion/conector.php';
+
+$conexion_obj = new Conexion();
+$conn = $conexion_obj->conectar();
+
+$query = "SELECT id_centroRegional, nombre_centro FROM centros_regionales";
+$result = $conn->query($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +34,7 @@ if ($validar == null || $validar = '') {
     <section>
         <div class="contentbx">
             <div class="form">
-                <h2>Registrar usuarios</h2><br>
+                <h2>Registrar Estudiantes</h2><br>
                 <form action="registroEstudiante.php" method="POST" class="formulario_Crear_Cuenta">
                     <div class="inputbx">
                         <div class="form-floating mb-3">
@@ -51,39 +59,28 @@ if ($validar == null || $validar = '') {
 
                         <div class="form-floating mb-3">
                             <label for="facultad">Facultad</label>
-                            <input type="text" id="facultad" name="facultad" title="Por favor, ingrese su facultad."><br>
+                            <input type="text" id="facultad" name="facultad" title="Por favor, ingrese su facultad." required><br>
                         </div>
                         <div class="form-floating mb-3">
                             <label for="carrera">Carrera</label>
-                            <input type="text" id="carrera" name="carrera" title="Por favor, ingrese su carrera."><br>
+                            <input type="text" id="carrera" name="carrera" title="Por favor, ingrese su carrera." required><br>
                         </div>
 
                         <div class="form-floating mb-3">
                             <label for="año">Año:</label>
-                            <select id="año" name="cr" class="form-select" required title="Por favor, escoja una opción.">
-                                <option value="">Escoger opción...</option>
-                                <option value="A1">I</option>
-                                <option value="A2">II</option>
-                                <option value="A3">III</option>
-                                <option value="A4">IV</option>
-                                <option value="A5">V</option>                      
-                            </select>
+                            <input type="text" id="año" name="año" pattern="[1-5]" required>                             
                         </div>
 
                         <div class="form-floating mb-3">
-                            <label for="cr">Centro Regional:</label>
-                            <select id="cr" name="cr" class="form-select" required title="Por favor, escoja una opción.">
+                            <label for="cr">Centro Regional</label>
+                            <select id="cr" name="id_centroRegional" class="form-select" required>
                                 <option value="">Escoger opción...</option>
-                                <option value="CR1">Centro Regional de Azuero</option>
-                                <option value="CR2">Centro Regional de Bocas del Toro</option>
-                                <option value="CR3">Centro Regional de Chiriquí</option>
-                                <option value="CR4">Centro Regional de Coclé</option>
-                                <option value="CR5">Centro Regional de Colón</option>
-                                <option value="CR6">Centro Regional de Panamá Oeste</option>
-                                <option value="CR7">Centro Regional de Veraguas</option>                        
+                                <?php while ($row = $result->fetch_assoc()) : ?>
+                                    <option value="<?php echo $row['id_centroRegional']; ?>"><?php echo $row['nombre_centro']; ?></option>
+                                <?php endwhile; ?>
                             </select>
                         </div>
-                        
+
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
                             <input type="password" id="pass" name="pass" class="form-control" data-form-pass required>

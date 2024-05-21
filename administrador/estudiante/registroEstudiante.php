@@ -47,12 +47,14 @@ body {
 </style>
 ';
 
-include '../db_Conexion/conector.php';
+include '../../db_Conexion/conector.php';
 
 session_start();
+$con = new Conexion();
+$mysqli = $con->conectar();
+
 if (isset($_POST['btnCrear'])) {
-    $con = new Conexion();
-    $mysqli = $con->conectar();
+
 
     // Inicializar variables
     $nombre = $_POST['nom'];
@@ -62,20 +64,20 @@ if (isset($_POST['btnCrear'])) {
     $facultad = $_POST['facultad'];
     $carrera = $_POST['carrera'];
     $año = $_POST['año'];
-    $centro_regional = $_POST['cr'];
+    $centro_regional = $_POST['id_centroRegional'];
     $contraseña = $_POST['pass'];
 
     // Obtener la cédula del administrador de la sesión
     $admin_cedula = $_SESSION['usuario'];
 
     // Verificar si ya existe un usuario con la cédula proporcionada
-    $stmt = $conn->prepare("SELECT cedula_estudiante FROM estudiantes WHERE cedula_estudiante = ?");
+    $stmt = $mysqli->prepare("SELECT cedula_estudiante FROM estudiantes WHERE cedula_estudiante = ?");
     $stmt->bind_param("s", $cedula);
     $stmt->execute();
     $result = $stmt->get_result();
-
+   
     // Verificar el número de filas devueltas por la consulta
-    if ($resul->num_rows > 0) {
+    if ($result->num_rows > 0) {
         echo '<div class="alert alert-danger"></div>';
         echo '<div class="card-success">
         <p class="success-message">Error: Ya existe una cuenta registrada con esta cédula</p>
@@ -88,9 +90,8 @@ if (isset($_POST['btnCrear'])) {
         }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
     } else {
-
         // Insertar nuevo usuario en la tabla de estudiantes
-        $stmt = $conn->prepare("INSERT INTO estudiantes (nombre, apellido, cedula_estudiante, correo, facultad, carrera, año, centro_regional, contraseña, admin_cedula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO estudiantes (nombre, apellido, cedula_estudiante, email, facultad, carrera, año, id_centroRegional, contraseña, cedula_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssssssss", $nombre, $apellido, $cedula, $correo, $facultad, $carrera, $año, $centro_regional, $contraseña, $admin_cedula);
         if ($stmt->execute()) {
             echo '<div class="card-success">

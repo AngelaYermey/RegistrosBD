@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../formularioIniciosesion.html");
     die();
 }
@@ -17,8 +17,8 @@ if ($validar == null || $validar = '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla Estudiantes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
+    <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../../css/tabla.css">
 </head>
@@ -27,14 +27,15 @@ if ($validar == null || $validar = '') {
     <h2 class="text-center p-4">Tabla de Estudiantes</h2>
 
     <div class="containerTabla">
+
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="col-md-4 mb-2 mb-md-0">
                 <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
             </div>
             <div class="col-md-4 mb-2 mb-md-0">
                 <div class="input-group">
-                    <input placeholder="Buscador" name="busqueda" type="search" class="form-control">
-                    <button type="submit" name="buscar" class="btn btn-primary">Buscar</button>
+                    <input placeholder="Ingrese el dato que desee buscar" name="busqueda" type="search" class="form-control">
+                    <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
@@ -43,22 +44,27 @@ if ($validar == null || $validar = '') {
         </form>
 
         <?php
+        
         include '../../db_Conexion/conector.php';
+
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
-        if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
+        if (isset($_GET['buscador'])) { // Comprobar si se realizó una búsqueda
             $busqueda = $_GET['busqueda'];
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
-            $stmt = $conn->prepare("SELECT * FROM estudiantes WHERE cedula_estudiante LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR facultad LIKE ? OR carrera LIKE ? OR sede LIKE ? OR año LIKE ? OR contraseña LIKE ?");
-            $stmt->bind_param("ssssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda); // Asociar parámetros
-            $stmt->execute(); // Ejecutar la consulta preparada
-            $result = $stmt->get_result(); // Obtener los resultados de la consulta
+            $consulta = $conn->prepare("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional WHERE 
+            estudiantes.cedula_estudiante LIKE ? OR estudiantes.nombre LIKE ? OR estudiantes.apellido LIKE ? OR estudiantes.email LIKE ? OR estudiantes.facultad LIKE ? OR estudiantes.carrera LIKE ? OR estudiantes.id_centroRegional LIKE ? OR estudiantes.año LIKE ? OR estudiantes.contraseña LIKE ? OR centros_regionales.nombre_centro LIKE ?");
+            $consulta->bind_param("ssssssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+        
+            $consulta->execute(); // Ejecutar la consulta preparada
+            $result = $consulta->get_result(); // Obtener los resultados de la consulta
         } else {
-            $result = $conn->query("SELECT * FROM estudiantes"); // Consulta por defecto si no hay búsqueda
+            $result = $conn->query("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional");       
         }
+
         ?>
         <div class="row justify-content-center">
             <div class="table-responsive">
@@ -91,7 +97,7 @@ if ($validar == null || $validar = '') {
                                     <td><?php echo $datos->email; ?></td>
                                     <td><?php echo $datos->facultad; ?></td>
                                     <td><?php echo $datos->carrera; ?></td>
-                                    <td><?php echo $datos->sede; ?></td>
+                                    <td><?php echo $datos->nombre_centro; ?></td>
                                     <td><?php echo $datos->año; ?></td>
                                     <td><?php echo $datos->contraseña; ?></td>
                                     <td>

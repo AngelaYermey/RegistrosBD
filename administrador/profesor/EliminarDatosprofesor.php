@@ -41,10 +41,10 @@ if ($validar == null || $validar = '') {
 <?php
 // Maneja la solicitud POST para eliminar el registro 
 if(isset($_POST['eliminar'])){
-    // Verifica si se ha enviado la cédula del a eliminar
+    // Verifica si se ha enviado la cédula 
     if(isset($_GET['cedProf'])) {
-        // Obtiene la cédula  a eliminar 
-        $cedula = $_GET['cedProf'];
+        // Obtiene la cédula a eliminar desde la URL
+        $cedulaprof = $_GET['cedProf'];
 
         // Incluye el archivo de conexión a la base de datos
         include '../../db_Conexion/conector.php';
@@ -56,26 +56,26 @@ if(isset($_POST['eliminar'])){
         $conn = $conexion_obj->conectar();
 
         // Prepara la consulta SQL para eliminar con la cédula especificada
-        $eliminar_estudiante = $conn->prepare("DELETE FROM profesores WHERE cedula_prof  = ?");
+        $eliminar= $conn->prepare("DELETE FROM profesores WHERE cedula_prof = ?");
         
         // Vincula el parámetro de la consulta
-        $eliminar_estudiante->bind_param("s", $cedula);
+        $eliminar->bind_param("s", $cedulaprof);
 
         // Ejecuta la consulta
-        if($eliminar_estudiante->execute()) {
-            // Si la eliminación es exitosa, redirecciona a la tabla 
-            header("Location: tablaprofesor.php");
+        if($eliminar->execute()) {
+            // Si la eliminación es exitosa, redirecciona a la tabla
+            header("Location: tablaEstudiante.php");
             exit();
         } else {
             // Si hay un error, muestra un mensaje de error
-            echo "Error al eliminar el estudiante.";
+            echo "Error al eliminar el registro.";
         }
 
         // Cierra la conexión a la base de datos
         $conn->close();
     } else {
         // Si no se ha proporcionado la cédula a eliminar, muestra un mensaje de error
-        echo "No se ha proporcionado la cédula del estudiante a eliminar.";
+        echo "No se ha proporcionado la cédula del usuario a eliminar.";
     }
 }
 ?>
