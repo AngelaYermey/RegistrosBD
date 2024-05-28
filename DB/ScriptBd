@@ -47,7 +47,7 @@ CREATE TABLE profesores (
 
 -- Tabla de asignaturas
 CREATE TABLE asignaturas (
-    codigo_asignatura VARCHAR(20) PRIMARY KEY,
+    codigo_asignatura VARCHAR(50) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     id_centroRegional INT NOT NULL,
     FOREIGN KEY (id_centroRegional) REFERENCES centros_regionales(id_centroRegional)
@@ -56,12 +56,11 @@ CREATE TABLE asignaturas (
 -- Tabla de registros de clase
 CREATE TABLE clases (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_asignatura VARCHAR(20) NOT NULL,
+    codigo_asignatura VARCHAR(50) NOT NULL,
     cedula_prof VARCHAR(30) NOT NULL,
-    nombre_clase VARCHAR(100) NOT NULL,
+    tema_clase VARCHAR(100) NOT NULL,
     texto_clase TEXT NOT NULL,
     fecha DATE NOT NULL,
-    hora TIME NOT NULL,
     FOREIGN KEY (codigo_asignatura) REFERENCES asignaturas(codigo_asignatura),
     FOREIGN KEY (cedula_prof) REFERENCES profesores(cedula_prof)
 );
