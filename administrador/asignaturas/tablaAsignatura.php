@@ -91,8 +91,8 @@ if ($validar == null || $validar = '') {
                                     <td><?php echo $datos->nombre; ?></td>
                                     <td><?php echo $datos->nombre_centro; ?></td>
                                     <td>
-                                        <a href="modificarDatosprofesor.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                                        <a href="modificarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                        <a href="eliminarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

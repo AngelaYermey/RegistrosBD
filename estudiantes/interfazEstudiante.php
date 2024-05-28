@@ -109,46 +109,69 @@
 
                 if (isset($_GET['buscador'])) {
                     $busqueda = $_GET['busqueda'];
-                    $sql = "SELECT asignaturas.codigo_asignatura, asignaturas.nombre AS nombre_materia, clases.nombre_clase, clases.fecha, profesores.nombre AS nombre_profesor
-                            FROM clases
-                            INNER JOIN asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura
-                            INNER JOIN profesores ON clases.cedula_prof = profesores.cedula_prof
-                            INNER JOIN estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional
-                            WHERE estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "'
-                            AND (asignaturas.codigo_asignatura LIKE '%$busqueda%'
-                            OR asignaturas.nombre LIKE '%$busqueda%'
-                            OR clases.nombre_clase LIKE '%$busqueda%'
-                            OR clases.fecha LIKE '%$busqueda%'
-                            OR profesores.nombre LIKE '%$busqueda%')";
+                    $sql = "SELECT 
+                                asignaturas.codigo_asignatura, 
+                                asignaturas.nombre AS nombre_asignatura,
+                                clases.texto_clase, 
+                                profesores.nombre AS nombre_profesor,
+                                clases.fecha
+                            FROM 
+                                clases 
+                            INNER JOIN 
+                                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+                            INNER JOIN 
+                                profesores ON clases.cedula_prof = profesores.cedula_prof 
+                            INNER JOIN 
+                                estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
+                            WHERE 
+                                estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "' 
+                                AND (asignaturas.codigo_asignatura LIKE '%$busqueda%'
+                                    OR asignaturas.nombre LIKE '%$busqueda%'
+                                    OR clases.texto_clase LIKE '%$busqueda%'
+                                    OR profesores.nombre LIKE '%$busqueda%'
+                                    OR clases.fecha LIKE '%$busqueda%')
+                            ORDER BY 
+                                clases.fecha DESC";
                 } else {
-                    $sql = "SELECT asignaturas.codigo_asignatura, asignaturas.nombre AS nombre_materia, clases.nombre_clase, clases.fecha, profesores.nombre AS nombre_profesor
-                            FROM clases
-                            INNER JOIN asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura
-                            INNER JOIN profesores ON clases.cedula_prof = profesores.cedula_prof
-                            INNER JOIN estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional
-                            WHERE estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "'";
+                    $sql = "SELECT 
+                                asignaturas.codigo_asignatura, 
+                                asignaturas.nombre AS nombre_asignatura,
+                                clases.texto_clase, 
+                                profesores.nombre AS nombre_profesor,
+                                clases.fecha
+                            FROM 
+                                clases 
+                            INNER JOIN 
+                                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+                            INNER JOIN 
+                                profesores ON clases.cedula_prof = profesores.cedula_prof 
+                            INNER JOIN 
+                                estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
+                            WHERE 
+                                estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "'
+                            ORDER BY 
+                                clases.fecha DESC";
                 }
-                
+
                 $result = $conn->query($sql);
-                
+
                 if ($result->num_rows > 0) {
                     while ($datos = $result->fetch_object()) {
                         echo "<tr>";
                         echo "<td>" . $datos->codigo_asignatura . "</td>"; // Cambiado a $datos->codigo_asignatura
-                        echo "<td>" . $datos->nombre_materia . "</td>";
-                        echo "<td>" . $datos->nombre_clase . "</td>";
+                        echo "<td>" . $datos->nombre_asignatura . "</td>"; // Cambiado a $datos->nombre_asignatura
+                        echo "<td>" . $datos->texto_clase . "</td>"; // Cambiado a $datos->texto_clase
                         echo "<td>" . $datos->fecha . "</td>";
                         echo "<td>" . $datos->nombre_profesor . "</td>";
                         echo "<td>";
-                        echo "<button class='btn btn-view' onclick='verContenido(\"{$row["texto_clase"]}\")'>Ver</button>";
-                        echo "<a class='btn btn-download' href='descargar.php?clase_id={$row["id"]}'>Descargar</a>";
+                        echo "<button class='btn btn-view' onclick='verContenido(\"{$datos->texto_clase}\")'>Ver</button>"; // Cambiado a $datos->texto_clase
+                        echo "<a class='btn btn-download' href='descargar.php?clase_id={$datos->id}'>Descargar</a>"; // Asumiendo que $datos->id es el ID de la clase
                         echo "</td>";
                         echo "</tr>";
                     }
                 } else {
                     echo "<tr><td colspan='6'>No se encontraron clases para este centro regional.</td></tr>";
                 }
-                
                 $conn->close();
                 ?>
             </tbody>
