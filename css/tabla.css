@@ -1,7 +1,8 @@
 /* Estilo para el contenedor principal */
 .containerTabla {
-  max-width: 1250px;
   margin: auto;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 
 /* Estilo para el título de la tabla */

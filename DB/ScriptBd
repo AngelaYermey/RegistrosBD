@@ -7,7 +7,9 @@ USE DB_Universidad;
 -- Tabla de centros regionales
 CREATE TABLE centros_regionales (
     id_centroRegional INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_centro VARCHAR(100) NOT NULL UNIQUE
+    nombre_centro VARCHAR(100) NOT NULL UNIQUE,
+     cedula_admin VARCHAR(30),
+     FOREIGN KEY (cedula_admin) REFERENCES administradores(cedula_admin)
 );
 
 -- Tabla de administradores
@@ -63,6 +65,7 @@ CREATE TABLE clases (
     fecha DATE NOT NULL,
     FOREIGN KEY (codigo_asignatura) REFERENCES asignaturas(codigo_asignatura),
     FOREIGN KEY (cedula_prof) REFERENCES profesores(cedula_prof)
+
 );
 
 
@@ -107,3 +110,30 @@ INSERT INTO clases (codigo_asignatura, cedula_prof, nombre_clase, texto_clase, f
 ('MATH101', '4-321-654', 'Clase 1', 'Introducción a las matemáticas básicas', '2024-05-21', '08:00:00'),
 ('BIO102', '5-432-765', 'Clase 1', 'Introducción a la biología general', '2024-05-22', '09:00:00');
 
+
+
+
+
+SELECT 
+    asignaturas.codigo_asignatura, 
+    asignaturas.nombre AS nombre_asignatura,
+    clases.texto_clase, 
+    profesores.nombre AS nombre_profesor,
+    clases.fecha
+FROM 
+    clases 
+INNER JOIN 
+    asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+INNER JOIN 
+    profesores ON clases.cedula_prof = profesores.cedula_prof 
+INNER JOIN 
+    estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
+WHERE 
+    estudiantes.cedula_estudiante = '7-654-321' 
+    AND estudiantes.id_centroRegional = (
+        SELECT id_centroRegional 
+        FROM estudiantes 
+        WHERE cedula_estudiante = '7-654-321'
+    )
+ORDER BY 
+    clases.fecha DESC;

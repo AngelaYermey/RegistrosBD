@@ -15,7 +15,7 @@ if ($validar == null || $validar = '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla Profesores</title>
+    <title>Tabla Asignaturas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@ if ($validar == null || $validar = '') {
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="formCrearcuentaProfesor.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
+                <a href="asignaturas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
             </div>
         </form>
 
@@ -46,33 +46,36 @@ if ($validar == null || $validar = '') {
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
-        if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
+        if (isset($_GET['buscar'])) {
+            // Comprobar si se realizó una búsqueda
             $busqueda = $_GET['busqueda']; // obtener el valor de 'busqueda'
             $busqueda = "%$busqueda%"; // comodines para la búsqueda parcial
 
-            // Preparar la consulta SQL para buscar en varias columnas
-            $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
+            // Preparar la consulta SQL para buscar en varias columnas y obtener el nombre del centro regional
+            $stmt = $conn->prepare("SELECT asignaturas.*, centros_regionales.nombre_centro FROM asignaturas INNER JOIN centros_regionales 
+            ON asignaturas.id_centroRegional = centros_regionales.id_centroRegional WHERE codigo_asignatura LIKE ? OR nombre LIKE ? OR 
+            centros_regionales.nombre_centro LIKE ?");
             // Asociar parámetros
-            $stmt->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+            $stmt->bind_param("sss", $busqueda, $busqueda, $busqueda);
 
             $stmt->execute(); // Ejecutar la consulta preparada
             $result = $stmt->get_result(); // Obtener los resultados de la consulta
 
         } else {
-            $result = $conn->query("SELECT * FROM profesores"); // Consulta por defecto si no hay búsqueda
+            // Consulta por defecto si no hay búsqueda
+            $result = $conn->query("SELECT asignaturas.*, centros_regionales.nombre_centro FROM asignaturas INNER JOIN centros_regionales ON
+             asignaturas.id_centroRegional = centros_regionales.id_centroRegional");
+            
         }
-
         ?>
         <div class="row justify-content-center">
             <div class="table-responsive">
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Cédula</th>
+                            <th scope="col">Codigo</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Contraseña</th>
+                            <th scope="col">Centro Regional</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -84,14 +87,12 @@ if ($validar == null || $validar = '') {
                         <?php else : ?>
                             <?php while ($datos = $result->fetch_object()) : ?>
                                 <tr>
-                                    <th scope="row"><?php echo $datos->cedula_prof; ?></th>
+                                    <th scope="row"><?php echo $datos->codigo_asignatura; ?></th>
                                     <td><?php echo $datos->nombre; ?></td>
-                                    <td><?php echo $datos->apellido; ?></td>
-                                    <td><?php echo $datos->email; ?></td>
-                                    <td><?php echo $datos->contraseña; ?></td>
+                                    <td><?php echo $datos->nombre_centro; ?></td>
                                     <td>
-                                        <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                                        <a href="modificarDatosprofesor.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                        <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

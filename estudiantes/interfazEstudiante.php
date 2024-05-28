@@ -38,80 +38,125 @@
             background-color: #008CBA;
             color: white;
         }
+
+        .containerTabla {
+            padding: 20px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .search-container button {
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-left: 5px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
-    <h2>Clases Disponibles</h2>
-    <table>
-        <tr>
-            <th>Código Materia</th>
-            <th>Nombre Materia</th>
-            <th>Nombre Clase</th>
-            <th>Fecha</th>
-            <th>Profesor</th>
-            <th>Acciones</th>
-        </tr>
-        <?php
-        // Incluir el archivo del conector
-        require_once('../../db_Conexion/conector.php');
+    <?php
+    session_start();
+    error_reporting(0);
 
-        // Crear una instancia de la clase Conexion
-        $conexion = new Conexion();
+    $validar = $_SESSION['usuario'];
 
-        // Establecer conexión a la base de datos
-        $conn = $conexion->conectar();
+    if ($validar == null || $validar == '') {
+        header("Location: ../../formularioIniciosesion.html");
+        die();
+    }
+    ?>
+    <h2 class="text-center p-4">Clases Disponibles</h2>
+    <div class="containerTabla">
+        <div class="search-container">
+            <form action="" method="GET">
+                <input type="text" placeholder="Buscar..." name="busqueda">
+                <button type="submit" name="buscador">Buscar</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código Materia</th>
+                    <th>Nombre Materia</th>
+                    <th>Nombre Clase</th>
+                    <th>Fecha</th>
+                    <th>Profesor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include '../db_Conexion/conector.php';
 
-        // Obtener el centro regional del estudiante (de alguna manera, por ejemplo, a través de una sesión)
-        //$id_centroRegional_estudiante = obtener_id_centro_regional_del_estudiante(); // Debes definir esta función
-        $_SESSION['centroRegional'] = $id_centroRegional;
-        // Consulta SQL para obtener los registros de clases del centro regional del estudiante
-        $sql = "SELECT asignaturas.codigo_asignatura, asignaturas.nombre AS nombre_materia, clases.nombre_clase, clases.fecha, profesores.nombre AS nombre_profesor
-        FROM clases
-        INNER JOIN asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura
-        INNER JOIN profesores ON clases.cedula_prof = profesores.cedula_prof
-        WHERE asignaturas.id_centroRegional = $id_centroRegional";
+                $conexion = new Conexion();
+                $conn = $conexion->conectar();
 
-        $result = $conn->query($sql);
+                $centroRegional = $_SESSION['centro_regional'];
 
-        if ($result->num_rows > 0) {
-            // Mostrar los datos encontrados en una tabla HTML
-            echo "<table>";
-            echo "<tr>
-            <th>Código Materia</th>
-            <th>Nombre Materia</th>
-            <th>Tema</th>
-            <th>Fecha</th>
-            <th>Profesor</th>
-            <th>Acciones</th>
-          </tr>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["codigo_asignatura"] . "</td>";
-                echo "<td>" . $row["nombre_materia"] . "</td>";
-                echo "<td>" . $row["nombre_clase"] . "</td>";
-                echo "<td>" . $row["fecha"] . "</td>";
-                echo "<td>" . $row["nombre_profesor"] . "</td>";
-                echo "<td>";
-                echo "<button class='btn btn-view' onclick='verContenido(\"{$row["texto_clase"]}\")'>Ver</button>";
-                echo "<a class='btn btn-download' href='descargar.php?clase_id={$row["id"]}'>Descargar</a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "No se encontraron clases para este centro regional.";
-        }
-
-        // Cerrar conexión
-        $conn->close();
-        ?>
-
-    </table>
+                if (isset($_GET['buscador'])) {
+                    $busqueda = $_GET['busqueda'];
+                    $sql = "SELECT asignaturas.codigo_asignatura, asignaturas.nombre AS nombre_materia, clases.nombre_clase, clases.fecha, profesores.nombre AS nombre_profesor
+                            FROM clases
+                            INNER JOIN asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura
+                            INNER JOIN profesores ON clases.cedula_prof = profesores.cedula_prof
+                            INNER JOIN estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional
+                            WHERE estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "'
+                            AND (asignaturas.codigo_asignatura LIKE '%$busqueda%'
+                            OR asignaturas.nombre LIKE '%$busqueda%'
+                            OR clases.nombre_clase LIKE '%$busqueda%'
+                            OR clases.fecha LIKE '%$busqueda%'
+                            OR profesores.nombre LIKE '%$busqueda%')";
+                } else {
+                    $sql = "SELECT asignaturas.codigo_asignatura, asignaturas.nombre AS nombre_materia, clases.nombre_clase, clases.fecha, profesores.nombre AS nombre_profesor
+                            FROM clases
+                            INNER JOIN asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura
+                            INNER JOIN profesores ON clases.cedula_prof = profesores.cedula_prof
+                            INNER JOIN estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional
+                            WHERE estudiantes.cedula_estudiante = '" . $conn->real_escape_string($centroRegional) . "'";
+                }
+                
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                    while ($datos = $result->fetch_object()) {
+                        echo "<tr>";
+                        echo "<td>" . $datos->codigo_asignatura . "</td>"; // Cambiado a $datos->codigo_asignatura
+                        echo "<td>" . $datos->nombre_materia . "</td>";
+                        echo "<td>" . $datos->nombre_clase . "</td>";
+                        echo "<td>" . $datos->fecha . "</td>";
+                        echo "<td>" . $datos->nombre_profesor . "</td>";
+                        echo "<td>";
+                        echo "<button class='btn btn-view' onclick='verContenido(\"{$row["texto_clase"]}\")'>Ver</button>";
+                        echo "<a class='btn btn-download' href='descargar.php?clase_id={$row["id"]}'>Descargar</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No se encontraron clases para este centro regional.</td></tr>";
+                }
+                
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <script>
         function verContenido(contenido) {
-            // Aquí puedes implementar la lógica para mostrar el contenido en un modal o ventana emergente
             alert("Contenido de la clase:\n" + contenido);
         }
     </script>
