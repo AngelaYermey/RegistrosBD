@@ -31,7 +31,7 @@ if (isset($_POST['iniciar'])) {
             break;
         case 'estudiante':
             $tabla = 'estudiantes';
-            $redireccion = 'estudiantes/interfazEstudiante.php'; // Cambiar por la página de estudiante
+            $redireccion = 'estudiantes/interfazClases.php'; // Cambiar por la página de estudiante
             $columna = 'cedula_estudiante';
 
             break;
@@ -78,8 +78,7 @@ function mostrarMensajeError()
                 window.location.href = "formularioIniciosesion.html"; // Ajusta la ruta según la ubicación del formulario de inicio de sesión
             }, 3000); 
         </script>';
-}
-echo '<style>
+       echo '<style>
 body {
    font-family: Arial, sans-serif;
    display: flex;
@@ -126,3 +125,5 @@ body {
 }
 </style>
 ';
+ 
+}
