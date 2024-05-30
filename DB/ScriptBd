@@ -4,7 +4,6 @@
 CREATE DATABASE IF NOT EXISTS DB_Universidad;
 USE DB_Universidad;
 
--- Tabla de administradores
 CREATE TABLE administradores (
     cedula_admin VARCHAR(30) PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
@@ -20,16 +19,14 @@ CREATE TABLE centros_regionales (
 -- Tabla de asignaturas
 CREATE TABLE asignaturas (
     codigo_asignatura VARCHAR(50) PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-   
+    nombre VARCHAR(100) NOT NULL
 );
 
 -- Tabla de aula
 CREATE TABLE aula (
    numero_aula VARCHAR(50) PRIMARY KEY,
    id_centroRegional INT NOT NULL,
-   FOREIGN KEY (id_centroRegional) REFERENCES centros_regionales(id_centroRegional),
-   
+   FOREIGN KEY (id_centroRegional) REFERENCES centros_regionales(id_centroRegional)  
 );
 
 -- Tabla de estudiantes
@@ -61,8 +58,6 @@ CREATE TABLE profesores (
     FOREIGN KEY (cedula_admin) REFERENCES administradores(cedula_admin)
 );
 
-
-
 -- Tabla de registros de clase
 CREATE TABLE clases (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,12 +74,21 @@ CREATE TABLE clases (
 );
 
 
-
 llenando tablas
 
---tabla de centros regionales
-INSERT INTO centros_regionales (nombre_centro)
-VALUES 
+--- Registros para la tabla 'administradores'
+INSERT INTO administradores (cedula_admin, nombre, apellido, contraseña) VALUES
+('8-888-888', 'Juan', 'Pérez', 'contraseña1'),
+('8-777-777', 'María', 'González', 'contraseña2'),
+('8-666-666', 'Carlos', 'López', 'contraseña3'),
+('8-555-555', 'Ana', 'Martínez', 'contraseña4'),
+('8-444-444', 'Luis', 'Rodríguez', 'contraseña5'),
+('8-333-333', 'Sofía', 'Hernández', 'contraseña6'),
+('8-222-222', 'Pedro', 'Díaz', 'contraseña7'),
+('8-111-111', 'Laura', 'Sánchez', 'contraseña8');
+
+-- Registros para la tabla 'centros_regionales'
+INSERT INTO centros_regionales (nombre_centro) VALUES
 ('Azuero'),
 ('Coclé'),
 ('Veraguas'),
@@ -93,58 +97,58 @@ VALUES
 ('Colón'),
 ('Panamá Oeste');
 
+-- Registros para la tabla 'asignaturas'
+INSERT INTO asignaturas (codigo_asignatura, nombre) VALUES
+('MAT101', 'Matemáticas I'),
+('FIS201', 'Física II'),
+('CS301', 'Ciencias de la Computación III'),
+('HIS401', 'Historia Contemporánea'),
+('ENG501', 'Inglés Avanzado'),
+('ART601', 'Arte Moderno'),
+('BIO701', 'Biología Celular'),
+('ECO801', 'Economía Política');
 
--- Tabla de administradores
-INSERT INTO administradores (cedula_admin, nombre, apellido, contraseña) VALUES
-('8-123-4567', 'Juan', 'Pérez', 'contraseña123'),
-('8-234-5678', 'María', 'González', 'adminpass'),
-('8-345-6789', 'Luis', 'Martínez', 'claveAdmin'),
-('8-456-7890', 'Ana', 'Rodríguez', 'admin123'),
-('8-567-8901', 'Carlos', 'López', 'securepass'),
-('8-678-9012', 'Laura', 'Sánchez', 'admin'),
-('8-789-0123', 'Pedro', 'Hernández', 'adminclave'),
-('8-890-1234', 'Sofía', 'Díaz', 'admin1234');
+-- Registros para la tabla 'aula'
+INSERT INTO aula (numero_aula, id_centroRegional) VALUES
+('A101', 1),
+('B201', 2),
+('C301', 3),
+('D401', 4),
+('E501', 5),
+('F601', 6),
+('G701', 7),
+('H801', 1);
 
--- Tabla de estudiantes
-INSERT INTO estudiantes (cedula_estudiante, nombre, apellido, email, facultad, carrera, id_centroRegional, año, contraseña, cedula_admin) VALUES
-('1-234-5678', 'Diego', 'Martínez', 'diego@example.com', 'Facultad de Ingeniería', 'Ingeniería Informática', 1, 3, 'pass123', '8-123-4567'),
-('2-345-6789', 'Ana', 'Gómez', 'ana@example.com', 'Facultad de Derecho', 'Derecho', 2, 2, 'contraseña1', '8-234-5678'),
-('3-456-7890', 'Jorge', 'Hernández', 'jorge@example.com', 'Facultad de Medicina', 'Medicina', 3, 5, 'studentpass', '8-345-6789'),
-('4-567-8901', 'María', 'Rodríguez', 'maria@example.com', 'Facultad de Ciencias', 'Biología', 4, 4, 'passstudent', '8-456-7890'),
-('5-678-9012', 'Carlos', 'López', 'carlos@example.com', 'Facultad de Economía', 'Economía', 5, 1, 'student123', '8-567-8901'),
-('6-789-0123', 'Laura', 'Sánchez', 'laura@example.com', 'Facultad de Arte', 'Artes Plásticas', 6, 2, 'studentclave', '8-678-9012'),
-('7-890-1234', 'Pedro', 'González', 'pedro@example.com', 'Facultad de Ciencias Sociales', 'Sociología', 7, 3, 'studentpass123', '8-789-0123'),
-('8-901-2345', 'Sofía', 'Díaz', 'sofia@example.com', 'Facultad de Administración', 'Administración de Empresas', 1, 4, 'studentpass1234', '8-890-1234');
+-- Registros para la tabla 'estudiantes'
+INSERT INTO estudiantes (cedula_estudiante, nombre, apellido, email, facultad, carrera, año, id_centroRegional, numero_aula, contraseña, cedula_admin) VALUES
+('8-000-001', 'Pedro', 'Ramírez', 'pedro@example.com', 'Facultad de Ciencias', 'Ingeniería Civil', 2, 1, 'A101', 'contraseña1', '8-888-888'),
+('8-000-002', 'María', 'López', 'maria@example.com', 'Facultad de Ciencias', 'Ingeniería Eléctrica', 3, 2, 'B201', 'contraseña2', '8-777-777'),
+('8-000-003', 'José', 'García', 'jose@example.com', 'Facultad de Humanidades', 'Historia', 1, 3, 'C301', 'contraseña3', '8-666-666'),
+('8-000-004', 'Ana', 'Martínez', 'ana@example.com', 'Facultad de Ciencias Sociales', 'Psicología', 4, 4, 'D401', 'contraseña4', '8-555-555'),
+('8-000-005', 'Carlos', 'Fernández', 'carlos@example.com', 'Facultad de Ingeniería', 'Ingeniería Mecánica', 2, 5, 'E501', 'contraseña5', '8-444-444'),
+('8-000-006', 'Laura', 'González', 'laura@example.com', 'Facultad de Ciencias', 'Química', 3, 6, 'F601', 'contraseña6', '8-333-333'),
+('8-000-007', 'Javier', 'Díaz', 'javier@example.com', 'Facultad de Humanidades', 'Lenguas Modernas', 1, 7, 'G701', 'contraseña7', '8-222-222'),
+('8-000-008', 'Sofía', 'Pérez', 'sofia@example.com', 'Facultad de Ciencias Sociales', 'Sociología', 4, 1, 'H801', 'contraseña8', '8-111-111');
 
--- Tabla de profesores
+-- Registros para la tabla 'profesores'
 INSERT INTO profesores (cedula_prof, nombre, apellido, email, contraseña, cedula_admin) VALUES
-('5-432-1098', 'Roberto', 'Gómez', 'roberto@example.com', 'teacherpass', '8-123-4567'),
-('6-543-2109', 'Julia', 'Martínez', 'julia@example.com', 'teacher123', '8-234-5678'),
-('7-654-3210', 'Eduardo', 'López', 'eduardo@example.com', 'profesorpass', '8-345-6789'),
-('8-765-4321', 'Isabel', 'Sánchez', 'isabel@example.com', 'profesor123', '8-456-7890'),
-('9-876-5432', 'Felipe', 'Hernández', 'felipe@example.com', 'teachpass', '8-567-8901'),
-('1-987-6543', 'Carmen', 'Díaz', 'carmen@example.com', 'teach123', '8-678-9012'),
-('2-098-7654', 'Manuel', 'González', 'manuel@example.com', 'teacherpass123', '8-789-0123'),
-('3-210-9876', 'Lucía', 'Martín', 'lucia@example.com', 'teacher1234', '8-890-1234');
+('8-000-009', 'Francisco', 'Gómez', 'francisco@example.com', 'contraseña9', '8-888-888'),
+('8-000-010', 'Elena', 'Rodríguez', 'elena@example.com', 'contraseña10', '8-777-777'),
+('8-000-011', 'Jorge', 'Hernández', 'jorge@example.com', 'contraseña11', '8-666-666'),
+('8-000-012', 'Marina', 'Sánchez', 'marina@example.com', 'contraseña12', '8-555-555'),
+('8-000-013', 'Andrés', 'Pérez', 'andres@example.com', 'contraseña13', '8-444-444'),
+('8-000-014', 'Marta', 'González', 'marta@example.com', 'contraseña14', '8-333-333'),
+('8-000-015', 'David', 'López', 'david@example.com', 'contraseña15', '8-222-222'),
+('8-000-016', 'Natalia', 'Martínez', 'natalia@example.com', 'contraseña16', '8-111-111');
 
--- Tabla de asignaturas
-INSERT INTO asignaturas (codigo_asignatura, nombre, id_centroRegional) VALUES
-('INF101', 'Introducción a la Programación', 1),
-('DER202', 'Derecho Civil', 2),
-('MED303', 'Anatomía Humana', 3),
-('BIO404', 'Genética', 4),
-('ECO505', 'Microeconomía', 5),
-('ART606', 'Pintura Avanzada', 6),
-('SOC707', 'Sociología Urbana', 7),
-('ADM808', 'Gestión Empresarial', 1);
+-- Registros para la tabla 'clases'
+INSERT INTO clases (codigo_asignatura, numero_aula, cedula_prof, tema_clase, texto_clase, fecha) VALUES
+('MAT101', 'A101', '8-000-009', 'Introducción a los números complejos', 'En esta clase vamos a introducir el concepto de números complejos y realizar operaciones básicas con ellos.', '2024-05-01'),
+('FIS201', 'B201', '8-000-010', 'Leyes de Newton', 'En esta clase discutiremos las leyes fundamentales del movimiento de Newton y resolveremos problemas relacionados.', '2024-05-02'),
+('CS301', 'C301', '8-000-011', 'Estructuras de Datos', 'En esta clase exploraremos diferentes estructuras de datos como listas, árboles y grafos y analizaremos su eficiencia.', '2024-05-03'),
+('HIS401', 'D401', '8-000-012', 'Revolución Industrial', 'Hablaremos sobre el impacto de la Revolución Industrial en la sociedad y en la economía global.', '2024-05-04'),
+('ENG501', 'E501', '8-000-013', 'Debates en Inglés', 'En esta clase discutiremos varios temas actuales en inglés y practicaremos habilidades de debate.', '2024-05-05'),
+('ART601', 'F601', '8-000-014', 'Expresionismo Abstracto', 'Analizaremos el movimiento artístico del Expresionismo Abstracto y crearemos nuestras propias obras inspiradas en este estilo.', '2024-05-06'),
+('BIO701', 'G701', '8-000-015', 'Genética Molecular', 'En esta clase exploraremos los principios de la genética molecular y discutiremos sus aplicaciones en la medicina y la biotecnología.', '2024-05-07'),
+('ECO801', 'H801', '8-000-016', 'Teoría Monetaria', 'Hablaremos sobre las principales teorías monetarias y su impacto en las políticas económicas modernas.', '2024-05-08');
 
--- Tabla de registros de clase
-INSERT INTO clases (codigo_asignatura, cedula_prof, tema_clase, texto_clase, fecha) VALUES
-('INF101', '5-432-1098', 'Variables y Operadores', 'En esta clase discutimos los conceptos básicos de variables y operadores en programación.', '2024-05-01'),
-('DER202', '6-543-2109', 'Contratos', 'Analizamos los diferentes tipos de contratos y sus implicaciones legales.', '2024-05-02'),
-('MED303', '7-654-3210', 'Sistema Digestivo', 'Estudio detallado del sistema digestivo humano y sus funciones principales.', '2024-05-03'),
-('BIO404', '8-765-4321', 'Herencia Genética', 'Explicación de los principios básicos de la herencia genética y las leyes de Mendel.', '2024-05-04'),
-('ECO505', '9-876-5432', 'Oferta y Demanda', 'Análisis de cómo funcionan los conceptos de oferta y demanda en la economía.', '2024-05-05'),
-('ART606', '1-987-6543', 'Técnica de Pincel', 'Demostración de diferentes técnicas avanzadas de pintura con pincel.', '2024-05-06'),
-('SOC707', '2-098-7654', 'Movimientos Sociales', 'Discusión sobre los principales movimientos sociales urbanos en la historia.', '2024-05-07'),
-('ADM808', '3-210-9876', 'Planificación Estratégica', 'Revisión de los conceptos clave en la planificación estratégica empresarial.', '2024-05-08');

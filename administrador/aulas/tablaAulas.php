@@ -24,7 +24,7 @@ if ($validar == null || $validar = '') {
 </head>
 
 <body>
-    <h2 class="text-center p-4">Tabla de Asignaturas</h2>
+    <h2 class="text-center p-4">Tabla de Profesores</h2>
     <div class="containerTabla">
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="col-md-4 mb-2 mb-md-0">
@@ -45,7 +45,6 @@ if ($validar == null || $validar = '') {
         include '../../db_Conexion/conector.php';
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
-
         // Verifica si se realizó una búsqueda
         if (isset($_GET['buscar'])) {
             // Obtener el valor de 'busqueda'
@@ -53,17 +52,20 @@ if ($validar == null || $validar = '') {
             // Agregar comodines para la búsqueda parcial
             $busqueda = "%$busqueda%";
 
-            // Preparar la consulta SQL para buscar en varias columnas
-            $stmt = $conn->prepare("SELECT * FROM asignaturas WHERE codigo_asignatura LIKE ? OR nombre LIKE ?");
+            // Preparar la consulta SQL para buscar en varias columnas y obtener el nombre del centro regional
+            $stmt = $conn->prepare("SELECT aula.*, centros_regionales.nombre_centro FROM aula INNER JOIN centros_regionales 
+            ON aula.id_centroRegional = centros_regionales.id_centroRegional WHERE numero_aula LIKE ? OR 
+            centros_regionales.nombre_centro LIKE ?");
             // Asociar parámetros
             $stmt->bind_param("ss", $busqueda, $busqueda);
 
             $stmt->execute(); // Ejecutar la consulta preparada
-            $result = $stmt->get_result(); // Obtener los resultados de la consulta
+            $resultado = $stmt->get_result(); // Obtener los resultados de la consulta
 
         } else {
             // Consulta por defecto si no hay búsqueda
-            $result = $conn->query("SELECT * FROM asignaturas");
+            $resultado = $conn->query("SELECT aula.*, centros_regionales.nombre_centro FROM aula INNER JOIN centros_regionales ON
+            aula.id_centroRegional = centros_regionales.id_centroRegional");
         }
 
         ?>
@@ -72,24 +74,24 @@ if ($validar == null || $validar = '') {
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">N° Aula</th>
+                            <th scope="col">Centro Regional</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <?php if ($result->num_rows === 0) : ?>
+                        <?php if ($resultado->num_rows === 0) : ?>
                             <tr>
                                 <td colspan="6" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
                             </tr>
                         <?php else : ?>
-                            <?php while ($datos = $result->fetch_object()) : ?>
+                            <?php while ($datos = $resultado->fetch_object()) : ?>
                                 <tr>
-                                    <th scope="row"><?php echo $datos->codigo_asignatura; ?></th>
-                                    <td><?php echo $datos->nombre; ?></td>
+                                    <th scope="row"><?php echo $datos->numero_aula; ?></th>
+                                    <td><?php echo $datos->nombre_centro; ?></td>
                                     <td>
-                                        <a href="modificarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                                        <a href="modificarAula.php?cedProf=<?= $datos->numero_aula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                        <a href="eliminarAula.php?cedProf=<?= $datos->numero_aula ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
