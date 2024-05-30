@@ -92,6 +92,10 @@ $resultCentros = $conn->query($query);
             <label for="año">Año:</label>
             <input type="text" id="año" name="año" pattern="[1-5]" value="<?php echo $datos->año; ?>" title="[1-5]" required >
         </div>
+        <div class="col-12">
+            <label for="año">Año:</label>
+            <input type="text" id="año" name="año" pattern="[1-5]" value="<?php echo $datos->año; ?>" title="[1-5]" required >
+        </div>
 
         <div class="col-12">
             <label for="cr">Centro Regional:</label>

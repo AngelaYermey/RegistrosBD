@@ -77,8 +77,9 @@ if ($validar == null || $validar == '') {
                             <th scope="col">Correo</th>
                             <th scope="col">Facultad</th>
                             <th scope="col">Carrera</th>
-                            <th scope="col">Centro Regional</th>
                             <th scope="col">Año</th>
+                            <th scope="col">Centro Regional</th>
+                            <th scope="col">N° aula o salon</th>
                             <th scope="col">Contraseña</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -97,7 +98,9 @@ if ($validar == null || $validar == '') {
                                     <td><?php echo $datos->email; ?></td>
                                     <td><?php echo $datos->facultad; ?></td>
                                     <td><?php echo $datos->carrera; ?></td>
+                                    <td><?php echo $datos->año; ?></td>
                                     <td><?php echo $datos->nombre_centro; ?></td>
+                                    <td><?php echo $datos->numero_aula; ?></td>
                                     <td><?php echo $datos->año; ?></td>
                                     <td><?php echo $datos->contraseña; ?></td>
                                     <td>

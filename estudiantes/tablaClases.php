@@ -1,11 +1,10 @@
 <?php
 session_start();
-error_reporting(0);
 
-$validar = $_SESSION['usuario'];
+$UsuarioEstudiante = $_SESSION['usuario'];
 
-if ($validar == null || $validar == '') {
-    header("Location: ../../formularioIniciosesion.html");
+if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
+    header("Location: ../formularioIniciosesion.html");
     die();
 }
 ?>
@@ -29,8 +28,9 @@ if ($validar == null || $validar == '') {
     <div class="containerTabla">
 
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
+
             <div class="col-md-4 mb-2 mb-md-0">
-                <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i>salir</a>
+                <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Salir</a>
             </div>
             <div class="col-md-4 mb-2 mb-md-0">
                 <div class="input-group">
@@ -41,86 +41,82 @@ if ($validar == null || $validar == '') {
         </form>
 
         <?php
-        session_start();
+
         include '../db_Conexion/conector.php';
 
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
-        
-        $centroRegional = $_SESSION['centro_regional'];
+
         if (isset($_GET['buscador'])) { // Comprobar si se realizó una búsqueda
             $busqueda = $_GET['busqueda'];
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
-        
+
             // Preparar la consulta SQL para buscar en varias columnas
             $sql = "SELECT 
-                        asignaturas.codigo_asignatura, 
-                        asignaturas.nombre AS nombre_asignatura,
-                        clases.texto_clase, 
-                        profesores.nombre AS nombre_profesor,
-                        clases.fecha
-                    FROM 
-                        clases 
-                    INNER JOIN 
-                        asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-                    INNER JOIN 
-                        profesores ON clases.cedula_prof = profesores.cedula_prof 
-                    INNER JOIN 
-                        estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
-                    WHERE 
-                        estudiantes.cedula_estudiante = ? 
-                        AND (asignaturas.codigo_asignatura LIKE ? 
-                            OR asignaturas.nombre LIKE ? 
-                            OR clases.texto_clase LIKE ? 
-                            OR profesores.nombre LIKE ? 
-                            OR clases.fecha LIKE ?)
-                    ORDER BY 
-                        clases.fecha DESC";
+            asignaturas.codigo_asignatura, 
+            asignaturas.nombre AS nombre_asignatura,
+            clases.tema_clase, 
+            profesores.nombre AS nombre_profesor,
+            profesores.apellido AS apellido_profesor,
+            clases.fecha
+        FROM 
+            clases 
+        INNER JOIN 
+            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+        INNER JOIN 
+            profesores ON clases.cedula_prof = profesores.cedula_prof 
+        WHERE 
+       (asignaturas.codigo_asignatura LIKE ? 
+                OR asignaturas.nombre LIKE ? 
+                OR clases.tema_clase LIKE ? 
+                OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
+                OR clases.fecha LIKE ?)";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("ssssss", $centroRegional, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
-        
+            $consulta->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
         } else {
             $sql = "SELECT 
-                        asignaturas.codigo_asignatura, 
-                        asignaturas.nombre AS nombre_asignatura,
-                        clases.texto_clase, 
-                        profesores.nombre AS nombre_profesor,
-                        clases.fecha
-                    FROM 
-                        clases 
-                    INNER JOIN 
-                        asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-                    INNER JOIN 
-                        profesores ON clases.cedula_prof = profesores.cedula_prof 
-                    INNER JOIN 
-                        estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
-                    WHERE 
-                        estudiantes.cedula_estudiante = ?
-                    ORDER BY 
-                        clases.fecha DESC";
+                asignaturas.codigo_asignatura, 
+                asignaturas.nombre AS nombre_asignatura,
+                clases.tema_clase, 
+                profesores.nombre AS nombre_profesor,
+                profesores.apellido AS apellido_profesor,
+                clases.fecha
+            FROM 
+                clases 
+            INNER JOIN 
+                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+            INNER JOIN 
+                profesores ON clases.cedula_prof = profesores.cedula_prof 
+            INNER JOIN 
+                estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
+            WHERE 
+                estudiantes.cedula_estudiante = ?
+            ORDER BY 
+                clases.fecha DESC";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("s", $centroRegional);
-        
+            $consulta->bind_param("s", $UsuarioEstudiante);
+
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
         }
-        
 
         ?>
+
+
         <div class="row justify-content-center">
             <div class="table-responsive">
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                        <th scope="col">Código Materia</th>
+                            <th scope="col">Código Materia</th>
                             <th scope="col">Nombre Materia</th>
-                            <th scope="col">Nombre Clase</th>
+                            <th scope="col">Tema de la Clase</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Profesor</th>
                             <th scope="col">Acciones</th>
-                     
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -133,9 +129,13 @@ if ($validar == null || $validar == '') {
                                 <tr>
                                     <th scope="row"><?php echo $datos->codigo_asignatura; ?></th>
                                     <td><?php echo $datos->nombre_asignatura; ?></td>
-                                    <td><?php echo $datos->texto_clase; ?></td>
+                                    <td><?php echo $datos->tema_clase; ?></td>
                                     <td><?php echo $datos->fecha; ?></td>
-                                    <td><?php echo $datos->nombre_profesor; ?></td>
+
+                                    <td>
+                                        <?php echo $datos->nombre_profesor; ?>
+                                        <?php echo $datos->apellido_profesor; ?>
+                                    </td>
                                     <td>
                                         <a href="modificarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>

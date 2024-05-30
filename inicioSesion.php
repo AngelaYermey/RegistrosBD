@@ -31,7 +31,7 @@ if (isset($_POST['iniciar'])) {
             break;
         case 'estudiante':
             $tabla = 'estudiantes';
-            $redireccion = 'estudiantes/interfazClases.php'; // Cambiar por la página de estudiante
+            $redireccion = 'estudiantes/tablaClases.php'; // Cambiar por la página de estudiante
             $columna = 'cedula_estudiante';
 
             break;
@@ -45,15 +45,6 @@ if (isset($_POST['iniciar'])) {
 
     if ($resultado->num_rows > 0) {
         $fila = $resultado->fetch_assoc();
-        $_SESSION['cedula'] = $fila[$columna];
-
-        // Si el usuario es un estudiante, obtener el centro regional
-        if ($tipo_usuario === 'estudiante') {
-            $centroRegionalID = $fila['id_centroRegional'];
-            $consultaCentroRegional = $mysqli->query('SELECT nombre_centro FROM centros_regionales WHERE id_centroRegional = ' . $centroRegionalID);
-            $centroRegional = $consultaCentroRegional->fetch_assoc();
-            $_SESSION['centro_regional'] = $centroRegional['nombre_centro'];
-        }
 
         header('Location: ' . $redireccion);
         exit;
