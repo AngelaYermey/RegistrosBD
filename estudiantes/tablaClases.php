@@ -53,26 +53,30 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 
             // Preparar la consulta SQL para buscar en varias columnas
             $sql = "SELECT 
-            asignaturas.codigo_asignatura, 
-            asignaturas.nombre AS nombre_asignatura,
-            clases.tema_clase, 
-            profesores.nombre AS nombre_profesor,
-            profesores.apellido AS apellido_profesor,
-            clases.fecha
-        FROM 
-            clases 
-        INNER JOIN 
-            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-        INNER JOIN 
-            profesores ON clases.cedula_prof = profesores.cedula_prof 
-        WHERE 
-       (asignaturas.codigo_asignatura LIKE ? 
+                asignaturas.codigo_asignatura, 
+                asignaturas.nombre AS nombre_asignatura,
+                clases.tema_clase, 
+                profesores.nombre AS nombre_profesor,
+                profesores.apellido AS apellido_profesor,
+                clases.fecha
+            FROM 
+                clases 
+            INNER JOIN 
+                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+            INNER JOIN 
+                profesores ON clases.cedula_prof = profesores.cedula_prof 
+            WHERE 
+                clases.numero_aula IN (
+                    SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)
+            AND (
+                asignaturas.codigo_asignatura LIKE ? 
                 OR asignaturas.nombre LIKE ? 
                 OR clases.tema_clase LIKE ? 
                 OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
-                OR clases.fecha LIKE ?)";
+                OR clases.fecha LIKE ?
+            )";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+            $consulta->bind_param("sssss", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
 
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
@@ -90,10 +94,10 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                 asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
             INNER JOIN 
                 profesores ON clases.cedula_prof = profesores.cedula_prof 
-            INNER JOIN 
-                estudiantes ON asignaturas.id_centroRegional = estudiantes.id_centroRegional 
             WHERE 
-                estudiantes.cedula_estudiante = ?
+                clases.numero_aula IN (
+                    SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?
+                )
             ORDER BY 
                 clases.fecha DESC";
             $consulta = $conn->prepare($sql);
@@ -154,5 +158,4 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
