@@ -24,13 +24,14 @@ if (isset($_POST["btnModificar"])) {
     $carrera = $_POST['carrera'];
     $año = $_POST['año'];
     $centro_regional = $_POST['id_centroRegional'];
+    $aula = $_POST['aula'];
     $contraseña = $_POST['pass'];
 
     $con = new Conexion();
     $mysqli = $con->conectar();
 
     // Construir la consulta SQL para actualizar los datos del estudiante
-    $sql_update = "UPDATE estudiantes SET nombre=?, apellido=?, cedula_estudiante=?, email=?, facultad=?, carrera=?, id_centroRegional=?, año=?, contraseña=? WHERE cedula_estudiante=?";
+    $sql_update = "UPDATE estudiantes SET nombre=?, apellido=?, cedula_estudiante=?, email=?, facultad=?, carrera=?, id_centroRegional=?, año=?, aula=?, contraseña=? WHERE cedula_estudiante=?";
 
     // Preparar la consulta
     $stmt = $mysqli->prepare($sql_update);
@@ -38,7 +39,7 @@ if (isset($_POST["btnModificar"])) {
     // Verificar si la preparación de la consulta fue exitosa
     if ($stmt) {
         // Asociar los parámetros
-        $stmt->bind_param("ssssssssss", $nombre, $apellido, $cedulaNueva, $correo, $facultad, $carrera, $centro_regional, $año, $contraseña, $cedulaAntigua);
+        $stmt->bind_param("sssssssssss", $nombre, $apellido, $cedulaNueva, $correo, $facultad, $carrera, $centro_regional, $año,  $aula, $contraseña, $cedulaAntigua);
         // Ejecutar la consulta
         $stmt->execute();
         // Verificar si se realizó alguna actualización

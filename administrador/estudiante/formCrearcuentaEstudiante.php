@@ -80,7 +80,10 @@ $result = $conn->query($query);
                                 <?php endwhile; ?>
                             </select>
                         </div>
-
+                        <div class="form-floating mb-3">
+                        <label for="aula">N° Aula</label>
+                            <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." required><br>
+                        </div>
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
                             <input type="password" id="pass" name="pass" class="form-control" data-form-pass required>

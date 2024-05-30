@@ -90,11 +90,7 @@ $resultCentros = $conn->query($query);
 
         <div class="col-12">
             <label for="año">Año:</label>
-            <input type="text" id="año" name="año" pattern="[1-5]" value="<?php echo $datos->año; ?>" title="[1-5]" required >
-        </div>
-        <div class="col-12">
-            <label for="año">Año:</label>
-            <input type="text" id="año" name="año" pattern="[1-5]" value="<?php echo $datos->año; ?>" title="[1-5]" required >
+            <input type="text" id="año" name="año" pattern="[1-5]" value="<?php echo $datos->año; ?>" title="[1-5]" required>
         </div>
 
         <div class="col-12">
@@ -106,7 +102,10 @@ $resultCentros = $conn->query($query);
                 <?php endwhile; ?>
             </select>
         </div>
-
+        <div class="form-floating mb-3">
+            <label for="aula">N° Aula</label>
+            <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." value="<?php echo $datos->aula; ?>" required><br>
+        </div>
         <div class="col-12">
             <label for="pass" class="form-label">Contraseña</label>
             <input type="text" id="pass" name="pass" class="form-control" value="<?php echo $datos->contraseña; ?>" required>

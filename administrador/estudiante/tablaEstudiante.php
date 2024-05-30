@@ -44,7 +44,7 @@ if ($validar == null || $validar == '') {
         </form>
 
         <?php
-        
+
         include '../../db_Conexion/conector.php';
 
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
@@ -55,16 +55,26 @@ if ($validar == null || $validar == '') {
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
             // Preparar la consulta SQL para buscar en varias columnas
-            $consulta = $conn->prepare("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional WHERE 
-            estudiantes.cedula_estudiante LIKE ? OR estudiantes.nombre LIKE ? OR estudiantes.apellido LIKE ? OR estudiantes.email LIKE ? OR estudiantes.facultad LIKE ? OR estudiantes.carrera LIKE ? OR estudiantes.id_centroRegional LIKE ? OR estudiantes.año LIKE ? OR estudiantes.contraseña LIKE ? OR centros_regionales.nombre_centro LIKE ?");
-            $consulta->bind_param("ssssssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
-        
+            $consulta = $conn->prepare("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales 
+            ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional WHERE 
+            estudiantes.cedula_estudiante LIKE ? OR 
+            estudiantes.nombre LIKE ? OR 
+            estudiantes.apellido LIKE ? OR 
+            estudiantes.email LIKE ? OR 
+            estudiantes.facultad LIKE ? OR 
+            estudiantes.carrera LIKE ? OR 
+            estudiantes.año LIKE ? OR 
+            estudiantes.numero_aula LIKE ? OR 
+            centros_regionales.nombre_centro LIKE ?");
+            // Enlaza parámetros
+            $consulta->bind_param("sssssssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
         } else {
-            $result = $conn->query("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional");       
+            // Consulta sin búsqueda
+            $result = $conn->query("SELECT estudiantes.*, centros_regionales.nombre_centro AS nombre_centro FROM estudiantes LEFT JOIN centros_regionales ON estudiantes.id_centroRegional = centros_regionales.id_centroRegional");
         }
-
         ?>
         <div class="row justify-content-center">
             <div class="table-responsive">

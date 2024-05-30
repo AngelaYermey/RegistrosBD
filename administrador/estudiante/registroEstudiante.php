@@ -54,8 +54,6 @@ $con = new Conexion();
 $mysqli = $con->conectar();
 
 if (isset($_POST['btnCrear'])) {
-
-
     // Inicializar variables
     $nombre = $_POST['nom'];
     $apellido = $_POST['ape'];
@@ -65,6 +63,7 @@ if (isset($_POST['btnCrear'])) {
     $carrera = $_POST['carrera'];
     $año = $_POST['año'];
     $centro_regional = $_POST['id_centroRegional'];
+    $aula = $_POST['aula'];
     $contraseña = $_POST['pass'];
 
     // Obtener la cédula del administrador de la sesión
@@ -91,8 +90,8 @@ if (isset($_POST['btnCrear'])) {
     </script>";
     } else {
         // Insertar nuevo usuario en la tabla de estudiantes
-        $stmt = $mysqli->prepare("INSERT INTO estudiantes (nombre, apellido, cedula_estudiante, email, facultad, carrera, año, id_centroRegional, contraseña, cedula_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssss", $nombre, $apellido, $cedula, $correo, $facultad, $carrera, $año, $centro_regional, $contraseña, $admin_cedula);
+        $stmt = $mysqli->prepare("INSERT INTO estudiantes (nombre, apellido, cedula_estudiante, email, facultad, carrera, año, id_centroRegional, numero_aula, contraseña, cedula_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssssss", $nombre, $apellido, $cedula, $correo, $facultad, $carrera, $año, $centro_regional, $aula, $contraseña, $admin_cedula);
         if ($stmt->execute()) {
             echo '<div class="card-success">
        <p class="success-message">Registrado correctamente</p>
