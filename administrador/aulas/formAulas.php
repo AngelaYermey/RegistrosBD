@@ -37,13 +37,8 @@ $result = $conn->query($query);
                 <form action="registrosAula.php" method="POST" class="formulario_Crear_Cuenta" >
                     <div class="inputbx">
                     <div class="form-floating mb-3">
-                            <label for="ape">Codigo</label>
-                            <input type="text" id="ape" class="form-control" name="codigo" data-form-lastname required>                           
-                        </div>
-
-                        <div class="form-floating mb-3">
-                            <label for="nom">Nombre</label>
-                            <input type="text" id="nom" class="form-control" name="nombre" data-form-name required>
+                            <label for="ape">Codigo o numero del aula</label>
+                            <input type="text" id="CodAula" class="form-control" name="CodAula" data-form-lastname required>                           
                         </div>
 
                         <div class="form-floating mb-3">
@@ -58,7 +53,7 @@ $result = $conn->query($query);
 
                     </div>
                     <div class="inputbx">
-                        <button type="submit" class="btnCrear_Cuenta" data-form-btn name="btn_ingDatos">Ingresar Datos</button>
+                        <button type="submit" class="btn_ingDatos" data-form-btn name="btn_ingDatos">Ingresar Datos</button>
                     </div>   
                     <div class="inputbx">
                         <a href="tablaAulas.php" name="volver" class="btnvolver" data-form-btn>Volver Atrás</a>

@@ -1,107 +1,138 @@
 <?php
 echo '<style>
 body {
-   font-family: Arial, sans-serif;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 100vh;
-   margin: 0;
-   background-color: #FFFFFF; /* Blanco para el fondo */
-}
-
-.card {
-   width: 350px;
-   padding: 30px;
-   border-radius: 12px;
-   background-color: #FDF0D5; 
-   color: #333; /* Texto oscuro */
-   text-align: center;
-   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.card p {
-   font-size: 30px; /* Tamaño de fuente más grande para el título */
-   margin-bottom: 20px; /* Espacio adicional debajo del título */
-}
-
-.error-message {
-   color: #EF233C; /* Rojo oscuro */
-   font-weight: bold;
-}
-
-.card-success {
-   width: 350px;
-   padding: 30px;
-   border-radius: 12px;
-   background-color: #EDF2F4;
-   color: #780000; /* Rojo oscuro */
-   text-align: center;
-   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.success-message {
-   color: #C1121F; /* Rojo oscuro */
-   font-weight: bold;
-}
-</style>
-';
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .card-success {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 2px #6ad151;
+    background-color: rgba(225, 238, 230, 0.964);
+    color: #62ce60;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .card-danger {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 2px #fa1b1b;
+    background-color: rgba(236, 226, 225, 0.964);
+    color: #ba0f0f;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .success-message, .danger-message {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .fa-times {
+    -webkit-animation: blink-1 2s infinite both;
+    animation: blink-1 2s infinite both;
+  }
+  
+  @-webkit-keyframes blink-1 {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+  }
+  
+  @keyframes blink-1 {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+  }
+</style>';
 
 include '../../db_Conexion/conector.php';
-
 session_start();
-$con = new Conexion();
-$mysqli = $con->conectar();
 
+// Verificar si se ha enviado el formulario
 if (isset($_POST['btn_ingDatos'])) {
 
-    // Inicializar variables
-    $aula = $_POST['aula'];
+    // Establecer conexión a la base de datos
+    $con = new Conexion();
+    $mysqli = $con->conectar();
+
+    // Obtener los datos del formulario
+    $aula = $_POST['CodAula'];
     $centro_regional = $_POST['id_centroRegional'];
 
     // Obtener la cédula del administrador de la sesión
     $admin_cedula = $_SESSION['usuario'];
 
+    // Consultar si el aula ya existe
     $stmt = $mysqli->prepare("SELECT numero_aula FROM aula WHERE numero_aula = ?");
-
-    $stmt->bind_param("s", $codigo);
+    $stmt->bind_param("s", $aula);
     $stmt->execute();
     $result = $stmt->get_result();
-   
-    // Verificar el número de filas devueltas por la consulta
+
+    // Verificar si ya existe el aula
     if ($result->num_rows > 0) {
-        echo '<div class="alert alert-danger"></div>';
-        echo '<div class="card-success">
-        <p class="success-message">Error: Ya existe registrado</p>
+        echo '<div class="card-danger alert-danger">
+        <p class="danger-message">¡Error! Ya existe registrado.</p>
+        <i class="fa fa-times"></i>
     </div>';
         echo "<script>
         // Esperar 4 segundos antes de redirigir
         setTimeout(function() {
             // Redirigir a otra página
-            window.location.href = 'asignaturas.php';
-        }, 4000); // 4000 milisegundos = 4 segundos
+            window.location.href = 'formAulas.php';
+        }, 3300);
     </script>";
+        
     } else {
-        // Insertar nuevo usuario en la tabla de estudiantes
+        // Insertar el nuevo aula en la tabla
         $stmt = $mysqli->prepare("INSERT INTO aula (numero_aula, id_centroRegional) VALUES (?, ?)");
-        $stmt->bind_param("ss", $numero_aula, $centro_regional);
+        $stmt->bind_param("ss", $aula, $centro_regional);
+
         if ($stmt->execute()) {
-            echo '<div class="card-success">
-       <p class="success-message">Registrado correctamente</p>
-   </div>';
-            echo "<script>
-       // Esperar 4 segundos antes de redirigir
-       setTimeout(function() {
-           // Redirigir a otra página
-           window.location.href = 'Asignaturas.php';
-       }, 4000); // 4000 milisegundos = 4 segundos
-   </script>";
+            echo '<div class="card-success alert-simple alert-success">
+            <p class="success-message greencross">Registrado correctamente</p>
+            <i class="fa fa-times"></i>
+        </div>';
+                 echo "<script>
+            // Esperar 4 segundos antes de redirigir
+            setTimeout(function() {
+                // Redirigir a otra página
+                window.location.href = 'formAulas.php';
+            }, 3300);
+        </script>";
         } else {
-            echo "Error al registrar usuario: " . $stmt->error;
+            echo '<div class="card-danger alert-danger">
+            <p class="danger-message">¡Error! No se pudo completar el registro.</p>
+            <i class="fa fa-times"></i>
+        </div>';
+            echo "<script>
+            // Esperar 4 segundos antes de redirigir
+            setTimeout(function() {
+                // Redirigir a otra página
+                window.location.href = 'formAulas.php';
+            }, 3300);
+        </script>";
         }
-        $stmt->close();
     }
 
     // Cerrar la conexión
-    mysqli_close($mysqli);
+    $stmt->close();
+    $mysqli->close();
 }
+?>

@@ -11,7 +11,6 @@ if ($validar == null || $validar = '') {
 ?>
 
 
-
 <?php
 
 if (isset($_POST["btn_Modificar"])) {
