@@ -38,12 +38,12 @@ $result = $conn->query($query);
                     <div class="inputbx">
                     <div class="form-floating mb-3">
                             <label for="ape">Codigo</label>
-                            <input type="text" id="ape" class="form-control" name="codigo" data-form-lastname pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" required>                           
+                            <input type="text" id="ape" class="form-control" name="codigo" data-form-lastname required>                           
                         </div>
 
                         <div class="form-floating mb-3">
                             <label for="nom">Nombre</label>
-                            <input type="text" id="nom" class="form-control" name="nombre" data-form-name pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" required>
+                            <input type="text" id="nom" class="form-control" name="nombre" data-form-name required>
                         </div>
 
                         <div class="form-floating mb-3">

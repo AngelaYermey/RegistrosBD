@@ -41,12 +41,12 @@ if (isset($_GET["cedEst"])) {
     if ($result->num_rows > 0) {
         $datos = $result->fetch_object();
     } else {
-        echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>No se encontraron datos para la cédula proporcionada.</div>";
+        echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>No se encontraron los datos</div>";
         echo "<script>setTimeout(function() { window.location.href = 'tablaEstudiante.php'; }, 3000);</script>";
         exit();
     }
 } else {
-    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>No se proporcionó la cédula.</div>";
+    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Algo salio mal.</div>";
     echo "<script>setTimeout(function() { window.location.href = 'tablaEstudiante.php'; }, 3000);</script>";
     exit();
 }
@@ -102,9 +102,9 @@ $resultCentros = $conn->query($query);
                 <?php endwhile; ?>
             </select>
         </div>
-        <div class="form-floating mb-3">
+        <div class="col-12">
             <label for="aula">N° Aula</label>
-            <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." value="<?php echo $datos->aula; ?>" required><br>
+            <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." value="<?php echo $datos->numero_aula; ?>" required><br>
         </div>
         <div class="col-12">
             <label for="pass" class="form-label">Contraseña</label>

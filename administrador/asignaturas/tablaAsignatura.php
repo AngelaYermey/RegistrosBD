@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
@@ -37,7 +36,7 @@ if ($validar == null || $validar = '') {
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="asignaturas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
+                <a href="FormAsignaturas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
             </div>
         </form>
 
@@ -88,8 +87,8 @@ if ($validar == null || $validar = '') {
                                     <th scope="row"><?php echo $datos->codigo_asignatura; ?></th>
                                     <td><?php echo $datos->nombre; ?></td>
                                     <td>
-                                        <a href="modificarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarAsignatura.php?cedProf=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                                        <a href="modificarAsignatura.php?codAsig=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                                        <button onclick="confirmarEliminacion('<?= $datos->codigo_asignatura ?>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -100,6 +99,34 @@ if ($validar == null || $validar = '') {
         </div>
 
     </div>
+
+    <!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Función para mostrar el mensaje de confirmación
+        function confirmarEliminacion(codigo) {
+            Swal.fire({
+                title: '¿Estás seguro/a?',
+                text: "¡No podrás revertir esto, algunas clases asociadas pueden eliminarse!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, redirigir al script de eliminación
+                    window.location.href = 'eliminarDatosasignatura.php?codigoAsignatura=' + codigo;
+                } else {
+                    // Si hay un error, mostrar un mensaje de error
+                    Swal.fire('Error', response.message, 'error');
+                }
+            });
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

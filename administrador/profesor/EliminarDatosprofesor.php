@@ -1,81 +1,55 @@
 <?php
 session_start();
-error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
-  header("Location: ../../formularioIniciosesion.html");
-  die();
+if ($validar == null || $validar == '') {
+    header("Location: ../../formularioIniciosesion.html");
+    die();
 }
 
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmar Eliminación</title>
-  <!-- CSS de Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+// Verifica si se ha enviado la cédula a eliminar
+if (isset($_GET['cedProf'])) {
+    // Obtiene la cédula a eliminar desde la URL
+    $cedula = $_GET['cedProf'];
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="alert alert-info alert-dismissible fade show" role="alert" style="max-width: 500px;">
-      ¿Estás seguro de que deseas eliminar este registro?
-      <form method="post"><br>
-          <center>
-          <button type="submit" name="eliminar" class="btn btn-danger">Sí, eliminar</button>
-          <a href="tablaProfesor.php" class="btn btn-secondary">Cancelar</a>
-          </center>
-      </form>
-  </div>
-</div>
+    // Incluye el archivo de conexión a la base de datos
+    include '../../db_Conexion/conector.php';
 
-<!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    // Instancia un objeto de la clase Conexion
+    $conexion_obj = new Conexion();
 
-<?php
-// Maneja la solicitud POST para eliminar el registro 
-if(isset($_POST['eliminar'])){
-    // Verifica si se ha enviado la cédula 
-    if(isset($_GET['cedProf'])) {
-        // Obtiene la cédula a eliminar desde la URL
-        $cedulaprof = $_GET['cedProf'];
+    // Establece la conexión a la base de datos
+    $conn = $conexion_obj->conectar();
 
-        // Incluye el archivo de conexión a la base de datos
-        include '../../db_Conexion/conector.php';
+    // Prepara la consulta SQL para eliminar las clases asociadas al profesor
+    $eliminar_clases = $conn->prepare("DELETE FROM clases WHERE cedula_prof = ?");
+    $eliminar_clases->bind_param("s", $cedula);
 
-        // Instancia un objeto de la clase Conexion
-        $conexion_obj = new Conexion();
-        
-        // Establece la conexión a la base de datos
-        $conn = $conexion_obj->conectar();
+    // Ejecuta la consulta para eliminar las clases asociadas al profesor
+    if ($eliminar_clases->execute()) {
+        // Ahora que las clases asociadas han sido eliminadas, puedes eliminar al profesor
+        $eliminar_profesor = $conn->prepare("DELETE FROM profesores WHERE cedula_prof = ?");
+        $eliminar_profesor->bind_param("s", $cedula);
 
-        // Prepara la consulta SQL para eliminar con la cédula especificada
-        $eliminar= $conn->prepare("DELETE FROM profesores WHERE cedula_prof = ?");
-        
-        // Vincula el parámetro de la consulta
-        $eliminar->bind_param("s", $cedulaprof);
-
-        // Ejecuta la consulta
-        if($eliminar->execute()) {
-            // Si la eliminación es exitosa, redirecciona a la tabla
-            header("Location: tablaEstudiante.php");
+        // Ejecuta la consulta para eliminar al profesor
+        if ($eliminar_profesor->execute()) {
+            // Si la eliminación es exitosa, redirecciona a la tabla de estudiantes
+            echo "<script>window.location.href = 'tablaProfesor.php';</script>";
             exit();
         } else {
-            // Si hay un error, muestra un mensaje de error
-            echo "Error al eliminar el registro.";
+            // Si hay un error al eliminar al profesor, muestra un mensaje de error
+            echo "<script>Swal.fire('Error al eliminar el profesor.', 'error');</script>";
         }
-
-        // Cierra la conexión a la base de datos
-        $conn->close();
     } else {
-        // Si no se ha proporcionado la cédula a eliminar, muestra un mensaje de error
-        echo "No se ha proporcionado la cédula del usuario a eliminar.";
+        // Si hay un error al eliminar las clases asociadas al profesor, muestra un mensaje de error
+        echo "<script>Swal.fire('Error al eliminar por clases asociadas al profesor.', 'error');</script>";
     }
+
+    // Cierra la conexión a la base de datos
+    $conn->close();
+} else {
+    // Si no se ha proporcionado la cédula del profesor a eliminar, muestra un mensaje de error
+    echo "<script>Swal.fire('Error', 'No se ha proporcionado la cédula del estudiante a eliminar.', 'error');</script>";
 }
 ?>

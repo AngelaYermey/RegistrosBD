@@ -37,7 +37,7 @@ if ($validar == null || $validar = '') {
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="asignaturas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
+                <a href="formAulas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
             </div>
         </form>
 
@@ -91,7 +91,7 @@ if ($validar == null || $validar = '') {
                                     <td><?php echo $datos->nombre_centro; ?></td>
                                     <td>
                                         <a href="modificarAula.php?cedProf=<?= $datos->numero_aula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarAula.php?cedProf=<?= $datos->numero_aula ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
+                                        <button onclick="confirmarEliminacion('<?= $datos->numero_aula ?>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -100,9 +100,35 @@ if ($validar == null || $validar = '') {
                 </table>
             </div>
         </div>
-
     </div>
 
+    <!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Función para mostrar el mensaje de confirmación
+        function confirmarEliminacion(codigo) {
+            Swal.fire({
+                title: '¿Estás seguro/a?',
+                text: "¡No podrás revertir esto, algunas clases asociadas pueden eliminarse!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, redirigir al script de eliminación
+                    window.location.href = 'eliminarDatosaula.php?codigoAula=' + codigo;
+                } else {
+                    // Si hay un error, mostrar un mensaje de error
+                    Swal.fire('Error', response.message, 'error');
+                }
+            });
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -91,8 +91,7 @@ if ($validar == null || $validar = '') {
                                     <td><?php echo $datos->contraseña; ?></td>
                                     <td>
                                         <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                                        <a href="eliminarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-danger"><i class="fa-solid fa-trash" name="eliminar"></i> Eliminar</a>
-                                    </td>
+                                        <button onclick="confirmarEliminacion('<?= $datos->cedula_prof ?>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
                                 </tr>
                             <?php endwhile; ?>
                         <?php endif; ?>
@@ -102,6 +101,34 @@ if ($validar == null || $validar = '') {
         </div>
 
     </div>
+
+        <!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Función para mostrar el mensaje de confirmación
+        function confirmarEliminacion(cedula) {
+            Swal.fire({
+                title: '¿Estás seguro/a?',
+                text: "¡No podrás revertir esto, si eliminas al profesor algunos datos registrados por el mismo se eliminaran!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, redirigir al script de eliminación
+                    window.location.href = 'eliminarDatosprofesor.php?ced=' + cedula;
+                }else {
+                    // Si hay un error, mostrar un mensaje de error
+                    Swal.fire('Error', response.message, 'error');
+                }
+            });
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

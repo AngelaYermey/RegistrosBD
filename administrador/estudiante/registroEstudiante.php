@@ -101,10 +101,20 @@ if (isset($_POST['btnCrear'])) {
        setTimeout(function() {
            // Redirigir a otra página
            window.location.href = 'formCrearcuentaEstudiante.php';
-       }, 4000); // 4000 milisegundos = 4 segundos
+       }, 3500); 
    </script>";
         } else {
-            echo "Error al registrar usuario: " . $stmt->error;
+            echo '<div class="card-success">
+            <p class="success-message">Ocurrio un error al registrar el usuario</p>
+        </div>';
+                 echo "<script>
+            // Esperar 4 segundos antes de redirigir
+            setTimeout(function() {
+                // Redirigir a otra página
+                window.location.href = 'formCrearcuentaEstudiante.php';
+            }, 3300);
+        </script>";
+           
         }
         $stmt->close();
     }
