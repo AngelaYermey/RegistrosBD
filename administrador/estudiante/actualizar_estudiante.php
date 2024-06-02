@@ -80,4 +80,5 @@ if (isset($_POST["btnModificar"])) {
     // Cerrar la conexión
     $mysqli->close();
 } 
+
 ?>

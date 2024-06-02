@@ -24,7 +24,7 @@ if ($validar == null || $validar = '') {
 </head>
 
 <body>
-    <h2 class="text-center p-4">Tabla de Profesores</h2>
+    <h2 class="text-center p-4">Tabla de Aulas</h2>
     <div class="containerTabla">
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="col-md-4 mb-2 mb-md-0">
@@ -90,7 +90,7 @@ if ($validar == null || $validar = '') {
                                     <th scope="row"><?php echo $datos->numero_aula; ?></th>
                                     <td><?php echo $datos->nombre_centro; ?></td>
                                     <td>
-                                        <a href="modificarAula.php?cedProf=<?= $datos->numero_aula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                                        <a href="modificarAula.php?codAula=<?= $datos->numero_aula ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                                         <button onclick="confirmarEliminacion('<?= $datos->numero_aula ?>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</button>
                                     </td>
                                 </tr>

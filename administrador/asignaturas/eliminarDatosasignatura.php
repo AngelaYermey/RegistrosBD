@@ -1,6 +1,72 @@
 <?php
+
+echo '<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .card-success {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 2px #6ad151;
+    background-color: rgba(225, 238, 230, 0.964);
+    color: #62ce60;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .card-danger {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 2px #fa1b1b;
+    background-color: rgba(236, 226, 225, 0.964);
+    color: #ba0f0f;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .success-message, .danger-message {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .fa-times {
+    -webkit-animation: blink-1 2s infinite both;
+    animation: blink-1 2s infinite both;
+  }
+  
+  @-webkit-keyframes blink-1 {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+  }
+  
+  @keyframes blink-1 {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+  }
+</style>
+';
+
+
+
 session_start();
-error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
@@ -36,24 +102,38 @@ if (isset($_GET['codigoAsignatura'])) {
         // Ejecuta la consulta para eliminar la asignatura
         if ($eliminar_asignatura->execute()) {
             // Si la eliminación es exitosa, redirecciona a la tabla de asignaturas
+            echo "<div class='card-success alert-success'>
+                    <p class='success-message'>Asignatura eliminada correctamente.</p>
+                    <i class='fa fa-times'></i>
+                </div>";
             echo "<script>window.location.href = 'tablaAsignatura.php';</script>";
             exit();
         } else {
             // Si hay un error al eliminar la asignatura, muestra un mensaje de error
-            echo "<script>alert('Error al eliminar la asignatura.');</script>";
+            echo "<div class='card-danger alert-danger'>
+                    <p class='danger-message'>Error al eliminar la asignatura.</p>
+                    <i class='fa fa-times'></i>
+                </div>";
+                
         }
     } else {
         // Si hay un error al eliminar las clases asociadas a la asignatura, muestra un mensaje de error
-        echo "<script>alert('Error al eliminar las clases asociadas a la asignatura.');</script>";
+        echo "<div class='card-danger alert-danger'>
+                <p class='danger-message'>Error al eliminar las clases asociadas a la asignatura.</p>
+                <i class='fa fa-times'></i>
+            </div>";
     }
 
     // Cierra la conexión a la base de datos
     $conn->close();
 } else {
     // Si no se ha proporcionado el código de la asignatura a eliminar, muestra un mensaje de error
-    echo "<script>alert('No se ha proporcionado el código de la asignatura a eliminar.');</script>";
+    echo "<div class='card-danger alert-danger'>
+            <p class='danger-message'>No se ha proporcionado el código de la asignatura a eliminar.</p>
+            <i class='fa fa-times'></i>
+        </div>";
 }
-?>
+
 
 
 ?>

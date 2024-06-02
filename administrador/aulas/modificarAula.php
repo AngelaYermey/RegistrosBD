@@ -31,10 +31,10 @@ include '../../db_Conexion/conector.php';
 $conexion_obj = new Conexion();
 $conn = $conexion_obj->conectar();
 
-if (isset($_GET["codAsig"])) {
-    $ced = $_GET["codAsig"];
-    $sql = $conn->prepare("SELECT * FROM asignaturas WHERE codigo_asignatura = ?");
-    $sql->bind_param("s", $ced);
+if (isset($_GET["codAula"])) {
+    $codAula = $_GET["codAula"];
+    $sql = $conn->prepare("SELECT * FROM aula WHERE numero_aula = ?");
+    $sql->bind_param("s", $codAula);
     $sql->execute();
     $result = $sql->get_result();
 
@@ -50,29 +50,35 @@ if (isset($_GET["codAsig"])) {
     echo "<script>setTimeout(function() { window.location.href = 'tablaAsignatura.php'; }, 3000);</script>";
     exit();
 }
-
+$query = "SELECT id_centroRegional, nombre_centro FROM centros_regionales";
+$resultCentros = $conn->query($query);
 ?>
 
 <body>
     <form method="POST" class="custom-form-style">
         <br>
-        <h3>Modificar Estudiante</h3><br>
+        <h3>Modificar Aula</h3><br>
         <div class="col-md-12">
-            <?php include "actualizarAsignatura.php"; ?>
+            <?php include "actualizarAula.php"; ?>
             <label for="nom" class="form-label">codigo</label>
-            <input type="text" id="codigo" class="form-control" name="codigo" value="<?php echo $datos->codigo_asignatura; ?>" required>
+            <input type="text" id="codAula" class="form-control" name="codAula" value="<?php echo $datos->numero_aula; ?>" required>
         </div>
-        <div class="col-md-12">
-        <label for="nom" class="form-label">Nombre</label>
-            <input type="text" id="nom" class="form-control" name="nom" value="<?php echo $datos->nombre; ?>" required>
+        <div class="col-12">
+            <label for="cr">Centro Regional:</label>
+            <select id="cr" name="id_centroRegional" class="form-select" required>
+                <option value="">Escoger opción...</option>
+                <?php while ($row = $resultCentros->fetch_assoc()) : ?>
+                    <option value="<?php echo $row['id_centroRegional']; ?>" <?php echo $datos->id_centroRegional == $row['id_centroRegional'] ? "selected" : ""; ?>><?php echo $row['nombre_centro']; ?></option>
+                <?php endwhile; ?>
+            </select>
         </div>
-        </div>
+
         <div class="row p-4 ">
             <div class="col-6">
                 <center><button type="submit" class="btn btn-success" name="btnModificar" value="ok">Modificar</button></center>
             </div>
             <div class="col-6">
-                <center><a href="tablaAsignatura.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
+                <center><a href="tablaAulas.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
             </div>
         </div>
 

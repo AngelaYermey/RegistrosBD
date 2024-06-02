@@ -30,17 +30,12 @@ if (isset($_POST["btnModificar"])) {
     if ($mysqli->query($sql_update) === TRUE) {
         // Verificar si se realizó alguna actualización
         if ($mysqli->affected_rows > 0) {
-        ?>
+?>
             <center>
                 <div class="alert alert-success" role="alert">
                     <?php echo "Registro actualizado correctamente"; ?>
                 </div>
             </center>
-            <script>
-                setTimeout(function() {
-                    window.location.href = 'tablaAsignatura.php';
-                }, 3000);
-            </script>
         <?php
             exit; // Finalizar la ejecución del script después de la redirección
         } else {
@@ -55,7 +50,7 @@ if (isset($_POST["btnModificar"])) {
         <div class="alert alert-danger" role="alert">
             <?php echo "Error al ejecutar la consulta: " . $mysqli->error; ?>
         </div>
-<?php
+        <?php
     }
 
     // Cerrar la conexión

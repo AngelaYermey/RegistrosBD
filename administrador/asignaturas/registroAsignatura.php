@@ -71,55 +71,63 @@ $mysqli = $con->conectar();
 
 if (isset($_POST['btn_ingDatos'])) {
 
-    // Inicializar variables
-    $nombre = $_POST['nombre'];
-    $codigo = $_POST['codigo'];
-    $centro_regional = $_POST['id_centroRegional'];
+  // Inicializar variables
+  $nombre = $_POST['nombre'];
+  $codigo = $_POST['codigo'];
+  $centro_regional = $_POST['id_centroRegional'];
 
-    // Obtener la cédula del administrador de la sesión
-    $admin_cedula = $_SESSION['usuario'];
+  // Obtener la cédula del administrador de la sesión
+  $admin_cedula = $_SESSION['usuario'];
 
-    // Verificar si ya existe un usuario con la cédula proporcionada
-    $stmt = $mysqli->prepare("SELECT codigo_asignatura FROM asignaturas WHERE codigo_asignatura = ?");
+  // Verificar si ya existe un usuario con la cédula proporcionada
+  $stmt = $mysqli->prepare("SELECT codigo_asignatura FROM asignaturas WHERE codigo_asignatura = ?");
 
-    $stmt->bind_param("s", $codigo);
-    $stmt->execute();
-    $result = $stmt->get_result();
-   
-    // Verificar el número de filas devueltas por la consulta
-    if ($result->num_rows > 0) {
-        echo '<div class="alert alert-danger"></div>';
-        echo '<div class="card-success">
-        <p class="success-message">Error: Ya existe registrado</p>
+  $stmt->bind_param("s", $codigo);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  // Verificar el número de filas devueltas por la consulta
+  if ($result->num_rows > 0) {
+    echo '<div class="card-danger">
+        <p class="danger-message">Error: Ya existe registrado</p>
     </div>';
-        echo "<script>
+    echo "<script>
         // Esperar 4 segundos antes de redirigir
         setTimeout(function() {
             // Redirigir a otra página
             window.location.href = 'asignaturas.php';
         }, 4000); // 4000 milisegundos = 4 segundos
     </script>";
-    } else {
-        // Insertar nuevo usuario en la tabla de estudiantes
-        $stmt = $mysqli->prepare("INSERT INTO asignaturas (codigo_asignatura, nombre, id_centroRegional, cedula_admin) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $codigo, $nombre, $centro_regional, $admin_cedula);
-        if ($stmt->execute()) {
-            echo '<div class="card-success">
+  } else {
+    // Insertar nuevo usuario en la tabla de estudiantes
+    $stmt = $mysqli->prepare("INSERT INTO asignaturas (codigo_asignatura, nombre, id_centroRegional, cedula_admin) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $codigo, $nombre, $centro_regional, $admin_cedula);
+    if ($stmt->execute()) {
+      echo '<div class="card-success">
        <p class="success-message">Registrado correctamente</p>
    </div>';
-            echo "<script>
+      echo "<script>
        // Esperar 4 segundos antes de redirigir
        setTimeout(function() {
            // Redirigir a otra página
-           window.location.href = 'Asignaturas.php';
+           window.location.href = 'asignaturas.php';
        }, 4000); // 4000 milisegundos = 4 segundos
    </script>";
-        } else {
-            echo "Error al registrar usuario: " . $stmt->error;
-        }
-        $stmt->close();
+    } else {
+      echo '<div class="card-danger">
+            <p class="danger-message">Error al registrar usuario</p>
+        </div>';
+      echo "<script>
+            // Esperar 4 segundos antes de redirigir
+            setTimeout(function() {
+                // Redirigir a otra página
+                window.location.href = 'asignaturas.php';
+            }, 4000); // 4000 milisegundos = 4 segundos
+        </script>";
     }
+    $stmt->close();
+  }
 
-    // Cerrar la conexión
-    mysqli_close($mysqli);
+  // Cerrar la conexión
+  mysqli_close($mysqli);
 }
