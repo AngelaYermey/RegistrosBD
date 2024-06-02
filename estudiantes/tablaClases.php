@@ -30,11 +30,11 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
 
             <div class="col-md-4 mb-2 mb-md-0">
-                <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Salir</a>
+                <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
             </div>
             <div class="col-md-4 mb-2 mb-md-0">
                 <div class="input-group">
-                    <input placeholder="Ingrese el dato que desee buscar" name="busqueda" type="search" class="form-control">
+                    <input placeholder="Buscador" name="busqueda" type="search" class="form-control">
                     <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
@@ -141,8 +141,8 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                                         <?php echo $datos->apellido_profesor; ?>
                                     </td>
                                     <td>
-                                        <a href="modificarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-small btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="modificarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>"  class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
+                                        <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

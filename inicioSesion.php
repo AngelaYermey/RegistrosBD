@@ -26,7 +26,7 @@ if (isset($_POST['iniciar'])) {
             break;
         case 'profesor':
             $tabla = 'profesores';
-            $redireccion = 'bienvenido.html'; // Cambiar por la página de profesor
+            $redireccion = 'profesores/transcripcion.php'; // Cambiar por la página de profesor
             $columna = 'cedula_prof';
             break;
         case 'estudiante':

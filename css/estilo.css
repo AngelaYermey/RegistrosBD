@@ -1,0 +1,203 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tauri", sans-serif;
+  text-align: center;
+  color: #ffffff;
+}
+
+.texts {
+  margin: 0 auto;
+  overflow-y: auto;
+  max-height: 590px; /* Ajusta según sea necesario */
+  border: 1px solid #cccccc00;
+  padding: 10px;
+  
+
+}
+.contenedorText{
+  font-size: 100%; /* Tamaño de texto inicial */
+}
+
+p {
+  font-size: calc(0.5rem + 3vw);
+  margin: 0.5em 0;
+  text-align: justify;
+  color: black;
+}
+
+.titulos {
+  text-align: center;
+  color: #ffffff;
+  font-size: clamp(55px, 4vw, 80px);
+}
+.titulos2 {
+  text-align: center;
+  color: #201818;
+  font-size: 1.1em;
+}
+
+/* control de imagenes */
+.imagen {
+  width: 301px;
+}
+.imagenMain {
+  width: 550px;
+}
+.imgMain {
+  margin-bottom: 2em;
+}
+/* fin de control de imagenes */
+
+/* botones de opciones */
+
+.btn {
+  margin: 1%;
+  border: none;
+  width: 20em;
+  height: 5em;
+  border-radius: 3em;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #00509d;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+  border: 1.5px solid white;
+}
+
+.sparkle {
+  fill: #fbfbfb;
+  transition: all 800ms ease;
+}
+
+.text {
+  font-weight: calc(0.2rem + 2vw);
+  color: #ffffff;
+  font-size: medium;
+  font-family: "Tauri", sans-serif;
+  
+}
+#text2{
+  font-weight: calc(0.2rem + 2vw);
+  color: #ffffff;
+  font-size: medium;
+  font-family: "Tauri", sans-serif;
+}
+
+.btn:hover {
+  background: linear-gradient(0deg, #4ea8de, #0e4cb8b8);
+  box-shadow: inset 0px 1px 0px 0px rgba(0, 22, 20, 0.4),
+    inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 0px 4px rgba(17, 1, 1, 0.2), 0px 0px 180px 0px #00ffd0;
+  transform: translateY(-2px);
+}
+
+.btn:hover .text {
+  color: white;
+}
+
+.btn:hover .sparkle {
+  fill: white;
+  transform: scale(1.2);
+}
+
+/* on/off */
+#language-selector {
+  margin: 1%;
+  border: none;
+  width: 20em;
+  height: 5em;
+  border-radius: 3em;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #00509d;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+  border: 1.5px solid white;
+  color: #ffffff;
+}
+/* fin de botones de opcion */
+
+
+/* reconocimiento de audio */
+#micContainer {
+  bottom: 500px;
+  right: 20px;
+  z-index: 999;
+}
+
+#micStatus {
+  margin-left: 5px;
+  font-size: 12px;
+  color: black;
+}
+
+#micIcon.active {
+  stroke: rgb(3, 255, 3); /* Cambiar el color cuando está captando audio */
+}
+
+#micIcon.on {
+  stroke: rgb(255, 0, 0); /* Cambiar el color cuando está encendido */
+}
+
+#micStatus {
+  margin-left: 10px; /* Ajusta el espacio entre el icono y el texto según sea necesario */
+  font-size: 1rem; /* Tamaño base del texto */
+}
+
+@media (min-width: 640px) {
+  #micStatus {
+    font-size: 2.25rem; /* Tamaño del texto en dispositivos medianos */
+  }
+}
+
+@media (min-width: 768px) {
+  #micStatus {
+    font-size: 2.5rem; /* Tamaño del texto en dispositivos grandes */
+  }
+}
+
+/* estilo de tabla */
+/* Agrega este estilo al final de tu archivo de estilo (estilo.css) o en un nuevo archivo CSS */
+
+/* Estilos para la tabla de transcripciones */
+/* Estilos para la tabla de transcripciones */
+.transcription-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.transcription-table th,
+.transcription-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.transcription-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+}
+
+.transcription-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.transcription-table tbody tr:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+
+
+/* fin de estilo de tabla */
+
+

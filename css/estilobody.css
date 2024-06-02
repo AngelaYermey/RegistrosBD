@@ -1,0 +1,53 @@
+.holy-grail header,
+.holy-grail footer,
+.hg-sidebar,
+.holy-grail-content {
+  padding: 20px;
+}
+
+.holy-grail header {
+  box-shadow: rgba(9, 9, 245, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.168) 0px 30px 60px -30px;
+  background: linear-gradient(160deg, #30b0ff 14%, #3a0ca3 100%);
+}
+
+.hg-sidebar {
+  background: rgb(27, 1, 1);
+}
+
+.holy-grail-content {
+  color: #777;
+  height: 590px;
+}
+
+.holy-grail {
+  min-height: 100vh;
+}
+
+.holy-grail,
+.holy-grail-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.holy-grail-content {
+  flex: 1 1 auto;
+  margin-bottom: 52px;
+}
+
+@media (min-width: 768px) {
+  .holy-grail-sidebar-1 {
+    order: -1;
+  }
+
+  .holy-grail-body {
+    flex-direction: row;
+  }
+
+  .hg-sidebar {
+    flex: 0 0 260px;
+  }
+}
+
+/* efecto cristal */
