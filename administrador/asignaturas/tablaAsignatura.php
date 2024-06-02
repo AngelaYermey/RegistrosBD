@@ -36,7 +36,7 @@ if ($validar == null || $validar = '') {
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="FormAsignaturas.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
+                <a href="FormAsignatura.php" type="button" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Agregar</a>
             </div>
         </form>
 

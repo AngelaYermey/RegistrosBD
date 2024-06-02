@@ -102,10 +102,6 @@ if (isset($_GET['codigoAsignatura'])) {
         // Ejecuta la consulta para eliminar la asignatura
         if ($eliminar_asignatura->execute()) {
             // Si la eliminación es exitosa, redirecciona a la tabla de asignaturas
-            echo "<div class='card-success alert-success'>
-                    <p class='success-message'>Asignatura eliminada correctamente.</p>
-                    <i class='fa fa-times'></i>
-                </div>";
             echo "<script>window.location.href = 'tablaAsignatura.php';</script>";
             exit();
         } else {
@@ -114,7 +110,12 @@ if (isset($_GET['codigoAsignatura'])) {
                     <p class='danger-message'>Error al eliminar la asignatura.</p>
                     <i class='fa fa-times'></i>
                 </div>";
-                
+                echo "<script>
+                setTimeout(function() {
+                    // Redirigir
+                    window.location.href = 'tablaAsignaturas.php';
+                }, 3000); 
+            </script>";              
         }
     } else {
         // Si hay un error al eliminar las clases asociadas a la asignatura, muestra un mensaje de error
@@ -122,6 +123,12 @@ if (isset($_GET['codigoAsignatura'])) {
                 <p class='danger-message'>Error al eliminar las clases asociadas a la asignatura.</p>
                 <i class='fa fa-times'></i>
             </div>";
+            echo "<script>
+            setTimeout(function() {
+                // Redirigir
+                window.location.href = 'tablaAsignaturas.php';
+            }, 3000); 
+        </script>";
     }
 
     // Cierra la conexión a la base de datos
@@ -132,6 +139,12 @@ if (isset($_GET['codigoAsignatura'])) {
             <p class='danger-message'>No se ha proporcionado el código de la asignatura a eliminar.</p>
             <i class='fa fa-times'></i>
         </div>";
+        echo "<script>
+       setTimeout(function() {
+           // Redirigir
+           window.location.href = 'tablaAsignaturas.php';
+       }, 3000); 
+   </script>";
 }
 
 

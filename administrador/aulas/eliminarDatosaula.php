@@ -113,10 +113,6 @@ if (isset($_GET['codigoAula'])) {
         // Ejecuta la consulta para eliminar el aula
         if ($eliminar_aula->execute()) {
             // Si la eliminación es exitosa, redirecciona a la tabla de aulas
-            echo "<div class='card-success alert-success'>
-                    <p class='success-message'>Aula eliminada correctamente.</p>
-                    <i class='fa fa-times'></i>
-                </div>";
             echo "<script>window.location.href = 'tablaAulas.php';</script>";
             exit();
         } else {

@@ -52,6 +52,7 @@ if (isset($_GET["codAula"])) {
 }
 $query = "SELECT id_centroRegional, nombre_centro FROM centros_regionales";
 $resultCentros = $conn->query($query);
+error_reporting(E_ALL);
 ?>
 
 <body>
@@ -59,9 +60,12 @@ $resultCentros = $conn->query($query);
         <br>
         <h3>Modificar Aula</h3><br>
         <div class="col-md-12">
-            <?php include "actualizarAula.php"; ?>
+            <?php include "actualizarDatosaula.php"; ?>
             <label for="nom" class="form-label">codigo</label>
-            <input type="text" id="codAula" class="form-control" name="codAula" value="<?php echo $datos->numero_aula; ?>" required>
+            <input type="text" id="codigoAula" class="form-control" name="codigoAula" value="<?php echo $datos->numero_aula; ?>" required>
+            <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
+            <input type="hidden" name="numAntiguo" value="<?php echo $datos->numero_aula; ?>">
+
         </div>
         <div class="col-12">
             <label for="cr">Centro Regional:</label>

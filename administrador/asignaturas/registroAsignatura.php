@@ -72,14 +72,10 @@ $mysqli = $con->conectar();
 if (isset($_POST['btn_ingDatos'])) {
 
   // Inicializar variables
-  $nombre = $_POST['nombre'];
-  $codigo = $_POST['codigo'];
-  $centro_regional = $_POST['id_centroRegional'];
+  $nombre = $_POST['nomAsignatura'];
+  $codigo = $_POST['codAsignatura'];
 
-  // Obtener la cédula del administrador de la sesión
-  $admin_cedula = $_SESSION['usuario'];
-
-  // Verificar si ya existe un usuario con la cédula proporcionada
+  // Verificar si ya existe
   $stmt = $mysqli->prepare("SELECT codigo_asignatura FROM asignaturas WHERE codigo_asignatura = ?");
 
   $stmt->bind_param("s", $codigo);
@@ -100,8 +96,8 @@ if (isset($_POST['btn_ingDatos'])) {
     </script>";
   } else {
     // Insertar nuevo usuario en la tabla de estudiantes
-    $stmt = $mysqli->prepare("INSERT INTO asignaturas (codigo_asignatura, nombre, id_centroRegional, cedula_admin) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $codigo, $nombre, $centro_regional, $admin_cedula);
+    $stmt = $mysqli->prepare("INSERT INTO asignaturas (codigo_asignatura, nombre) VALUES (?, ?)");
+    $stmt->bind_param("ss", $codigo, $nombre);
     if ($stmt->execute()) {
       echo '<div class="card-success">
        <p class="success-message">Registrado correctamente</p>

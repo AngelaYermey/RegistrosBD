@@ -1,43 +1,41 @@
 <?php
-session_start();
-error_reporting(0);
-
-$validar = $_SESSION['usuario'];
-
-if ($validar == null || $validar = '') {
-    header("Location: ../../formularioIniciosesion.html");
-    die();
-}
-?>
-
-<?php
+error_reporting(E_ALL);
 if (isset($_POST["btnModificar"])) {
     // Recoger los datos del formulario
-    $num = $_POST['codAula'];
+    $codigo = $_POST['numAntiguo'];
+    $codigoNuevo = $_POST['codigoAula'];
     $centro_regional = $_POST['id_centroRegional'];
-
-    // Incluir el archivo de conexión a la base de datos
-    include '../../db_Conexion/conector.php';
 
     // Instanciar un objeto de la clase Conexion
     $con = new Conexion();
     $mysqli = $con->conectar();
 
     // Construir la consulta SQL para actualizar los datos
-    $sql_update = "UPDATE aula SET id_centroRegional='$centro_regional' WHERE numero_aula = '$num'";
+    $sql_update = "UPDATE aula SET id_centroRegional= ?, numero_aula= ? WHERE numero_aula= ?";
+    
+    // Preparar la consulta
+    $stmt = $mysqli->prepare($sql_update);
+
+    // Vincular los parámetros y ejecutar la consulta
+    $stmt->bind_param("iss", $centro_regional, $codigoNuevo, $codigo);
 
     // Ejecutar la consulta
-    if ($mysqli->query($sql_update) === TRUE) {
+    if ($stmt->execute()) {
         // Verificar si se realizó alguna actualización
-        if ($mysqli->affected_rows > 0) {
+        if ($stmt->affected_rows > 0) {
 ?>
             <center>
                 <div class="alert alert-success" role="alert">
                     <?php echo "Registro actualizado correctamente"; ?>
                 </div>
+
             </center>
+            <script>
+                setTimeout(function() {
+                    window.location.href = 'tablaAulas.php';
+                }, 3000);
+            </script>
         <?php
-            exit; // Finalizar la ejecución del script después de la redirección
         } else {
         ?>
             <div class="alert alert-warning" role="alert">
@@ -54,7 +52,7 @@ if (isset($_POST["btnModificar"])) {
     }
 
     // Cerrar la conexión
+    $stmt->close();
     $mysqli->close();
 }
-
 ?>
