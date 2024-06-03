@@ -141,8 +141,8 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                                         <?php echo $datos->apellido_profesor; ?>
                                     </td>
                                     <td>
-                                        <a href="modificarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>"  class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
-                                        <a href="eliminarDatosestudiante.php?cedEst=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
+                                        <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>"  class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
+                                        <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

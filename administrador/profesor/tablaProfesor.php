@@ -121,7 +121,7 @@ if ($validar == null || $validar == '') {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Si el usuario confirma, redirigir al script de eliminación
-                    window.location.href = 'eliminarDatosprofesor.php?ced=' + cedula;
+                    window.location.href = 'eliminarDatosprofesor.php?cedProf=' + cedula;
                 }else {
                     // Si hay un error, mostrar un mensaje de error
                     Swal.fire('Error', response.message, 'error');
