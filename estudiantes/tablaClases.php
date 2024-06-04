@@ -20,9 +20,16 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../css/tabla.css">
+
 </head>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../menuFooter/encabezado.html");
+        ?>
+
+    </header>
     <h2 class="text-center p-4">Clases Disponibles</h2>
 
     <div class="containerTabla">
@@ -141,7 +148,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                                         <?php echo $datos->apellido_profesor; ?>
                                     </td>
                                     <td>
-                                        <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>"  class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
+                                        <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
                                         <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
                                     </td>
                                 </tr>
@@ -154,8 +161,16 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 
     </div>
 
+    <footer class="footer">
+        <?php
+        include("../menuFooter/footer.html");
+        ?>
+
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

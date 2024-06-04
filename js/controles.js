@@ -1,11 +1,7 @@
-const languageSelector = document.getElementById('language-selector');
 
-languageSelector.addEventListener('change', function() {
-  recognition.lang = this.value;
-});
 
 window.addEventListener('DOMContentLoaded', () => {
-  const fileInput = document.getElementById('fileInput');
+  const fileInput = document.getElementById('file');
   const texts = document.querySelector('.texts');
 
   fileInput.addEventListener('change', handleFileSelect);

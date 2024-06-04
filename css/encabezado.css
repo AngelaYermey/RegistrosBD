@@ -1,0 +1,129 @@
+.holy-grail header,
+.holy-grail footer,
+.hg-sidebar,
+.holy-grail-content{
+  padding: 20px;
+}
+
+.holy-grail header {
+  background-image: radial-gradient(
+      circle at 17% 77%,
+      rgba(17, 17, 17, 0.04) 0%,
+      rgba(17, 17, 17, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 26% 17%,
+      rgba(64, 64, 64, 0.04) 0%,
+      rgba(64, 64, 64, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 44% 60%,
+      rgba(177, 177, 177, 0.04) 0%,
+      rgba(177, 177, 177, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 100%
+    ),
+    linear-gradient(19deg, rgb(28, 117, 250), rgb(34, 2, 159));
+}
+
+.hg-sidebar {
+  background: rgb(27, 1, 1);
+}
+
+.holy-grail-content {
+  color: #777;
+  height: 590px;
+}
+
+.holy-grail {
+  min-height: 100vh;
+}
+
+.holy-grail,
+.holy-grail-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.holy-grail-content {
+  flex: 1 1 auto;
+  margin-bottom: 52px;
+}
+
+@media (min-width: 768px) {
+  .holy-grail-sidebar-1 {
+    order: -1;
+  }
+
+  .holy-grail-body {
+    flex-direction: row;
+  }
+
+  .hg-sidebar {
+    flex: 0 0 260px;
+  }
+}
+
+
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Tauri", sans-serif;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .texts {
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: 590px; /* Ajusta según sea necesario */
+    border: 1px solid #cccccc00;
+    padding: 10px;
+  }
+  .contenedorText {
+    font-size: 100%; /* Tamaño de texto inicial */
+  }
+  
+  p {
+    font-size: calc(0.5rem + 3vw);
+    margin: 0.5em 0;
+    text-align: justify;
+    color: black;
+  }
+  
+  .titulos {
+    text-align: center;
+    color: #ffffff;
+    font-size: clamp(55px, 4vw, 80px);
+  }
+  .titulos2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.1em;
+  }
+  
+  /* control de imagenes */
+  .imagen {
+    width: 301px;
+  }
+  .imagenMain {
+    max-width: 100%;
+    width: 550px;
+    height: auto;
+  }
+  .imgMain {
+    margin-bottom: 2em;
+  }
+  /* fin de control de imagenes */
+  
