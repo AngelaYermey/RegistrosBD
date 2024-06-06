@@ -111,8 +111,8 @@ window.addEventListener("DOMContentLoaded", () => {
     Swal.fire({
       title: "Guardar Transcripción",
       html:
-        '<input id="codigo" class="swal2-input" placeholder="Codigo de la asignatura">' +
-        '<input id="numeroAula" class="swal2-input" placeholder="Codigo o numero del aula">' +
+        '<input id="codigo" class="swal2-input" placeholder="Código de la asignatura">' +
+        '<input id="numeroAula" class="swal2-input" placeholder="Código o número del aula">' +
         '<input id="tema" class="swal2-input" placeholder="Tema de la clase">',
       focusConfirm: false,
       preConfirm: () => {
@@ -120,10 +120,10 @@ window.addEventListener("DOMContentLoaded", () => {
         const codigo = document.getElementById("codigo").value;
         const tema = document.getElementById("tema").value;
         const numeroAula = document.getElementById("numeroAula").value;
-
+  
         // Obtener la transcripción del almacenamiento local
         const transcripcion = texts.innerText;
-
+  
         // Validar que se ingresen todos los campos
         if (!codigo || !numeroAula || !tema || !transcripcion) {
           Swal.showValidationMessage("Todos los campos son obligatorios");
@@ -140,7 +140,7 @@ window.addEventListener("DOMContentLoaded", () => {
           transcripcion: result.value.transcripcion,
         };
         localStorage.setItem("transcriptionData", JSON.stringify(data));
-
+  
         fetch("../profesores/guardarDatostraduccion.php", {
           method: "POST",
           body: JSON.stringify(data),
@@ -148,31 +148,32 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json()) // Parsear la respuesta como JSON
-          .then((data) => {
-            if (data.success) {
-              // Mostrar mensaje de éxito
-              Swal.fire({
-                title: "¡Guardado!",
-                text: data.message,
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1900,
-              });
-            } else {
-              // Mostrar mensaje de error
-              Swal.fire({
-                title: "Error",
-                text: data.message,
-                icon: "error",
-                showConfirmButton: false,
-                timer: 1900,
-              });
-            }
-          })
+        .then((response) => response.json()) // Parsear la respuesta como JSON
+        .then((data) => {
+          if (data.success) {
+            // Mostrar mensaje de éxito
+            Swal.fire({
+              title: "¡Guardado!",
+              text: data.message,
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1900,
+            });
+          } else {
+            // Mostrar mensaje de error
+            Swal.fire({
+              title: "Error",
+              text: data.message,
+              icon: "error",
+              showConfirmButton: false,
+              timer: 1900,
+            });
+          }
+        });
       }
     });
   });
+  
 
   goToLecturaButton.addEventListener("click", () => {
     window.location.href = "lectura.html"; // Redirigir a la interfaz de lectura
