@@ -103,7 +103,7 @@ $resultCentros = $conn->query($query);
             </select>
         </div>
         <div class="col-12">
-            <label for="aula">N° Aula</label>
+            <label for="numAula">N° Aula</label>
             <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." value="<?php echo $datos->numero_aula; ?>" required><br>
         </div>
         <div class="col-12">
