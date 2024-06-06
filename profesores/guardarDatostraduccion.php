@@ -58,5 +58,5 @@ if (isset($data['codigo'], $data['tema'], $data['numeroAula'], $data['transcripc
     }
 } else {
     // Si no se enviaron todos los datos necesarios, envía una respuesta JSON con un mensaje de error
-    echo json_encode(array("success" => false, "message" => "No se han recibido todos los datos necesarios para guardar la transcripción."));
+    echo json_encode(array("success" => false, "message" => "No se han recibido todos los datos necesarios"));
 }
