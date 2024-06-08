@@ -181,7 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   goToLecturaButton.addEventListener('click', () => {
-    window.location.href = '/profesores/lectura.php'; // Redirigir a la interfaz de lectura
+    window.location.href = './profesores/lectura.php'; // Redirigir a la interfaz de lectura
   });
 
 

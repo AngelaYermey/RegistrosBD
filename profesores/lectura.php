@@ -53,9 +53,8 @@ if ($Usuarioprofesor == null || $Usuarioprofesor == '') {
 
     </footer>
 
-    <script src="/js/script.js"></script>
-    <script src="/js/lectura.js"></script>
-    <script src="/js/Controles.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/lectura.js"></script>
 
 </body>
 

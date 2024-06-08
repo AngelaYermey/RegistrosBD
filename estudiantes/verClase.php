@@ -51,6 +51,8 @@ if (isset($_GET['clase'])) {
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tauri&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="holy-grail">
@@ -93,8 +95,6 @@ if (isset($_GET['clase'])) {
     <script src="../js/lectura.js"></script>
     <script src="../js/Controles.js"></script>
 
-
-    <!-- <script src="/js/database.js"></script>  -->
 </body>
 
 </html>

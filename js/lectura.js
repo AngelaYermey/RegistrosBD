@@ -5,8 +5,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const limpiarButton = document.getElementById('limpiarPantalla');
     const goToTranscripcionButton = document.getElementById('goToTranscripcion');
     const languageSelector = document.getElementById('language-selector');
-    
-    let currentLang = 'es-MX'; // Idioma por defecto
+
+    let currentLang = languageSelector.value; // Idioma establecido por el selector
     let voices = [];
     let currentVoice;
 
@@ -18,11 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Seleccionar la voz específica para el idioma
     function updateVoice() {
-        if (currentLang === 'es-MX') {
-            currentVoice = voices.find(voice => voice.voiceURI === 'Microsoft Jorge Online (Natural) - Spanish (Mexico)');
-        } else if (currentLang === 'en-US') {
-            currentVoice = voices.find(voice => voice.voiceURI === 'Microsoft Jenny Online (Natural) - English (United States)');
-        }
+        currentVoice = voices.find(voice => voice.lang.startsWith(currentLang));
+        console.log(`Voice updated. Current voice: ${currentVoice ? currentVoice.name : 'None'}`);
     }
 
     // Cargar las voces cuando estén disponibles
@@ -70,27 +67,21 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     observer.observe(texts, { childList: true });
 
-    limpiarButton.addEventListener('click', () => {
+    limpiarButton.addEventListener('click', clearScreen);
+    goToTranscripcionButton.addEventListener('click', clearScreen);
+
+    function clearScreen() {
         window.speechSynthesis.cancel();
         localStorage.removeItem('transcription');
         texts.innerHTML = '';
         fileInput.value = ''; // Restablecer el valor del input de archivo
         readButton.disabled = true; // Deshabilitar el botón de lectura
-    });
-
-    goToTranscripcionButton.addEventListener('click', () => {
-        window.speechSynthesis.cancel();
-        localStorage.removeItem('transcription');
-        texts.innerHTML = '';
-        fileInput.value = ''; // Restablecer el valor del input de archivo
-        readButton.disabled = true; // Deshabilitar el botón de lectura
-    });
-
-    
+    }
 
     // Actualizar la voz cuando cambia el idioma seleccionado
     languageSelector.addEventListener('change', function() {
         currentLang = this.value;
+        console.log(`Language changed. Current language: ${currentLang}`);
         updateVoice();
     });
 });

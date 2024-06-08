@@ -94,6 +94,7 @@ section p {
 .legal,
 .copyright {
   font-size: 12px;
+  color: white;
 }
 
 .legal > span {
