@@ -94,7 +94,7 @@ if (isset($_GET['clase'])) {
     <script src="../js/script.js"></script>
     <script src="../js/lectura.js"></script>
     <script src="../js/Controles.js"></script>
-
+ 
 </body>
 
 </html>

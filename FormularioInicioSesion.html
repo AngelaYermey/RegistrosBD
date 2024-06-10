@@ -6,46 +6,136 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/Diseñocuenta.css">
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/estilobody.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <!-- librearias -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Iniciar Sesión</title>
 </head>
 
-<body>
-    <section>
-        <div class="contentbx">
-            <div class="form">
-                <h2>Iniciar sesión Rama</h2>
-                <form action="inicioSesion.php" method="POST">
 
-                    <div class="inputbx">
-                        <div class="form-floating mb-3">
-                            <label for="tipo_usuario">Tipo de Usuario:</label>
-                            <select id="tipo_usuario" name="tipo_usuario" class="form-select" required
-                                title="Por favor, escoja una opción.">
-                                <option value="">Escoger opción...</option>
-                                <option value="administrador">Administrador</option>
-                                <option value="profesor">Profesor</option>
-                                <option value="estudiante">Estudiante</option>
-                            </select><br>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <label>Cédula</label>
-                            <input type="text" name="cedula" data-form-id pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX" required>
-                        </div>
+<body class="holy-grail">
+    <header class="container">
+        <div class="box">
+            <div class="imgMain">
+                <!-- imagen de footer -->
+                <img class="imagenMain" src="./img/NuevoLogo.png" alt="">
+            </div>
 
-                        <div class="form-floating mb-3">
-                            <label>Contraseña</label>
-                            <input type="password" name="pass" required>
-                        </div>
-                        <br>
+
+        </div>
+
+    </header>
+
+    <div class="holy-grail-body">
+
+        <section class="holy-grail-content">
+            <div class="contentbx">
+                <div class="form">
+                    <h2>Iniciar sesión</h2>
+                    <form action="inicioSesion.php" method="POST">
+
                         <div class="inputbx">
-                            <button type="submit" name="iniciar" class="btnCrear_Cuenta" data-form-btn>Iniciar
-                                sesión</button>
+                            <div class="form-floating mb-3">
+                                <label for="tipo_usuario">Tipo de Usuario:</label>
+                                <select id="tipo_usuario" name="tipo_usuario" class="form-select" required
+                                    title="Por favor, escoja una opción.">
+                                    <option value="">Escoger opción...</option>
+                                    <option value="administrador">Administrador</option>
+                                    <option value="profesor">Profesor</option>
+                                    <option value="estudiante">Estudiante</option>
+                                </select><br>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label>Cédula</label>
+                                <input type="text" name="cedula" data-form-id
+                                    pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}"
+                                    title="Formato: XX-XXXX-XXXXX" required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <label>Contraseña</label>
+                                <input type="password" name="pass" required>
+                            </div>
+                            <br>
+                            <div class="inputbx">
+                                <button type="submit" name="iniciar" class="btnCrear_Cuenta" data-form-btn>Iniciar
+                                    sesión</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <footer>
+            <section class="top">
+                <img class="imgFooter" src="./img/retina.png" />
+                <div class="links">
+                    <div class="links-column">
+                        <h2 style="font-weight: bold;">Información</h2>
+                        <a>ROEH es un sitio web creado por la Universidad Tecnológica de Panamá, está es una
+                            herramienta
+                            web que
+                            facilita la
+                            inclusión digital. Convierte voz a texto en tiempo real para personas con discapacidad
+                            auditiva y lee
+                            texto a voz para quienes tienen discapacidad visual, mejorando la accesibilidad y la
+                            comunicación.</a>
+
+                    </div>
+                    <div class="links-column">
+                        <h2 style="font-weight: bold;">Transcripción en Tiempo Real de Voz a Texto:</h2>
+                        <a>Facilita la comunicación para personas con discapacidad auditiva.</a>
+                        <a>Convierte la voz en texto de manera instantánea.</a>
+                        <h2 style="font-weight: bold;">Texto a Voz:</h2>
+                        <a>Mejora la accesibilidad para personas con discapacidad visual.</a>
+                        <a>Lee en voz alta el texto proporcionando una experiencia auditiva.</a>
+                    </div>
+                    <div class="links-column socials-column">
+                        <h2 style="font-weight: bold;">Sitio de interes</h2>
+                        <p>
+                            Follow me on social media to get the latest awesome reels and
+                            posts.
+                        </p>
+                        <div class="socials">
+                            <a class="" href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-users">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </a>
+                            <a class="fa-brands fa-tiktok"></a>
+                            <a class="fa-brands fa-linkedin"></a>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </section>
+                </div>
+            </section>
+            <section class="bottom">
+                <p class="copyright">© 2024 Todo los derechos reservados</p>
+                <div class="legal">
+                    <a> Contact </a>
+                    <a> Terms </a>
+                    <a> Privacy </a>
+                </div>
+            </section>
+        </footer>
+
+    </footer>
+
+
 </body>
 
 </html>

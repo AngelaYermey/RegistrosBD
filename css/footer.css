@@ -29,7 +29,7 @@ footer {
       rgba(187, 187, 187, 0.04) 50%,
       rgba(187, 187, 187, 0.04) 100%
     ),
-    linear-gradient(19deg, rgb(28, 117, 250), rgb(34, 2, 159));
+    linear-gradient(19deg, #1c75fa, rgb(34, 2, 159));
   padding-top: 60px;
 }
 .imgFooter{
