@@ -83,7 +83,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                 OR clases.fecha LIKE ?
             )";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("sssss", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+            $consulta->bind_param("ssssss", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
 
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta

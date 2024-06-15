@@ -115,8 +115,10 @@ window.addEventListener("DOMContentLoaded", () => {
     Swal.fire({
       title: "Guardar Transcripción",
       html:
-        '<input id="codigo" class="swal2-input" placeholder="Codigo de la asignatura">' +
-        '<input id="numeroAula" class="swal2-input" placeholder="Codigo o numero del aula">' +
+
+        '<input id="codigo" class="swal2-input" placeholder="Código de la asignatura">' +
+        '<input id="numeroAula" class="swal2-input" placeholder="Código o número del aula">' +
+
         '<input id="tema" class="swal2-input" placeholder="Tema de la clase">',
       focusConfirm: false,
       preConfirm: () => {
@@ -125,9 +127,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const tema = document.getElementById("tema").value;
         const numeroAula = document.getElementById("numeroAula").value;
 
+
         // Obtener la transcripción del almacenamiento local
         const transcripcion = texts.innerText;
-
         // Validar que se ingresen todos los campos
         if (!codigo || !numeroAula || !tema || !transcripcion) {
           Swal.showValidationMessage("Todos los campos son obligatorios");
@@ -137,7 +139,6 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-
         const data = {
           codigo: result.value.codigo,
           tema: result.value.tema,
@@ -145,7 +146,6 @@ window.addEventListener("DOMContentLoaded", () => {
           transcripcion: result.value.transcripcion,
         };
         localStorage.setItem("transcriptionData", JSON.stringify(data));
-
         fetch("../profesores/guardarDatostraduccion.php", {
           method: "POST",
           body: JSON.stringify(data),
@@ -153,13 +153,14 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
           },
         })
+
           .then((response) => response.text())
           .then((data) => {
             // Mostrar mensaje de confirmación con SweetAlert2
             console.log(data);
             Swal.fire({
               title: "¡Guardado!",
-              text: "La transcripción ha sido guardada correctamente.",
+              text: data.message,
               icon: "success",
               showConfirmButton: false,
               timer: 1500,
@@ -170,10 +171,10 @@ window.addEventListener("DOMContentLoaded", () => {
             // Mostrar mensaje de error con SweetAlert2
             Swal.fire({
               title: "Error",
-              text: "Ocurrió un error al guardar la transcripción.",
+              text: data.message,
               icon: "error",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 1900,
             });
           });
       }

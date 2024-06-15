@@ -88,11 +88,10 @@ if (isset($_POST['btn_ingDatos'])) {
         <p class="danger-message">Error: Ya existe registrado</p>
     </div>';
     echo "<script>
-        // Esperar 4 segundos antes de redirigir
         setTimeout(function() {
             // Redirigir a otra página
             window.location.href = 'asignaturas.php';
-        }, 4000); // 4000 milisegundos = 4 segundos
+        }, 2900); 
     </script>";
   } else {
     // Insertar nuevo usuario en la tabla de estudiantes
@@ -105,9 +104,8 @@ if (isset($_POST['btn_ingDatos'])) {
       echo "<script>
        // Esperar 4 segundos antes de redirigir
        setTimeout(function() {
-           // Redirigir a otra página
            window.location.href = 'asignaturas.php';
-       }, 4000); // 4000 milisegundos = 4 segundos
+       }, 2800);
    </script>";
     } else {
       echo '<div class="card-danger">
@@ -118,7 +116,7 @@ if (isset($_POST['btn_ingDatos'])) {
             setTimeout(function() {
                 // Redirigir a otra página
                 window.location.href = 'asignaturas.php';
-            }, 4000); // 4000 milisegundos = 4 segundos
+            }, 2900);
         </script>";
     }
     $stmt->close();
