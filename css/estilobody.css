@@ -1,14 +1,35 @@
 .holy-grail header,
 .holy-grail footer,
 .hg-sidebar,
-.holy-grail-content {
+.holy-grail-content,
+.boxUsuario2,
+.boxUsuario {
   padding: 20px;
 }
 
 .holy-grail header {
-  box-shadow: rgba(9, 9, 245, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.168) 0px 30px 60px -30px;
-  background: linear-gradient(160deg, #30b0ff 14%, #3a0ca3 100%);
+  background-image: radial-gradient(
+      circle at 17% 77%,
+      rgba(17, 17, 17, 0.04) 0%,
+      rgba(17, 17, 17, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 26% 17%,
+      rgba(64, 64, 64, 0.04) 0%,
+      rgba(64, 64, 64, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 44% 60%,
+      rgba(177, 177, 177, 0.04) 0%,
+      rgba(177, 177, 177, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 100%
+    ),
+    linear-gradient(19deg, rgb(28, 117, 250), rgb(34, 2, 159));
 }
 
 .hg-sidebar {
@@ -31,7 +52,7 @@
   flex-direction: column;
 }
 
-.holy-grail-content {
+.holy-grail-content, .boxUsuario, .boxUsuario2 {
   flex: 1 1 auto;
   margin-bottom: 52px;
 }
@@ -49,5 +70,50 @@
     flex: 0 0 260px;
   }
 }
+/* Caja de usuario */
+ .boxUsuario{
+  color: #ffffff;
+  height: 20px;
+  text-align: right;
+  ;
+ }
+ .boxUsuario2{
+  color: #ffffff;
+  height: 20px;
+  text-align: left;
+  ;
+ }
 
-/* efecto cristal */
+
+ .btnUsuario {
+  margin: 1%;
+  border: none;
+  width: 10em;
+  height: 3em;
+  border-radius: 3em;
+  text-align: center;
+  justify-content: center;
+  align-items:center;
+  gap: 12px;
+  background: #00509d;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+  border: 1.5px solid white;
+}
+
+ .btnUsuario2 {
+  margin: 1%;
+  border: none;
+  width: 15em;
+  height: 3em;
+  border-radius: 3em;
+  text-align: center;
+  justify-content: center;
+  align-items:center;
+  gap: 12px;
+  background: #00509d;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+  border: 1.5px solid white;
+}
+ /* fin de caja de usuario */

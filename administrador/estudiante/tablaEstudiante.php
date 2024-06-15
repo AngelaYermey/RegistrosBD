@@ -21,9 +21,13 @@ if ($validar == null || $validar == '') {
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../../css/tabla.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/estilobody.css">
+  <link rel="stylesheet" href="../css/footer.css">
 </head>
 
 <body>
+    
     <h2 class="text-center p-4">Tabla de Estudiantes</h2>
 
     <div class="containerTabla">

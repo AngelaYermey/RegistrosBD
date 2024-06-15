@@ -6,9 +6,13 @@ window.addEventListener("DOMContentLoaded", () => {
   const limparTexto = document.getElementById("limpiar");
   const descargarTexto = document.getElementById("descargarFile");
   const guardarTranscripcionButton = document.getElementById("btninfo");
-  const languageSelector = document.getElementById("language-selector");
   const micIcon = document.getElementById("micIcon");
   const micStatus = document.getElementById("micStatus");
+  const languageSelector = document.getElementById('language-selector');
+
+  languageSelector.addEventListener('change', function () {
+    recognition.lang = this.value;
+  });
 
   window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -111,8 +115,10 @@ window.addEventListener("DOMContentLoaded", () => {
     Swal.fire({
       title: "Guardar Transcripción",
       html:
+
         '<input id="codigo" class="swal2-input" placeholder="Código de la asignatura">' +
         '<input id="numeroAula" class="swal2-input" placeholder="Código o número del aula">' +
+
         '<input id="tema" class="swal2-input" placeholder="Tema de la clase">',
       focusConfirm: false,
       preConfirm: () => {
@@ -120,10 +126,10 @@ window.addEventListener("DOMContentLoaded", () => {
         const codigo = document.getElementById("codigo").value;
         const tema = document.getElementById("tema").value;
         const numeroAula = document.getElementById("numeroAula").value;
-  
+
+
         // Obtener la transcripción del almacenamiento local
         const transcripcion = texts.innerText;
-  
         // Validar que se ingresen todos los campos
         if (!codigo || !numeroAula || !tema || !transcripcion) {
           Swal.showValidationMessage("Todos los campos son obligatorios");
@@ -140,7 +146,6 @@ window.addEventListener("DOMContentLoaded", () => {
           transcripcion: result.value.transcripcion,
         };
         localStorage.setItem("transcriptionData", JSON.stringify(data));
-  
         fetch("../profesores/guardarDatostraduccion.php", {
           method: "POST",
           body: JSON.stringify(data),
@@ -148,19 +153,22 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
           },
         })
-        .then((response) => response.json()) // Parsear la respuesta como JSON
-        .then((data) => {
-          if (data.success) {
-            // Mostrar mensaje de éxito
+
+          .then((response) => response.text())
+          .then((data) => {
+            // Mostrar mensaje de confirmación con SweetAlert2
+            console.log(data);
             Swal.fire({
               title: "¡Guardado!",
               text: data.message,
               icon: "success",
               showConfirmButton: false,
-              timer: 1900,
+              timer: 1500,
             });
-          } else {
-            // Mostrar mensaje de error
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            // Mostrar mensaje de error con SweetAlert2
             Swal.fire({
               title: "Error",
               text: data.message,
@@ -168,20 +176,15 @@ window.addEventListener("DOMContentLoaded", () => {
               showConfirmButton: false,
               timer: 1900,
             });
-          }
-        });
+          });
       }
     });
   });
-  
 
-  goToLecturaButton.addEventListener("click", () => {
-    window.location.href = "lectura.html"; // Redirigir a la interfaz de lectura
+  goToLecturaButton.addEventListener('click', () => {
+    window.location.href = './profesores/lectura.php'; // Redirigir a la interfaz de lectura
   });
 
-  document.getElementById("goToEstudiante").addEventListener("click", () => {
-    window.location.href = "estudiante.html";
-  });
 
   recognition.onstart = () => {
     console.log("Comenzó la transcripción.");

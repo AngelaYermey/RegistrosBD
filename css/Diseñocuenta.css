@@ -2,12 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 /* Estilos generales */
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  box-sizing: border-box;
-}
 
 /* Estilos para la sección principal */
 section {
@@ -18,12 +12,7 @@ section {
   overflow: hidden; 
 }
 
-/* Estilos para el contenido */
-section {
-  background-image: url("inclusion.jpg"); /* Reemplaza 'ruta de la imagen' */
-  background-size: cover;
-  background-position: center;
-}
+
 
 section .contentbx {
   display: flex;
@@ -47,7 +36,7 @@ section .contentbx .form h2 {
   font-size: 1.5em;
   text-transform: uppercase;
   margin-bottom: 10px;
-  border-bottom: 4px solid #6096ba;
+  border-bottom: 4px solid #0099ff;
   display: inline-block;
   letter-spacing: 1px;
 }
@@ -94,7 +83,7 @@ section .contentbx .form .inputbx select option {
 
 /* Estilos para el botón de enviar del formulario */
 section .contentbx .form .inputbx button[type="submit"] {
-  background: #274c77;
+  background: #1c75fa;
   color: #fff;
   outline: none;
   border: none;

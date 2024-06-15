@@ -5,7 +5,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Tauri", sans-serif;
   text-align: center;
   color: #ffffff;
 }
@@ -16,10 +15,8 @@ body {
   max-height: 590px; /* Ajusta según sea necesario */
   border: 1px solid #cccccc00;
   padding: 10px;
-  
-
 }
-.contenedorText{
+.contenedorText {
   font-size: 100%; /* Tamaño de texto inicial */
 }
 
@@ -37,7 +34,7 @@ p {
 }
 .titulos2 {
   text-align: center;
-  color: #201818;
+  color: #ffffff;
   font-size: 1.1em;
 }
 
@@ -46,7 +43,9 @@ p {
   width: 301px;
 }
 .imagenMain {
+  max-width: 100%;
   width: 550px;
+  height: auto;
 }
 .imgMain {
   margin-bottom: 2em;
@@ -81,13 +80,14 @@ p {
   color: #ffffff;
   font-size: medium;
   font-family: "Tauri", sans-serif;
-  
 }
-#text2{
-  font-weight: calc(0.2rem + 2vw);
+#text2 {
   color: #ffffff;
   font-size: medium;
   font-family: "Tauri", sans-serif;
+}
+.text3Small{
+   font-size: calc(0.6rem + 0.5vw);
 }
 
 .btn:hover {
@@ -109,6 +109,7 @@ p {
 
 /* on/off */
 #language-selector {
+  /* font-size: calc(0.4rem + 1vw); */
   margin: 1%;
   border: none;
   width: 20em;
@@ -124,8 +125,9 @@ p {
   border: 1.5px solid white;
   color: #ffffff;
 }
-/* fin de botones de opcion */
 
+
+/* fin de botones de opcion */
 
 /* reconocimiento de audio */
 #micContainer {
@@ -197,7 +199,4 @@ p {
   cursor: pointer;
 }
 
-
 /* fin de estilo de tabla */
-
-
