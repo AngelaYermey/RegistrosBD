@@ -71,7 +71,6 @@ section.top .links {
 }
 
 .links-column {
-  display: grid;
   gap: 10px;
   text-align: justify;
 }
