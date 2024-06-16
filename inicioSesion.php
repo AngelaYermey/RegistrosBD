@@ -60,7 +60,7 @@ if (isset($_POST['iniciar'])) {
 function mostrarMensajeError()
 {
     echo '    
-        <div class="card">
+        <div class="card-danger">
             <p class="danger-message">¡Error!</br> Cédula o contraseña incorrecta.</p>
         </div>
         <script>
