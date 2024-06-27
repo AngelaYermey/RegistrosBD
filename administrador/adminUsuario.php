@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+$Usuarioprofesor = $_SESSION['usuario'];
+
+if ($Usuarioprofesor == null || $Usuarioprofesor == '') {
+    header("Location: ../formularioIniciosesion.html");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,11 +46,10 @@
                     <h2>Administración de Usuarios</h2>
                 </center><br>
                 <div class="inputbx">
-                    <a href="profesor/tablaProfesor.php" class="btn_tabProf" data-form-btn>Ver Registro de Profesores</a>
+                    <a href="profesor/tablaProfesor.php" class="btn_tabProf" data-form-btn>Ver Registro Profesores</a>
                 </div>
                 <div class="inputbx">
-                    <a href="estudiante/tablaEstudiante.php" class="btn_tabEstud" data-form-btn>Ver Registro de
-                        Estudiantes</a>
+                    <a href="estudiante/tablaEstudiante.php" class="btn_tabEstud" data-form-btn>Ver Registro Estudiantes</a>
                 </div>
                 <div class="inputbx">
                     <a href="asignaturas/tablaAsignatura.php" class="btn_tabEstud" data-form-btn>Ver Registro
@@ -50,7 +59,7 @@
                     <a href="aulas/tablaAulas.php" class="btn_tabEstud" data-form-btn>Ver Registro Aulas</a>
                 </div>
                 <div class="inputbx">
-                    <a href="aulas/tablaAulas.php" class="btn_tabEstud" data-form-btn>Ver Registro Clases</a>
+                    <a href="clases/clasesRegistradas.php" class="btn_tabEstud" data-form-btn>Ver Registro Clases</a>
                 </div>
                 <div class="inputbx">
                     <a href="../sesion/cerrar.php" class="btnsalir" data-form-btn>Salir</a>
