@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
     } else {
         // Si hay un error al eliminar el aula, muestra un mensaje de error
         echo "<div class='card-danger alert-danger'>
-          <p class='danger-message'>Ocurrio un error al eliminar.</p>
+          <p class='danger-message'>Ocurrió un error al eliminar.</p>
           <i class='fa fa-times'></i>
       </div>";
         echo "<script>
