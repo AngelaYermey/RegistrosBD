@@ -66,6 +66,7 @@ if ($Usuarioprofesor == null || $Usuarioprofesor == '') {
 
     <script src="../js/script.js"></script>
     <script src="../js/lectura.js"></script>
+    <script src="../js/controles.js"></script>
 
 </body>
 

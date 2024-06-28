@@ -30,21 +30,28 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
         ?>
 
     </header>
-    <h2 class="text-center p-4">Clases Disponibles</h2>
+    <h2 class="text-center p-4 botonInfo">Clases Disponibles</h2>
 
     <div class="containerTabla">
 
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
+                    </div>
+                  
 
-            <div class="col-md-4 mb-2 mb-md-0">
-                <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
-            </div>
-            <div class="col-md-4 mb-2 mb-md-0">
-                <div class="input-group">
-                    <input placeholder="Buscador" name="busqueda" type="search" class="form-control">
-                    <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
+                    <div class="col">
+                        <div class="input-group">
+                            <input placeholder="Buscador" name="busqueda" type="search" class="form-control">
+                            <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
         </form>
 
         <?php

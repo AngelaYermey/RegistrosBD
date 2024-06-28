@@ -1,12 +1,9 @@
-/* Importar la fuente */
-@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 /* Estilos generales */
 
 /* Estilos para la sección principal */
 section {
   position: relative;
-  width: 100%;
   height: auto; 
   display: flex;
   overflow: hidden; 
@@ -144,7 +141,7 @@ section .contentbx .form .inputbx a.btn_tabEstud,
 section .contentbx .form .inputbx a.btnsalir,
 section .contentbx .form .inputbx a.btnvolver {
   display: inline-block;
-  background: #274c77;
+  background: #1c75fa;
   color: #fff;
   font-weight: 500;
   cursor: pointer;

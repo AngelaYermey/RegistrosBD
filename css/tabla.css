@@ -1,6 +1,5 @@
 /* Estilo para el contenedor principal */
 .containerTabla {
-  margin: auto;
   padding-left: 8%;
   padding-right: 8%;
 }
@@ -9,6 +8,9 @@
 h2 {
   text-align: center;
   margin-bottom: 5px;
+}
+.botonInfo{
+  color: #0d0c22;
 }
 
 table {

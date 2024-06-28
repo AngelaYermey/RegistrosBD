@@ -86,7 +86,13 @@ section p {
   margin: 0;
 }
 
-.legal > a {
+.footerInfo3{
+  text-align: justify;
+  color: #fff9ff;
+  text-decoration: none;
+}
+
+.legal > #footerInfo3 {
   margin: 0 0 0 7px;
 }
 
@@ -111,7 +117,7 @@ section.top .socials {
   height: 56px;
 }
 
-section.top .socials > a {
+section.top .socials > #footerInfo3 {
   font-size: 20px;
   background: rgb(45 118 232 / 25%);
   color: var(--color-title);
