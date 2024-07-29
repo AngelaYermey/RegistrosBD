@@ -1,0 +1,273 @@
+:root {
+  --azulGris: #0084ff;
+  --blanco: #fff;
+  --fuente: "Quicksand", sans-serif;
+}
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--fuente);
+  background-image: radial-gradient(
+      circle at 17% 77%,
+      rgba(17, 17, 17, 0.04) 0%,
+      rgba(17, 17, 17, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 50%,
+      rgba(197, 197, 197, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 26% 17%,
+      rgba(64, 64, 64, 0.04) 0%,
+      rgba(64, 64, 64, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 50%,
+      rgba(244, 244, 244, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 44% 60%,
+      rgba(177, 177, 177, 0.04) 0%,
+      rgba(177, 177, 177, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 50%,
+      rgba(187, 187, 187, 0.04) 100%
+    ),
+    linear-gradient(19deg, rgb(28, 117, 250), rgb(34, 2, 159));
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  margin: 0 auto;
+
+  max-width: 1800px;
+  width: 85%;
+}
+.continfo {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.imagen-formulario {
+  background-image: url("../img/NuevoLogo.png");
+  background-position: center center;
+  background-size: cover;
+  height: 200px;
+  flex: 0 0 calc(70%);
+  position: relative;
+}
+@media (max-width: 768px) {
+  .imagen-formulario {
+    height: 40vh; /* Ajusta la altura para pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .imagen-formulario {
+    height: 20vh; /* Ajusta la altura para pantallas aún más pequeñas */
+  }
+}
+
+/* Estilos para el campo Tipo de Usuario al enfocarse */
+section .contentbx .form .inputbx select:focus {
+  border-color: #6096ba;
+}
+
+/* Estilos para las opciones del campo Tipo de Usuario */
+section .contentbx .form .inputbx select option {
+  font-size: 18px;
+  color: #495057;
+}
+
+.imagen-formulario::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media (min-width: 768px) {
+  .imagen-formulario {
+    height: auto;
+    background-position: right;
+  }
+}
+@media (min-width: 1200px) {
+  .imagen-formulario {
+    background-position: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .contenedor-formulario {
+    display: flex;
+  }
+}
+
+.formulario {
+  padding: 70px;
+  margin: auto;
+  border-radius: 25% 10%;
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0px,
+      rgba(255, 255, 255, 0.04) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(0deg, rgb(30, 35, 121), rgb(45, 106, 187));
+}
+.texto-formulario h2,
+.input label,
+.password-olvidada a,
+.texto-formulario p {
+  color: var(--blanco);
+}
+.texto-formulario h2 {
+  font-size: 40px;
+  text-align: center;
+}
+.texto-formulario p {
+  font-size: 22px;
+  text-align: center;
+}
+.input label {
+  display: block;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+.password-olvidada a {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 22px;
+}
+.input input {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 5px;
+  outline: none;
+}
+.input input[type="submit"] {
+  background-color: var(--azulGris);
+  color: var(--blanco);
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+.input input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: var(--azulOscuro);
+}
+
+/* css para social bar */
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+  height: 120px;
+  width: 100%;
+  padding-top: 40px;
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #fff;
+  border-radius: 50%;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .retina:hover,
+.wrapper .retina:hover .tooltip,
+.wrapper .retina:hover .tooltip::before {
+  background: #0049a9;
+  color: #fff;
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1e64c0;
+  color: #fff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1da1f2;
+  color: #fff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  color: #fff;
+}
+
+.wrapper .youtubed:hover,
+.wrapper .youtubed:hover .tooltip,
+.wrapper .youtubed:hover .tooltip::before {
+  background: #ff002f;
+  color: #fff;
+}

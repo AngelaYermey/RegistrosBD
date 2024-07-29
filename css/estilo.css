@@ -66,7 +66,7 @@ p {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: #00509d;
+  background: #2183deb0;
   cursor: pointer;
   transition: all 450ms ease-in-out;
   border: 1.5px solid white;
@@ -121,7 +121,7 @@ p {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: #00509d;
+  background: #2183deb0;
   cursor: pointer;
   transition: all 450ms ease-in-out;
   border: 1.5px solid white;

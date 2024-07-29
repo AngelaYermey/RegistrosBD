@@ -4,25 +4,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const readButton = document.getElementById('readButton');
     const limpiarButton = document.getElementById('limpiarPantalla');
     const goToTranscripcionButton = document.getElementById('goToTranscripcion');
-    const languageSelector = document.getElementById('language-selector');
+    const stopButton = document.getElementById('stopButton'); // Nuevo botón de detener
 
-    let currentLang = languageSelector.value; // Idioma establecido por el selector
     let voices = [];
     let currentVoice;
 
-    // Cargar las voces disponibles
     function loadVoices() {
         voices = speechSynthesis.getVoices();
-        updateVoice();
+        currentVoice = voices.find(voice => voice.name === 'Microsoft AvaMultilingual Online (Natural) - English (United States)');
+        console.log(`Voice loaded: ${currentVoice ? currentVoice.name : 'None'}`);
     }
 
-    // Seleccionar la voz específica para el idioma
-    function updateVoice() {
-        currentVoice = voices.find(voice => voice.lang.startsWith(currentLang));
-        console.log(`Voice updated. Current voice: ${currentVoice ? currentVoice.name : 'None'}`);
-    }
-
-    // Cargar las voces cuando estén disponibles
     speechSynthesis.onvoiceschanged = loadVoices;
     loadVoices();
 
@@ -45,13 +37,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     readButton.addEventListener('click', () => {
         const text = texts.innerText;
-        const speech = new SpeechSynthesisUtterance(text);
-        speech.lang = currentLang; // Utiliza el idioma seleccionado
-        speech.voice = currentVoice; // Utiliza la voz específica
-        speech.volume = 1;
-        speech.rate = 1;
-        speech.pitch = 1;
-        window.speechSynthesis.speak(speech);
+        const speechInstance = new SpeechSynthesisUtterance(text);
+        speechInstance.voice = currentVoice;
+        speechInstance.volume = 1;
+        speechInstance.rate = 1;
+        speechInstance.pitch = 1;
+        window.speechSynthesis.speak(speechInstance);
+    });
+
+    stopButton.addEventListener('click', () => {
+        window.speechSynthesis.cancel();
+        console.log('Speech synthesis stopped.');
     });
 
     const storedTranscription = localStorage.getItem('transcription');
@@ -72,16 +68,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function clearScreen() {
         window.speechSynthesis.cancel();
-        localStorage.removeItem('transcription');
+        // localStorage.removeItem('transcription');
         texts.innerHTML = '';
-        fileInput.value = ''; // Restablecer el valor del input de archivo
-        readButton.disabled = true; // Deshabilitar el botón de lectura
+        fileInput.value = '';
+        readButton.disabled = true;
     }
-
-    // Actualizar la voz cuando cambia el idioma seleccionado
-    languageSelector.addEventListener('change', function() {
-        currentLang = this.value;
-        console.log(`Language changed. Current language: ${currentLang}`);
-        updateVoice();
-    });
 });

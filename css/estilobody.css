@@ -1,5 +1,4 @@
 .holy-grail header,
-.holy-grail footer,
 .hg-sidebar,
 .holy-grail-content,
 .boxUsuario2,
@@ -30,6 +29,12 @@
       rgba(187, 187, 187, 0.04) 100%
     ),
     linear-gradient(19deg, rgb(28, 117, 250), rgb(34, 2, 159));
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+.holy-grail footer{
+  border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
 }
 
 .hg-sidebar {
