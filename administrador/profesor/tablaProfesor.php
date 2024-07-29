@@ -16,7 +16,7 @@ if ($validar == null || $validar == '') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla Profesores</title>
-   
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
@@ -55,23 +55,39 @@ if ($validar == null || $validar == '') {
                     $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
                     $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
+                    $results_per_page = 6; // Número de resultados por página
+
+                    // Determinar el número de página actual
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $start_from = ($page - 1) * $results_per_page;
+
                     if (isset($_GET['buscar'])) { // Comprobar si se realizó una búsqueda
                         $busqueda = $_GET['busqueda']; // obtener el valor de 'busqueda'
                         $busqueda = "%$busqueda%"; // comodines para la búsqueda parcial
 
                         // Preparar la consulta SQL para buscar en varias columnas
-                        $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
+                        $stmt = $conn->prepare("SELECT * FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ? LIMIT ?, ?");
                         // Asociar parámetros
-                        $stmt->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+                        $stmt->bind_param("ssssssi", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $start_from, $results_per_page);
 
                         $stmt->execute(); // Ejecutar la consulta preparada
                         $result = $stmt->get_result(); // Obtener los resultados de la consulta
 
+                        // Obtener el número total de resultados
+                        $stmt_total = $conn->prepare("SELECT COUNT(*) AS total FROM profesores WHERE cedula_prof LIKE ? OR nombre LIKE ? OR apellido LIKE ? OR email LIKE ? OR contraseña LIKE ?");
+                        $stmt_total->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+                        $stmt_total->execute();
+                        $total_result = $stmt_total->get_result()->fetch_assoc()['total'];
                     } else {
-                        $result = $conn->query("SELECT * FROM profesores"); // Consulta por defecto si no hay búsqueda
+                        $result = $conn->query("SELECT * FROM profesores LIMIT $start_from, $results_per_page"); // Consulta por defecto si no hay búsqueda
+
+                        // Obtener el número total de resultados
+                        $total_result = $conn->query("SELECT COUNT(*) AS total FROM profesores")->fetch_assoc()['total'];
                     }
 
+                    $total_pages = ceil($total_result / $results_per_page); // Calcular el número total de páginas
                     ?>
+
                     <div class="row justify-content-center">
                         <div class="table-responsive">
                             <table class="table">
@@ -101,6 +117,7 @@ if ($validar == null || $validar == '') {
                                                 <td>
                                                     <a href="modificarDatosprofesor.php?cedProf=<?= $datos->cedula_prof ?>" class="btn btn-small btn-warning mb-1" name="modificar"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                                                     <button onclick="confirmarEliminacion('<?= $datos->cedula_prof ?>')" class="btn btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</button>
+                                                </td>
                                             </tr>
                                         <?php endwhile; ?>
                                     <?php endif; ?>
@@ -108,6 +125,23 @@ if ($validar == null || $validar == '') {
                             </table>
                         </div>
                     </div>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                <a class="page-link" href="?page=<?= $page - 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Previous</a>
+                            </li>
+                            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $i ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : '' ?>">
+                                <a class="page-link" href="?page=<?= $page + 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+
 
                 </div>
             </div>
@@ -145,7 +179,7 @@ if ($validar == null || $validar == '') {
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-   
+
     <footer class="footer">
         <?php
         include("../../menuFooter/footerA.html");
