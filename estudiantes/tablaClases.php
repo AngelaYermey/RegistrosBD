@@ -40,7 +40,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                     <div class="col">
                         <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
                     </div>
-                  
+
 
                     <div class="col">
                         <div class="input-group">
@@ -61,67 +61,128 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
+        // Definir el número de resultados por página
+        $resultados_por_pagina = 5;
+
+        // Determinar en qué página estamos
+        if (isset($_GET['pagina'])) {
+            $pagina = $_GET['pagina'];
+        } else {
+            $pagina = 1;
+        }
+
+        // Calcular el OFFSET
+        $offset = ($pagina - 1) * $resultados_por_pagina;
+
         if (isset($_GET['buscador'])) { // Comprobar si se realizó una búsqueda
             $busqueda = $_GET['busqueda'];
             $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
 
-            // Preparar la consulta SQL para buscar en varias columnas
+            // Preparar la consulta SQL para buscar en varias columnas con LIMIT y OFFSET
             $sql = "SELECT 
-                asignaturas.codigo_asignatura, 
-                asignaturas.nombre AS nombre_asignatura,
-                clases.tema_clase, 
-                profesores.nombre AS nombre_profesor,
-                profesores.apellido AS apellido_profesor,
-                clases.fecha
-            FROM 
-                clases 
-            INNER JOIN 
-                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-            INNER JOIN 
-                profesores ON clases.cedula_prof = profesores.cedula_prof 
-            WHERE 
-                clases.numero_aula IN (
-                    SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)
-            AND (
-                asignaturas.codigo_asignatura LIKE ? 
-                OR asignaturas.nombre LIKE ? 
-                OR clases.tema_clase LIKE ? 
-                OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
-                OR clases.fecha LIKE ?
-            )";
+            asignaturas.codigo_asignatura, 
+            asignaturas.nombre AS nombre_asignatura,
+            clases.tema_clase, 
+            profesores.nombre AS nombre_profesor,
+            profesores.apellido AS apellido_profesor,
+            clases.fecha
+        FROM 
+            clases 
+        INNER JOIN 
+            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+        INNER JOIN 
+            profesores ON clases.cedula_prof = profesores.cedula_prof 
+        WHERE 
+            clases.numero_aula IN (
+                SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)
+        AND (
+            asignaturas.codigo_asignatura LIKE ? 
+            OR asignaturas.nombre LIKE ? 
+            OR clases.tema_clase LIKE ? 
+            OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
+            OR clases.fecha LIKE ?
+        )
+        LIMIT ? OFFSET ?";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("ssssss", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+            $consulta->bind_param("ssssssii", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $resultados_por_pagina, $offset);
 
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
         } else {
             $sql = "SELECT 
-                asignaturas.codigo_asignatura, 
-                asignaturas.nombre AS nombre_asignatura,
-                clases.tema_clase, 
-                profesores.nombre AS nombre_profesor,
-                profesores.apellido AS apellido_profesor,
-                clases.fecha
-            FROM 
-                clases 
-            INNER JOIN 
-                asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-            INNER JOIN 
-                profesores ON clases.cedula_prof = profesores.cedula_prof 
-            WHERE 
-                clases.numero_aula IN (
-                    SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?
-                )
-            ORDER BY 
-                clases.fecha DESC";
+            asignaturas.codigo_asignatura, 
+            asignaturas.nombre AS nombre_asignatura,
+            clases.tema_clase, 
+            profesores.nombre AS nombre_profesor,
+            profesores.apellido AS apellido_profesor,
+            clases.fecha
+        FROM 
+            clases 
+        INNER JOIN 
+            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+        INNER JOIN 
+            profesores ON clases.cedula_prof = profesores.cedula_prof 
+        WHERE 
+            clases.numero_aula IN (
+                SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?
+            )
+        ORDER BY 
+            clases.fecha DESC
+        LIMIT ? OFFSET ?";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("s", $UsuarioEstudiante);
+            $consulta->bind_param("sii", $UsuarioEstudiante, $resultados_por_pagina, $offset);
 
             $consulta->execute(); // Ejecutar la consulta preparada
             $result = $consulta->get_result(); // Obtener los resultados de la consulta
         }
 
         ?>
+
+
+        <?php
+        // Calcular el número total de resultados
+        $total_resultados_sql = "SELECT COUNT(*) FROM clases WHERE numero_aula IN (SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)";
+        $total_resultados_consulta = $conn->prepare($total_resultados_sql);
+        $total_resultados_consulta->bind_param("s", $UsuarioEstudiante);
+        $total_resultados_consulta->execute();
+        $total_resultados_consulta->bind_result($total_resultados);
+        $total_resultados_consulta->fetch();
+        $total_resultados_consulta->close();
+
+        // Calcular el número total de páginas
+        $total_paginas = ceil($total_resultados / $resultados_por_pagina);
+        ?>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item <?php if ($pagina <= 1) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($pagina <= 1) {
+                                                    echo '#';
+                                                } else {
+                                                    echo "?pagina=" . ($pagina - 1);
+                                                } ?>">Anterior</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                    <li class="page-item <?php if ($pagina == $i) {
+                                                echo 'active';
+                                            } ?>">
+                        <a class="page-link" href="?pagina=<?= $i; ?>"><?= $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if ($pagina >= $total_paginas) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($pagina >= $total_paginas) {
+                                                    echo '#';
+                                                } else {
+                                                    echo "?pagina=" . ($pagina + 1);
+                                                } ?>">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+
 
 
         <div class="row justify-content-center">
@@ -175,9 +236,9 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 </body>
 
 </html>
