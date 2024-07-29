@@ -9,7 +9,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -18,22 +18,18 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/iconoRetinanuevo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="../css/tabla.css">
-
 </head>
 
 <body class="holy-grail">
     <header class="container2">
-        <?php
-        include("../menuFooter/encabezado.html");
-        ?>
-
+        <?php include("../menuFooter/encabezado.html"); ?>
     </header>
+
+    <h2 class="text-center p-4">Clases Disponibles</h2>
     <h2 class="text-center p-4 botonInfo">Clases Disponibles</h2>
 
     <div class="containerTabla">
-
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="container text-center">
                 <div class="row">
@@ -55,11 +51,10 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
         </form>
 
         <?php
-
         include '../db_Conexion/conector.php';
 
-        $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
-        $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
+        $conexion_obj = new Conexion(); 
+        $conn = $conexion_obj->conectar(); 
 
         // Definir el número de resultados por página
         $resultados_por_pagina = 5;
@@ -76,7 +71,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 
         if (isset($_GET['buscador'])) { // Comprobar si se realizó una búsqueda
             $busqueda = $_GET['busqueda'];
-            $busqueda = "%$busqueda%"; // Agregar comodines para la búsqueda parcial
+            $busqueda = "%$busqueda%"; 
 
             // Preparar la consulta SQL para buscar en varias columnas con LIMIT y OFFSET
             $sql = "SELECT 
@@ -106,8 +101,8 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
             $consulta = $conn->prepare($sql);
             $consulta->bind_param("ssssssii", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $resultados_por_pagina, $offset);
 
-            $consulta->execute(); // Ejecutar la consulta preparada
-            $result = $consulta->get_result(); // Obtener los resultados de la consulta
+            $consulta->execute(); 
+            $result = $consulta->get_result(); 
         } else {
             $sql = "SELECT 
             asignaturas.codigo_asignatura, 
@@ -201,7 +196,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                     <tbody class="table-group-divider">
                         <?php if ($result->num_rows === 0) : ?>
                             <tr>
-                                <td colspan="10" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
+                                <td colspan="6" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
                             </tr>
                         <?php else : ?>
                             <?php while ($datos = $result->fetch_object()) : ?>
@@ -210,14 +205,10 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                                     <td><?php echo $datos->nombre_asignatura; ?></td>
                                     <td><?php echo $datos->tema_clase; ?></td>
                                     <td><?php echo $datos->fecha; ?></td>
-
-                                    <td>
-                                        <?php echo $datos->nombre_profesor; ?>
-                                        <?php echo $datos->apellido_profesor; ?>
-                                    </td>
+                                    <td><?php echo $datos->nombre_profesor . ' ' . $datos->apellido_profesor; ?></td>
                                     <td>
                                         <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
-                                        <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
+                                        <a href="descargarClase.php?id=<?= $datos->id ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -226,14 +217,10 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                 </table>
             </div>
         </div>
-
     </div>
 
     <footer class="footer">
-        <?php
-        include("../menuFooter/footer.html");
-        ?>
-
+        <?php include("../menuFooter/footer.html"); ?>
     </footer>
 
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->

@@ -1,0 +1,20 @@
+Código Materia: CS301
+Nombre Materia: Ciencias de la Computación III
+Tema de la Clase: mate facil
+Fecha: 2024-06-03
+Profesor: Jorge Hernández
+
+Texto de la Clase:
+
+no no tiene nada
+
+Código Materia: CS301
+Nombre Materia: Ciencias de la Computación III
+Tema de la Clase: Estructuras de Datos
+Fecha: 2024-05-03
+Profesor: Jorge Hernández
+
+Texto de la Clase:
+
+En esta clase exploraremos diferentes estructuras de datos como listas, árboles y grafos y analizaremos su eficiencia.
+

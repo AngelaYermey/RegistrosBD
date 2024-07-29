@@ -28,7 +28,7 @@ if ($validar == null || $validar = '') {
     <div class="containerTabla">
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="col-md-4 mb-2 mb-md-0">
-                <a href="../adminUsuario.html" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
+                <a href="../adminUsuario.php" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
             </div>
             <div class="col-md-4 mb-2 mb-md-0">
                 <div class="input-group">
