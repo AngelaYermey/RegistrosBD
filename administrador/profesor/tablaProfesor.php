@@ -129,7 +129,7 @@ if ($validar == null || $validar == '') {
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $page - 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Previous</a>
+                                <a class="page-link" href="?page=<?= $page - 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Anterior</a>
                             </li>
                             <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
                                 <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
@@ -137,7 +137,7 @@ if ($validar == null || $validar == '') {
                                 </li>
                             <?php endfor; ?>
                             <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $page + 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Next</a>
+                                <a class="page-link" href="?page=<?= $page + 1 ?>&buscar=<?= isset($_GET['buscar']) ? $_GET['buscar'] : '' ?>">Siguiente</a>
                             </li>
                         </ul>
                     </nav>

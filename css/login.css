@@ -54,6 +54,9 @@ body {
   flex-direction: column;
   text-align: center;
 }
+.textlogin{
+  color: #ffff;
+}
 
 .imagen-formulario {
   background-image: url("../img/NuevoLogo.png");
