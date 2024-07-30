@@ -23,7 +23,19 @@ if ($validar == null || $validar = '') {
     <link rel="stylesheet" href="../../css/tabla.css">
 </head>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
+    <div class="holy-grail-body">
+        <section class="holy-grail-content">
+            <div class="container">
+
+            </div>
+        </section>
+    </div>
     <h2 class="text-center p-4">Tabla de Aulas</h2>
     <div class="containerTabla">
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
@@ -45,29 +57,28 @@ if ($validar == null || $validar = '') {
         include '../../db_Conexion/conector.php';
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
-        // Verifica si se realizó una búsqueda
+
+        $resultados_por_pagina = 6;
+        $total_resultados = $conn->query("SELECT COUNT(*) AS total FROM aula")->fetch_object()->total;
+        $total_paginas = ceil($total_resultados / $resultados_por_pagina);
+
+        $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+        $inicio = ($pagina_actual - 1) * $resultados_por_pagina;
+
         if (isset($_GET['buscar'])) {
-            // Obtener el valor de 'busqueda'
             $busqueda = $_GET['busqueda'];
-            // Agregar comodines para la búsqueda parcial
             $busqueda = "%$busqueda%";
-
-            // Preparar la consulta SQL para buscar en varias columnas y obtener el nombre del centro regional
             $stmt = $conn->prepare("SELECT aula.*, centros_regionales.nombre_centro FROM aula INNER JOIN centros_regionales 
-            ON aula.id_centroRegional = centros_regionales.id_centroRegional WHERE numero_aula LIKE ? OR 
-            centros_regionales.nombre_centro LIKE ?");
-            // Asociar parámetros
-            $stmt->bind_param("ss", $busqueda, $busqueda);
-
-            $stmt->execute(); // Ejecutar la consulta preparada
-            $resultado = $stmt->get_result(); // Obtener los resultados de la consulta
-
+    ON aula.id_centroRegional = centros_regionales.id_centroRegional WHERE numero_aula LIKE ? OR 
+    centros_regionales.nombre_centro LIKE ? LIMIT ?, ?");
+            $stmt->bind_param("ssii", $busqueda, $busqueda, $inicio, $resultados_por_pagina);
         } else {
-            // Consulta por defecto si no hay búsqueda
-            $resultado = $conn->query("SELECT aula.*, centros_regionales.nombre_centro FROM aula INNER JOIN centros_regionales ON
-            aula.id_centroRegional = centros_regionales.id_centroRegional");
+            $stmt = $conn->prepare("SELECT aula.*, centros_regionales.nombre_centro FROM aula INNER JOIN centros_regionales 
+    ON aula.id_centroRegional = centros_regionales.id_centroRegional LIMIT ?, ?");
+            $stmt->bind_param("ii", $inicio, $resultados_por_pagina);
         }
-
+        $stmt->execute();
+        $resultado = $stmt->get_result();
         ?>
         <div class="row justify-content-center">
             <div class="table-responsive">
@@ -100,6 +111,22 @@ if ($validar == null || $validar = '') {
                 </table>
             </div>
         </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <?= $pagina_actual <= 1 ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?>">Previous</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                    <li class="page-item <?= $i == $pagina_actual ? 'active' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?= $pagina_actual >= $total_paginas ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 
     <!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
@@ -132,6 +159,12 @@ if ($validar == null || $validar = '') {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
 </body>
 
 </html>

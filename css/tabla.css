@@ -2,6 +2,7 @@
 .containerTabla {
   padding-left: 8%;
   padding-right: 8%;
+  margin-bottom: 6% /* Espacio entre la tabla y el footer */
 }
 
 /* Estilo para el título de la tabla */
@@ -22,7 +23,7 @@ h2 {
   border: 2px solid #ddd;
   overflow-x: auto;
   font-size: 16px;
-  margin-bottom: 6% /* Espacio entre la tabla y el footer */
+  
 }
 
 /* Estilo para las celdas de la tabla */

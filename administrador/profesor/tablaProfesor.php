@@ -18,9 +18,10 @@ if ($validar == null || $validar == '') {
     <title>Tabla Profesores</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/tabla.css">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/tabla.css">
+  
 </head>
 
 <body class="holy-grail">

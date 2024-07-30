@@ -24,8 +24,17 @@ if ($validar == null || $validar = '') {
 
 <body class="holy-grail">
     <header class="container2">
-        <?php include("../../menuFooter/encabezado.html"); ?>
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
     </header>
+    <div class="holy-grail-body">
+        <section class="holy-grail-content">
+            <div class="container">
+
+            </div>
+        </section>
+    </div>
 
     <h2 class="text-center p-4">Clases Registradas</h2>
 
@@ -40,46 +49,93 @@ if ($validar == null || $validar = '') {
                     <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
-
+            
         </form>
-
+ <!-- Filtro de fecha -->
+ <div class="row justify-content-center">
+            <div class="col-md-4">
+                <label for="orderFecha">Ordenar por fecha:</label>
+                <select id="orderFecha" class="form-control">
+                    <option value="asc">Más antigua a más reciente</option>
+                    <option value="desc">Más reciente a más antigua</option>
+                </select>
+            </div>
+        </div>
+        <br>
         <?php
         include '../../db_Conexion/conector.php';
         $conexion_obj = new Conexion(); // Instanciar un objeto de conexión
         $conn = $conexion_obj->conectar(); // Establecer la conexión a la base de datos
 
-       // Verifica si se realizó una búsqueda
+        // Número de resultados por página
+        $results_per_page = 7;
+
+        // Determinar el número de página actual
+        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+            $page = (int) $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        // Calcular el offset para la consulta SQL
+        $offset = ($page - 1) * $results_per_page;
+
+        // Verifica si se realizó una búsqueda
         if (isset($_GET['buscador'])) {
-            //Obtener el valor de 'busqueda'
+            // Obtener el valor de 'busqueda'
             $busqueda = $_GET['busqueda'];
             $busqueda = "%$busqueda%";
-          // Preparar la consulta SQL para buscar en varias columnas
+            // Preparar la consulta SQL para buscar en varias columnas
             $stmt = $conn->prepare("
-                SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
-                FROM clases c
-                JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
-                JOIN profesores p ON c.cedula_prof = p.cedula_prof
-                WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
-            ");
-            $stmt->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+        SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
+        FROM clases c
+        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+        JOIN profesores p ON c.cedula_prof = p.cedula_prof
+        WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
+        LIMIT ?, ?
+    ");
+            $stmt->bind_param("ssssssi", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $offset, $results_per_page);
             $stmt->execute();
             $result = $stmt->get_result();
-        } else {
-            
-            $result = $conn->query("
-                SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
-                FROM clases c
-                JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
-                JOIN profesores p ON c.cedula_prof = p.cedula_prof
-            ");
-        }
-   
 
+            // Obtener el número total de resultados
+            $stmt_total = $conn->prepare("
+        SELECT COUNT(*) AS total
+        FROM clases c
+        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+        JOIN profesores p ON c.cedula_prof = p.cedula_prof
+        WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
+    ");
+            $stmt_total->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
+            $stmt_total->execute();
+            $result_total = $stmt_total->get_result();
+            $total_rows = $result_total->fetch_object()->total;
+        } else {
+            $result = $conn->query("
+        SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
+        FROM clases c
+        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+        JOIN profesores p ON c.cedula_prof = p.cedula_prof
+        LIMIT $offset, $results_per_page
+    ");
+
+            // Obtener el número total de resultados
+            $result_total = $conn->query("
+        SELECT COUNT(*) AS total
+        FROM clases c
+        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+        JOIN profesores p ON c.cedula_prof = p.cedula_prof
+    ");
+            $total_rows = $result_total->fetch_object()->total;
+        }
+
+        // Calcular el número total de páginas
+        $total_pages = ceil($total_rows / $results_per_page);
         ?>
 
         <div class="row justify-content-center">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="clasesTable">
                     <thead class="table-light">
                         <tr>
                             <th scope="col">Código Materia</th>
@@ -113,15 +169,34 @@ if ($validar == null || $validar = '') {
                 </table>
             </div>
         </div>
+
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                    <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if ($page >= $total_pages) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+       
     </div>
 
     <footer class="footer">
-        <?php include("../../menuFooter/footer.html"); ?>
+        <?php include("../../menuFooter/footerA.html"); ?>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../js/adminTables.js"></script>
 </body>
 
 </html>
