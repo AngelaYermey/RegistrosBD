@@ -16,9 +16,11 @@ body {
   max-height: 590px; /* Ajusta según sea necesario */
   border: 1px solid #cccccc00;
   padding: 10px;
+  height: 500px;
 }
 .contenedorText {
   font-size: 100%; /* Tamaño de texto inicial */
+  height: 500px;
 }
 
 p {
