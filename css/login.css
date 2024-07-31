@@ -129,6 +129,23 @@ section .contentbx .form .inputbx select option {
     ),
     linear-gradient(0deg, rgb(30, 35, 121), rgb(45, 106, 187));
 }
+
+/* Media queries para laptops de 14 pulgadas */
+@media only screen and (max-width: 1440px) {
+  .contenedor {
+    width: 90%;
+  }
+
+  .formulario {
+    padding: 50px;
+    border-radius: 20% 8%;
+  }
+
+  .imagen-formulario {
+    height: 150px;
+  }
+}
+
 .texto-formulario h2,
 .input label,
 .password-olvidada a,
