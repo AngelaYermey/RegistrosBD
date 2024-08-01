@@ -26,7 +26,6 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
         <?php include("../menuFooter/encabezado.html"); ?>
     </header>
 
-    <h2 class="text-center p-4">Clases Disponibles</h2>
     <h2 class="text-center p-4 botonInfo">Clases Disponibles</h2>
 
     <div class="containerTabla">

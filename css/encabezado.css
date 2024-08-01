@@ -93,7 +93,7 @@
   }
   .contenedorText {
     font-size: 100%; /* Tamaño de texto inicial */
-   height: 10%;
+    height: 500px;
   }
   
   p {

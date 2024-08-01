@@ -68,7 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function clearScreen() {
         window.speechSynthesis.cancel();
-        // localStorage.removeItem('transcription');
+        localStorage.removeItem('transcription');
         texts.innerHTML = '';
         fileInput.value = '';
         readButton.disabled = true;

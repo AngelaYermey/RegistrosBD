@@ -44,75 +44,52 @@ body {
 
 .contenedor {
   margin: 0 auto;
-
   max-width: 1800px;
   width: 85%;
+   
 }
+
 .continfo {
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
+  
 }
-.textlogin{
+
+.textlogin {
   color: #ffff;
 }
 
 .imagen-formulario {
-  background-image: url("../img/NuevoLogo.png");
+  background-image: url("../img/newlogo3D.png");
   background-position: center center;
-  background-size: cover;
-  height: 200px;
-  flex: 0 0 calc(70%);
+  background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  width: 100%; /* Asegura que el ancho sea el 100% del contenedor padre */
+  height: 200px; /* Ajusta la altura para probar si la imagen aparece */
   position: relative;
+
 }
+
 @media (max-width: 768px) {
   .imagen-formulario {
-    height: 40vh; /* Ajusta la altura para pantallas más pequeñas */
+      height: 40vh; /* Ajusta la altura máxima para pantallas más pequeñas */
   }
 }
 
 @media (max-width: 480px) {
   .imagen-formulario {
-    height: 20vh; /* Ajusta la altura para pantallas aún más pequeñas */
-  }
-}
-
-/* Estilos para el campo Tipo de Usuario al enfocarse */
-section .contentbx .form .inputbx select:focus {
-  border-color: #6096ba;
-}
-
-/* Estilos para las opciones del campo Tipo de Usuario */
-section .contentbx .form .inputbx select option {
-  font-size: 18px;
-  color: #495057;
-}
-
-.imagen-formulario::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-@media (min-width: 768px) {
-  .imagen-formulario {
-    height: auto;
-    background-position: right;
-  }
-}
-@media (min-width: 1200px) {
-  .imagen-formulario {
-    background-position: center;
+      height: 20vh; /* Ajusta la altura máxima para pantallas aún más pequeñas */
   }
 }
 
 @media (min-width: 768px) {
   .contenedor-formulario {
-    display: flex;
+      display: flex;
+      flex-direction: row; /* Muestra en fila en pantallas grandes */
+      align-items: flex-start; /* Alinea al inicio del contenedor */
+      
   }
 }
 
@@ -121,15 +98,15 @@ section .contentbx .form .inputbx select option {
   width: 100%;
   max-width: 400px;
   margin: auto;
-  border-radius: 6% ;
+  border-radius: 6%;
   background-image: repeating-linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.04) 0px,
       rgba(255, 255, 255, 0.04) 2px,
       transparent 2px,
       transparent 4px
-    ),
-    linear-gradient(0deg, rgb(30, 35, 121), rgb(45, 106, 187));
+  ),
+  linear-gradient(0deg, rgb(30, 35, 121), rgb(45, 106, 187));
 }
 
 @media (max-width: 600px) {
@@ -150,31 +127,37 @@ section .contentbx .form .inputbx select option {
 .texto-formulario p {
   color: var(--blanco);
 }
+
 .texto-formulario h2 {
   font-size: 40px;
   text-align: center;
 }
+
 .texto-formulario p {
   font-size: 22px;
   text-align: center;
 }
+
 .input label {
   display: block;
   font-size: 22px;
   font-weight: bold;
   margin: 20px 0;
 }
+
 .password-olvidada a {
   display: inline-block;
   margin-top: 20px;
   font-size: 22px;
 }
+
 .input input {
   width: 100%;
   padding: 10px 16px;
   border-radius: 5px;
   outline: none;
 }
+
 .input input[type="submit"] {
   background-color: var(--azulGris);
   color: var(--blanco);
@@ -184,10 +167,12 @@ section .contentbx .form .inputbx select option {
   margin-top: 20px;
   transition: background-color 0.3s ease-in-out;
 }
+
 .input input[type="submit"]:hover {
   cursor: pointer;
   background-color: var(--azulOscuro);
 }
+
 
 /* css para social bar */
 .wrapper {

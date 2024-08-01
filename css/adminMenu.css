@@ -1,0 +1,53 @@
+.textAdmin{
+    color: #000000;
+}
+.adminBox {
+    
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.contAdmin {
+    background-color: #fff;
+    border-radius: 8px;
+    
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+.contAdmin h2 {
+    margin-bottom: 20px;
+}
+.buttonBox {
+    margin-bottom: 25px;
+}
+.interactiveBtn {
+    display: block;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.interactiveBtn i {
+    margin-right: 8px;
+}
+.interactiveBtn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+.btnLogout {
+    background-color: #dc3545;
+}
+.btnLogout:hover {
+    background-color: #c82333;
+}
