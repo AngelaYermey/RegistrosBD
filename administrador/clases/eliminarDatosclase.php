@@ -2,7 +2,7 @@
 
 echo '<style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Quicksand", sans-serif;: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;

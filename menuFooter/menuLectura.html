@@ -5,16 +5,15 @@
     <link rel="stylesheet" href="../css/estilobody.css">
     <link rel="stylesheet" href="../css/footer.css">
 </head>
+<div class="imgMain">
+    <!-- imagen de footer -->
+    <img class="imagenMain" src="../img/NuevoLogo.png" alt="">
+</div>
+<div class="button-container">
 
-<div class="box">
-    <div class="imgMain">
-        <!-- imagen de footer -->
-        <img class="imagenMain" src="../img/NuevoLogo.png" alt="">
-    </div>
 
 
     <button id="readButton" title="Leer Texto" class="btn">
-
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
             stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-audio-lines">
             <path d="M2 10v3" />
@@ -24,9 +23,15 @@
             <path d="M18 5v13" />
             <path d="M22 10v3" />
         </svg>
-
         <span class="text">Leer Texto</span>
     </button>
+
+    <select id="voiceSelect">
+    </select>
+
+
+
+
 
     <button id="stopButton" title="Limpiar Pantalla" class="btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff"

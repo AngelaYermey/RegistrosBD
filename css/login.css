@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  font-family: var(--fuente);
+  font-family:  var(--fuente);
   background-image: radial-gradient(
       circle at 17% 77%,
       rgba(17, 17, 17, 0.04) 0%,
@@ -59,6 +59,7 @@ body {
 
 .textlogin {
   color: #ffff;
+  font-family: "Quicksand", sans-serif;
 }
 
 .imagen-formulario {
@@ -67,7 +68,7 @@ body {
   background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
   background-repeat: no-repeat; /* Evita la repetición de la imagen */
   width: 100%; /* Asegura que el ancho sea el 100% del contenedor padre */
-  height: 200px; /* Ajusta la altura para probar si la imagen aparece */
+  height: 500px; /* Ajusta la altura para probar si la imagen aparece */
   position: relative;
 
 }
@@ -182,7 +183,7 @@ body {
   width: 100%;
   padding-top: 40px;
   padding-right: 40px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Quicksand", sans-serif;
   justify-content: center;
 }
 
@@ -190,8 +191,8 @@ body {
 .wrapper .icon {
   position: relative;
   background: #fff;
-  border-radius: 50%;
-  margin: 10px;
+  border-radius: 40%;
+  margin: 5px;
   width: 50px;
   height: 50px;
   font-size: 18px;

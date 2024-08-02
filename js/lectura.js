@@ -4,19 +4,29 @@ window.addEventListener('DOMContentLoaded', () => {
     const readButton = document.getElementById('readButton');
     const limpiarButton = document.getElementById('limpiarPantalla');
     const goToTranscripcionButton = document.getElementById('goToTranscripcion');
-    const stopButton = document.getElementById('stopButton'); // Nuevo botón de detener
+    const stopButton = document.getElementById('stopButton');
+    const voiceSelect = document.getElementById('voiceSelect');
 
     let voices = [];
     let currentVoice;
 
     function loadVoices() {
-        voices = speechSynthesis.getVoices();
-        currentVoice = voices.find(voice => voice.name === 'Microsoft AvaMultilingual Online (Natural) - English (United States)');
-        console.log(`Voice loaded: ${currentVoice ? currentVoice.name : 'None'}`);
+        const allVoices = speechSynthesis.getVoices();
+        const usVoices = allVoices.filter(voice => voice.lang === 'en-US' && voice.name.includes('(Natural)')).slice(0, 2);
+        const mxVoices = allVoices.filter(voice => voice.lang === 'es-MX' && voice.name.includes('(Natural)')).slice(0, 2);
+        voices = [...usVoices, ...mxVoices];
+        voiceSelect.innerHTML = voices.map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`).join('');
+        currentVoice = voices[0];
+        console.log(`Voices loaded: ${voices.map(voice => voice.name).join(', ')}`);
     }
 
     speechSynthesis.onvoiceschanged = loadVoices;
     loadVoices();
+
+    voiceSelect.addEventListener('change', () => {
+        const selectedVoiceName = voiceSelect.value;
+        currentVoice = voices.find(voice => voice.name === selectedVoiceName);
+    });
 
     fileInput.addEventListener('change', handleFileSelect);
 

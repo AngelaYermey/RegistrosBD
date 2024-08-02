@@ -72,7 +72,7 @@ function mostrarMensajeError()
 
        echo '<style>
        body {
-        font-family: "Tauri", sans-serif;
+        font-family: "Quicksand", sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;

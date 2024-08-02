@@ -5,9 +5,19 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Quicksand", sans-serif;
   text-align: center;
   color: #ffffff;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en una nueva línea si es necesario */
+  align-items: center; /* Alinea verticalmente los botones en el centro */
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 10px; /* Espacio entre los botones */
+  padding: 10px; /* Agrega un poco de espacio alrededor del contenedor */
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
 }
 
 .texts {
@@ -28,7 +38,7 @@ p {
   margin: 0.5em 0;
   text-align: justify;
   color: black;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .titulos {
@@ -68,10 +78,32 @@ p {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: #2183deb0;
+  background: #007bff;
   cursor: pointer;
   transition: all 450ms ease-in-out;
   border: 1.5px solid white;
+}
+
+#voiceSelect {
+  align-items: center;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  margin: 1%;
+  width: 100%; /* Ajusta el ancho al contenedor padre */
+  max-width: 20em;
+  height: 5em;
+
+  cursor: pointer;
+  border-radius: 3em;
+  transition: all 450ms ease-in-out;
+  border: 1.5px solid white;
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+#voiceSelect option {
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .sparkle {
@@ -83,15 +115,15 @@ p {
   font-weight: calc(0.2rem + 2vw);
   color: #ffffff;
   font-size: medium;
-  font-family: "Tauri", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 #text2 {
   color: #ffffff;
   font-size: medium;
-  font-family: "Tauri", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
-.text3Small{
-   font-size: calc(0.6rem + 0.5vw);
+.text3Small {
+  font-size: calc(0.6rem + 0.5vw);
 }
 
 .btn:hover {
@@ -129,7 +161,6 @@ p {
   border: 1.5px solid white;
   color: #ffffff;
 }
-
 
 /* fin de botones de opcion */
 
