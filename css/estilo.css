@@ -155,7 +155,7 @@ p {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: #2183deb0;
+  background: #007bff;
   cursor: pointer;
   transition: all 450ms ease-in-out;
   border: 1.5px solid white;
