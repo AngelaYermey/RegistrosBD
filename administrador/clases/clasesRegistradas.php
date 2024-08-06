@@ -49,10 +49,10 @@ if ($validar == null || $validar = '') {
                     <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
-            
+
         </form>
- <!-- Filtro de fecha -->
- <div class="row justify-content-center">
+        <!-- Filtro de fecha -->
+        <div class="row justify-content-center">
             <div class="col-md-4">
                 <label for="orderFecha">Ordenar por fecha:</label>
                 <select id="orderFecha" class="form-control">
@@ -87,12 +87,12 @@ if ($validar == null || $validar = '') {
             $busqueda = "%$busqueda%";
             // Preparar la consulta SQL para buscar en varias columnas
             $stmt = $conn->prepare("
-        SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
-        FROM clases c
-        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
-        JOIN profesores p ON c.cedula_prof = p.cedula_prof
-        WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
-        LIMIT ?, ?
+            SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
+            FROM clases c
+            JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+            JOIN profesores p ON c.cedula_prof = p.cedula_prof
+            WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
+            LIMIT ?, ?
     ");
             $stmt->bind_param("ssssssi", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $offset, $results_per_page);
             $stmt->execute();
@@ -100,11 +100,11 @@ if ($validar == null || $validar = '') {
 
             // Obtener el número total de resultados
             $stmt_total = $conn->prepare("
-        SELECT COUNT(*) AS total
-        FROM clases c
-        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
-        JOIN profesores p ON c.cedula_prof = p.cedula_prof
-        WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
+            SELECT COUNT(*) AS total
+            FROM clases c
+            JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+            JOIN profesores p ON c.cedula_prof = p.cedula_prof
+            WHERE c.codigo_asignatura LIKE ? OR a.nombre LIKE ? OR p.nombre LIKE ? OR p.apellido LIKE ? OR c.fecha LIKE ?
     ");
             $stmt_total->bind_param("sssss", $busqueda, $busqueda, $busqueda, $busqueda, $busqueda);
             $stmt_total->execute();
@@ -112,11 +112,11 @@ if ($validar == null || $validar = '') {
             $total_rows = $result_total->fetch_object()->total;
         } else {
             $result = $conn->query("
-        SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
-        FROM clases c
-        JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
-        JOIN profesores p ON c.cedula_prof = p.cedula_prof
-        LIMIT $offset, $results_per_page
+            SELECT c.id, c.codigo_asignatura, a.nombre AS nombre_asignatura, c.tema_clase, c.fecha, p.nombre AS nombre_profesor, p.apellido AS apellido_profesor
+            FROM clases c
+            JOIN asignaturas a ON c.codigo_asignatura = a.codigo_asignatura
+            JOIN profesores p ON c.cedula_prof = p.cedula_prof
+            LIMIT $offset, $results_per_page
     ");
 
             // Obtener el número total de resultados
@@ -160,7 +160,7 @@ if ($validar == null || $validar = '') {
                                     <td><?php echo $datos->fecha; ?></td>
                                     <td><?php echo $datos->nombre_profesor . ' ' . $datos->apellido_profesor; ?></td>
                                     <td>
-                                        <a href="eliminarDatosclase.php?id=2344>" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                                        <a href="eliminarDatosclase.php?id=<?= $datos->id ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -186,7 +186,7 @@ if ($validar == null || $validar = '') {
             </ul>
         </nav>
 
-       
+
     </div>
 
     <footer class="footer">
