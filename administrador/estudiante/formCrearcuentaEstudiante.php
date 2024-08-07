@@ -30,7 +30,13 @@ $result = $conn->query($query);
     <title>Reistro de usuarios</title>
 </head>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
+
     <section>
         <div class="contentbx">
             <div class="form">
@@ -68,7 +74,7 @@ $result = $conn->query($query);
 
                         <div class="form-floating mb-3">
                             <label for="año">Año:</label>
-                            <input type="text" id="año" name="año" pattern="[1-5]" required>                             
+                            <input type="text" id="año" name="año" pattern="[1-5]" required>
                         </div>
 
                         <div class="form-floating mb-3">
@@ -81,7 +87,7 @@ $result = $conn->query($query);
                             </select>
                         </div>
                         <div class="form-floating mb-3">
-                        <label for="aula">N° Aula</label>
+                            <label for="aula">N° Aula</label>
                             <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." required><br>
                         </div>
                         <div class="form-floating mb-3">
@@ -106,6 +112,12 @@ $result = $conn->query($query);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
 </body>
 
 </html>

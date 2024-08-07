@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const text = event.target.result;
       const p = document.createElement('p');
       p.textContent = text;
-      texts.appendChild(p);
+      // texts.appendChild(p);
     };
 
     reader.readAsText(file);
