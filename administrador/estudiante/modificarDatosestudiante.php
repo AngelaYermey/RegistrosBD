@@ -55,7 +55,13 @@ $query = "SELECT id_centroRegional, nombre_centro FROM centros_regionales";
 $resultCentros = $conn->query($query);
 ?>
 
-<body>
+
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
     <form method="POST" class="custom-form-style">
         <br>
         <h3>Modificar Estudiante</h3><br>
@@ -121,6 +127,12 @@ $resultCentros = $conn->query($query);
         </div>
 
     </form>
+    <footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
+    
 </body>
 
 

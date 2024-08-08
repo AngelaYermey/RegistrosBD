@@ -55,10 +55,15 @@ $resultCentros = $conn->query($query);
 error_reporting(E_ALL);
 ?>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
     <form method="POST" class="custom-form-style">
         <br>
-        <h3>Modificar Aula</h3><br>
+        <h3 class="textcolor">Modificar Aula</h3><br>
         <div class="col-md-12">
             <?php include "actualizarDatosaula.php"; ?>
             <label for="nom" class="form-label">codigo</label>
@@ -87,6 +92,13 @@ error_reporting(E_ALL);
         </div>
 
     </form>
+
+    <footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
+
 </body>
 
 

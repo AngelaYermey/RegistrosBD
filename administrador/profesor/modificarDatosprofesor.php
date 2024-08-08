@@ -74,11 +74,16 @@ if(isset($_GET["cedProf"])) {
 }
 ?>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
 <div class="form-style-2">
     
     <form method="POST" class="custom-form-style">
-    <br><h3>Modificar Profesor</h3><br>
+    <br><h3 class="textcolor">Modificar Profesor</h3><br>
         <div class="col-md-12">
         <?php include "actualizar_profesor.php"; ?>
             <label for="nom" class="form-label">Nombre</label>
@@ -119,4 +124,11 @@ if(isset($_GET["cedProf"])) {
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
+
 </html>

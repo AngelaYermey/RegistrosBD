@@ -86,7 +86,7 @@
 
 
         <form class="formulario" action="inicioSesion.php" method="POST">
-            <h2 class="textlogin">Bienvenido de nuevo</h2>
+            <h2 class="textlogin">Bienvenido</h2>
             <p class="textlogin">Inicia sesión con tu cuenta</p>
             <div class="texto-formulario">
             </div>

@@ -49,7 +49,12 @@ if (isset($_GET["codAsig"])) {
 }
 ?>
 
-<body>
+<body class="holy-grail">
+    <header class="container2">
+        <?php
+        include("../../menuFooter/encabezadoA.html");
+        ?>
+    </header>
     <form method="POST" class="custom-form-style">
         <br>
         <h3>Modificar Asignatura</h3><br>
@@ -73,6 +78,11 @@ if (isset($_GET["codAsig"])) {
             </div>
         </div>
     </form>
+    <footer class="footer">
+        <?php
+        include("../../menuFooter/footerA.html");
+        ?>
+    </footer>
 </body>
 
 </html>
