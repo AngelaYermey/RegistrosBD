@@ -66,7 +66,7 @@ function mostrarMensajeError()
         <script>
             // Redirigir al formulario de inicio de sesión 
             setTimeout(function() {
-                window.location.href = "formularioIniciosesion.html"; // Ajusta la ruta según la ubicación del formulario de inicio de sesión
+                window.location.href = "index.php"; // Ajusta la ruta según la ubicación del formulario de inicio de sesión
             }, 3000); 
         </script>';
 

@@ -4,12 +4,19 @@ session_start();
 $UsuarioEstudiante = $_SESSION['usuario'];
 
 if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
-    header("Location: ../formularioIniciosesion.html");
+    header("Location: ../index.php");
     die();
 }
+
+// Parámetros de paginación
+$limite = 6; // Número de resultados por página
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1; // Página actual
+$inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inicio para la consulta
+
 ?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,24 +25,27 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/iconoRetinanuevo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="../css/tabla.css">
+
 </head>
 
 <body class="holy-grail">
     <header class="container2">
-        <?php include("../menuFooter/encabezado.html"); ?>
+        <?php
+        include("../menuFooter/encabezado.html");
+        ?>
     </header>
-
     <h2 class="text-center p-4 botonInfo">Clases Disponibles</h2>
 
     <div class="containerTabla">
+
         <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
                         <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
                     </div>
-
 
                     <div class="col">
                         <div class="input-group">
@@ -44,140 +54,82 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </form>
 
         <?php
+
         include '../db_Conexion/conector.php';
 
-        $conexion_obj = new Conexion(); 
-        $conn = $conexion_obj->conectar(); 
+        $conexion_obj = new Conexion();
+        $conn = $conexion_obj->conectar();
 
-        // Definir el número de resultados por página
-        $resultados_por_pagina = 5;
-
-        // Determinar en qué página estamos
-        if (isset($_GET['pagina'])) {
-            $pagina = $_GET['pagina'];
-        } else {
-            $pagina = 1;
-        }
-
-        // Calcular el OFFSET
-        $offset = ($pagina - 1) * $resultados_por_pagina;
-
-        if (isset($_GET['buscador'])) { // Comprobar si se realizó una búsqueda
+        if (isset($_GET['buscador'])) {
             $busqueda = $_GET['busqueda'];
-            $busqueda = "%$busqueda%"; 
+            $busqueda = "%$busqueda%";
 
-            // Preparar la consulta SQL para buscar en varias columnas con LIMIT y OFFSET
             $sql = "SELECT 
-            asignaturas.codigo_asignatura, 
-            asignaturas.nombre AS nombre_asignatura,
-            clases.tema_clase, 
-            profesores.nombre AS nombre_profesor,
-            profesores.apellido AS apellido_profesor,
-            clases.fecha
-        FROM 
-            clases 
-        INNER JOIN 
-            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-        INNER JOIN 
-            profesores ON clases.cedula_prof = profesores.cedula_prof 
-        WHERE 
-            clases.numero_aula IN (
-                SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)
-        AND (
-            asignaturas.codigo_asignatura LIKE ? 
-            OR asignaturas.nombre LIKE ? 
-            OR clases.tema_clase LIKE ? 
-            OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
-            OR clases.fecha LIKE ?
-        )
-        LIMIT ? OFFSET ?";
+                        SQL_CALC_FOUND_ROWS
+                        asignaturas.codigo_asignatura, 
+                        asignaturas.nombre AS nombre_asignatura,
+                        clases.tema_clase, 
+                        profesores.nombre AS nombre_profesor,
+                        profesores.apellido AS apellido_profesor,
+                        clases.fecha
+                    FROM 
+                        clases 
+                    INNER JOIN 
+                        asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+                    INNER JOIN 
+                        profesores ON clases.cedula_prof = profesores.cedula_prof 
+                    WHERE 
+                        clases.numero_aula IN (
+                            SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)
+                    AND (
+                        asignaturas.codigo_asignatura LIKE ? 
+                        OR asignaturas.nombre LIKE ? 
+                        OR clases.tema_clase LIKE ? 
+                        OR CONCAT(profesores.nombre, ' ', profesores.apellido) LIKE ? 
+                        OR clases.fecha LIKE ?
+                    )
+                    LIMIT ?, ?";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("ssssssii", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $resultados_por_pagina, $offset);
-
-            $consulta->execute(); 
-            $result = $consulta->get_result(); 
+            $consulta->bind_param("ssssssii", $UsuarioEstudiante, $busqueda, $busqueda, $busqueda, $busqueda, $busqueda, $inicio, $limite);
         } else {
             $sql = "SELECT 
-            asignaturas.codigo_asignatura, 
-            asignaturas.nombre AS nombre_asignatura,
-            clases.tema_clase, 
-            profesores.nombre AS nombre_profesor,
-            profesores.apellido AS apellido_profesor,
-            clases.fecha
-        FROM 
-            clases 
-        INNER JOIN 
-            asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
-        INNER JOIN 
-            profesores ON clases.cedula_prof = profesores.cedula_prof 
-        WHERE 
-            clases.numero_aula IN (
-                SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?
-            )
-        ORDER BY 
-            clases.fecha DESC
-        LIMIT ? OFFSET ?";
+                        SQL_CALC_FOUND_ROWS
+                        asignaturas.codigo_asignatura, 
+                        asignaturas.nombre AS nombre_asignatura,
+                        clases.tema_clase, 
+                        profesores.nombre AS nombre_profesor,
+                        profesores.apellido AS apellido_profesor,
+                        clases.fecha
+                    FROM 
+                        clases 
+                    INNER JOIN 
+                        asignaturas ON clases.codigo_asignatura = asignaturas.codigo_asignatura 
+                    INNER JOIN 
+                        profesores ON clases.cedula_prof = profesores.cedula_prof 
+                    WHERE 
+                        clases.numero_aula IN (
+                            SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?
+                        )
+                    ORDER BY 
+                        clases.fecha DESC
+                    LIMIT ?, ?";
             $consulta = $conn->prepare($sql);
-            $consulta->bind_param("sii", $UsuarioEstudiante, $resultados_por_pagina, $offset);
-
-            $consulta->execute(); // Ejecutar la consulta preparada
-            $result = $consulta->get_result(); // Obtener los resultados de la consulta
+            $consulta->bind_param("sii", $UsuarioEstudiante, $inicio, $limite);
         }
 
-        ?>
+        $consulta->execute();
+        $result = $consulta->get_result();
 
-
-        <?php
-        // Calcular el número total de resultados
-        $total_resultados_sql = "SELECT COUNT(*) FROM clases WHERE numero_aula IN (SELECT numero_aula FROM estudiantes WHERE cedula_estudiante = ?)";
-        $total_resultados_consulta = $conn->prepare($total_resultados_sql);
-        $total_resultados_consulta->bind_param("s", $UsuarioEstudiante);
-        $total_resultados_consulta->execute();
-        $total_resultados_consulta->bind_result($total_resultados);
-        $total_resultados_consulta->fetch();
-        $total_resultados_consulta->close();
+        // Obtener el número total de resultados
+        $total_resultados = $conn->query("SELECT FOUND_ROWS() as total")->fetch_assoc()['total'];
 
         // Calcular el número total de páginas
-        $total_paginas = ceil($total_resultados / $resultados_por_pagina);
+        $total_paginas = ceil($total_resultados / $limite);
         ?>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item <?php if ($pagina <= 1) {
-                                            echo 'disabled';
-                                        } ?>">
-                    <a class="page-link" href="<?php if ($pagina <= 1) {
-                                                    echo '#';
-                                                } else {
-                                                    echo "?pagina=" . ($pagina - 1);
-                                                } ?>">Anterior</a>
-                </li>
-                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-                    <li class="page-item <?php if ($pagina == $i) {
-                                                echo 'active';
-                                            } ?>">
-                        <a class="page-link" href="?pagina=<?= $i; ?>"><?= $i; ?></a>
-                    </li>
-                <?php endfor; ?>
-                <li class="page-item <?php if ($pagina >= $total_paginas) {
-                                            echo 'disabled';
-                                        } ?>">
-                    <a class="page-link" href="<?php if ($pagina >= $total_paginas) {
-                                                    echo '#';
-                                                } else {
-                                                    echo "?pagina=" . ($pagina + 1);
-                                                } ?>">Siguiente</a>
-                </li>
-            </ul>
-        </nav>
-
-
 
         <div class="row justify-content-center">
             <div class="table-responsive">
@@ -195,7 +147,7 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                     <tbody class="table-group-divider">
                         <?php if ($result->num_rows === 0) : ?>
                             <tr>
-                                <td colspan="6" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
+                                <td colspan="10" class="text-center" style="color: red; font-size: 20px;">No se encontraron resultados.</td>
                             </tr>
                         <?php else : ?>
                             <?php while ($datos = $result->fetch_object()) : ?>
@@ -204,10 +156,13 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                                     <td><?php echo $datos->nombre_asignatura; ?></td>
                                     <td><?php echo $datos->tema_clase; ?></td>
                                     <td><?php echo $datos->fecha; ?></td>
-                                    <td><?php echo $datos->nombre_profesor . ' ' . $datos->apellido_profesor; ?></td>
+                                    <td>
+                                        <?php echo $datos->nombre_profesor; ?>
+                                        <?php echo $datos->apellido_profesor; ?>
+                                    </td>
                                     <td>
                                         <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
-                                        <a href="descargarClase.php?id=<?= $datos->id ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
+                                        <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -216,15 +171,44 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
                 </table>
             </div>
         </div>
+        <br>
+        <!-- Paginación -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <?php if ($pagina > 1) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=<?php echo $pagina - 1; ?>" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span> Anterior
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                    <li class="page-item <?php echo ($i == $pagina) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($pagina < $total_paginas) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pagina=<?php echo $pagina + 1; ?>" aria-label="Siguiente">
+                            Siguiente <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
     </div>
 
     <footer class="footer">
-        <?php include("../menuFooter/footer.html"); ?>
+        <?php
+        include("../menuFooter/footer.html");
+        ?>
     </footer>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

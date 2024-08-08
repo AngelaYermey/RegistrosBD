@@ -4,7 +4,7 @@ session_start();
 $validar = $_SESSION['usuario'];
 
 if ($validar == null || $validar == '') {
-    header("Location: ../../formularioIniciosesion.html");
+    header("Location: ../../index.php");
     die();
 }
 

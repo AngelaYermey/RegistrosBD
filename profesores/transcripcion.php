@@ -4,7 +4,7 @@ session_start();
 $Usuarioprofesor = $_SESSION['usuario'];
 
 if ($Usuarioprofesor == null || $Usuarioprofesor == '') {
-  header("Location: ../formularioIniciosesion.html");
+  header("Location: ../index.php");
   die();
 }
 ?>
