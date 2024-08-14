@@ -128,6 +128,18 @@ section {
     width: 80%; 
   }
   
+  section .contentbx .form select {
+    width: 100%;
+    padding: 12px 20px;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background: transparent;
+    border-radius: 10px;
+    margin-top: 5px; 
+    box-sizing: border-box; 
+  }
+
   /* Estilos para mensajes en el formulario */
   section .contentbx .form .inputbx p {
     color: #0d70a2;
