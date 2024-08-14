@@ -9,8 +9,6 @@ section {
     overflow: hidden; 
   }
   
-  
-  
   section .contentbx {
     display: flex;
     justify-content: center;
@@ -98,6 +96,37 @@ section {
   section .contentbx .form .inputbx button[type="submit"]:hover {
     background: #65a0c7;
   }
+
+   /* Estilos para el botón del formulario modificar*/
+   section .contentbx .form .inputbx2 button[type="submit"] {
+    background: #5465ff;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 12px 20px; 
+    font-size: 18px;
+    border-radius: 10px;
+    margin-top: 5px;
+    box-sizing: border-box; 
+    width: 80%; 
+  }
+   /* Estilos para el botón del formulario modificar*/
+   section .contentbx .form .inputbx2 a {
+    background: #8d99ae;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 12px 20px; 
+    font-size: 18px;
+    border-radius: 10px;
+    margin-top: 5px;
+    box-sizing: border-box; 
+    width: 80%; 
+  }
   
   /* Estilos para mensajes en el formulario */
   section .contentbx .form .inputbx p {
@@ -118,8 +147,6 @@ section {
     margin: 30px 0 10px;
     font-weight: 500;
   }
-  
-  
   
   
   /* Estilos para el título del formulario */
@@ -162,7 +189,6 @@ section {
   section .contentbx .form .inputbx a.btnCrear_eliminar:hover {
     background: #65a0c7;
   }
-  
   
   
   /* Estilos para el contenido al estar en dispositivos con ancho máximo de 1024px */
