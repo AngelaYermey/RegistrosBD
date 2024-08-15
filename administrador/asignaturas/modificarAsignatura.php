@@ -16,8 +16,8 @@ if ($validar == null || $validar == '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: Modificar</title>
 </head>
@@ -59,15 +59,15 @@ if (isset($_GET["codAsig"])) {
             <div class="form">
                 <h2>Modificar Asignatura</h2>
                 <form method="POST" class="custom-form-style">
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <?php include "actualizar_asignatura.php"; ?>
-                        <label for="codigo" class="form-label">Código</label>
+                        <label for="codigo" class="form-label">Código de asignatura</label>
                         <input type="text" id="codigo" class="form-control" name="codigo" value="<?php echo $datos->codigo_asignatura; ?>" required>
                         <!-- Campo oculto para almacenar la codigo antigua por si se modifica este campo-->
                         <input type="hidden" name="codAntiguo" value="<?php echo $datos->codigo_asignatura; ?>">
                     </div>
-                    <div class="form-floating mb-3">
-                        <label for="nom" class="form-label">Nombre</label>
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nombre de asignatura</label>
                         <input type="text" id="nom" class="form-control" name="nom" value="<?php echo $datos->nombre; ?>" required>
                     </div>
                     <div class="inputbx2">

@@ -17,7 +17,7 @@ if ($validar == null || $validar = '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: Modificar</title>
@@ -83,27 +83,27 @@ if (isset($_GET["cedProf"])) {
             <div class="form">
                 <h2>Modificar Profesor</h2><br>
                 <form method="POST" class="custom-form-style">
-                    <div class="form-floating mb-3"> 
+                    <div class="mb-3"> 
                         <?php include "actualizar_profesor.php"; ?>
                         <label for="nom" class="form-label">Nombre</label>
                         <input type="text" id="nom" class="form-control" name="nom" pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" value="<?php echo $datos->nombre; ?>" required>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <label for="ape" class="form-label">Apellido</label>
                         <input type="text" id="ape" class="form-control" name="ape" pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" value="<?php echo $datos->apellido; ?>" required>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <label for="cedula" class="form-label">Cédula</label>
                         <input type="text" id="cedula" name="nueva_cedula" class="form-control" pattern="(\d{1,2}|PE|E|N|\d{1,2}AV|\d{1,2}PI)-\d{1,4}-\d{1,5}" title="Formato: XX-XXXX-XXXXX" value="<?php echo $datos->cedula_prof; ?>" required>
                         <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
                         <input type="hidden" name="cedAntigua" value="<?php echo $datos->cedula_prof; ?>">
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <label for="correo" class="form-label">Correo Institucional</label>
                         <input type="email" id="correo" name="correo" class="form-control" title="Formato: @utp.ac.pa " pattern="^[\w.%+-]+@([a-zA-Z0-9-]+\.)*utp\.ac\.pa$" value="<?php echo $datos->email; ?>" required>
                     </div>
 
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <label for="pass" class="form-label">Contraseña</label>
                         <input type="text" id="pass" name="pass" class="form-control" value="<?php echo $datos->contraseña; ?>" required>
                     </div>

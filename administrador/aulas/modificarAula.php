@@ -16,8 +16,8 @@ if ($validar == null || $validar == '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: Modificar</title>
 </head>
@@ -63,17 +63,16 @@ error_reporting(E_ALL);
             <div class="form">
                 <h2>Modificar Aulas</h2><br>
                 <form method="POST" class="custom-form-style">
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <?php include "actualizarDatosaula.php"; ?>
-                        <label for="nom" class="form-label">codigo</label>
+                        <label for="nom" class="form-label">Codigo</label>
                         <input type="text" id="codigoAula" class="form-control" name="codigoAula" value="<?php echo $datos->numero_aula; ?>" required>
                         <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
                         <input type="hidden" name="numAntiguo" value="<?php echo $datos->numero_aula; ?>">
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="mb-3">
                         <label for="cr">Centro Regional:</label>
                         <select id="cr" name="id_centroRegional" class="form-select" required>
-                            <option value="">Escoger opción...</option>
                             <?php while ($row = $resultCentros->fetch_assoc()) : ?>
                                 <option value="<?php echo $row['id_centroRegional']; ?>" <?php echo $datos->id_centroRegional == $row['id_centroRegional'] ? "selected" : ""; ?>><?php echo $row['nombre_centro']; ?></option>
                             <?php endwhile; ?>
