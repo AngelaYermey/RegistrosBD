@@ -1,131 +1,197 @@
-/* Estilo para el contenedor principal */
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Contenedor de la Tabla */
 .containerTabla {
-  padding-left: 8%;
-  padding-right: 8%;
-  margin-bottom: 6% /* Espacio entre la tabla y el footer */
+  padding: 0 8%;
+  margin: 20px auto 6%;
 }
 
-/* Estilo para el título de la tabla */
-h2 {
-  text-align: center;
-  margin-bottom: 5px;
-  color: #0d0c22;
-}
- /* Estilos para el título del formulario de tablas*/
- section .titulo{
-  color: #494a48;
-  font-weight: 600;
-  font-size: 1.5em;
+/* Estilo del Título */
+h2,
+.titulo {
+  color: #494a48; /* Mantener el color original del título */
+  font-weight: 550;
+  font-size: 1.8em;
   text-transform: uppercase;
-  margin-bottom: 10px;
-  border-bottom: 4px solid #0099ff;
+  margin-bottom: 24px;
+  margin-top: 20px;
+  text-align: center;
+  border-bottom: 4px solid #0099ff; 
   display: inline-block;
-  margin-bottom: 30px; /* Espacio debajo del título */
-  text-align: center; /* Centrar el texto */
 }
 
-.botonInfo{
-  color: #0d0c22;
-}
-
-/* Estilo para la tabla */
+/* Tabla */
 .table {
   width: 100%;
-  margin: auto;
-  border-collapse: collapse;
-  border: 2px solid #ddd;
-  overflow-x: auto;
-  font-size: 16px;
-  
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-/* Estilo para las celdas de la tabla */
-th,
-td {
-  padding: 16px;
-  text-align: center;
-  border-bottom: 2px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-/* Estilo para el formulario de búsqueda y botones */
-.input-group {
-  width: 100%;
-}
-
-.input-group .form-control {
-  height: 40px;
-  border-radius: 0;
-}
-
-.input-group .btn-primary {
-  height: 40px;
-  border-radius: 0;
-}
-
-/* Estilo para los botones de acción */
-.btn-small {
-  padding: 6px 12px;
-  font-size: 14px;
-}
-
-.btn-secondary,
-.btn-success,
-.btn-primary {
-  padding: 10px 20px;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.btn-success:hover {
-  background-color: #5bba6f;
+.table thead th {
+  background-color: #2445c5; /* Color #2445c5 para el encabezado de la tabla */
   color: #fff;
+  padding: 10px;
+  font-size: 1em;
+  text-align: left;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+.table td {
+  padding: 10px;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Paginación */
+.pagination {
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.pagination .page-link {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  color: #2445c5; /* Color #2445c5 para los enlaces de la paginación */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  background-color: #2445c5;
+  color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #2c45c5; /* Color #2c45c5 para el enlace activo */
+  border-color: #2c45c5;
+  color: #fff;
+}
+
+/* Botones Generales */
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Botón Volver */
+.btn-secondary {
+  color: #fff;
+  background-color: #627188; /* Color #3423ad para el botón Volver */
+  border-color: #727b91;
 }
 
 .btn-secondary:hover {
-  background-color: #858a87;
+  background-color: #567de4; /* Color #2c45c5 en hover para el botón Volver */
+  border-color: #567de4;
+}
+
+/* Botón Agregar */
+.btn-success {
+  color: #fff;
+  background-color: #1c5f8e; /* Color #245cd6 para el botón Agregar */
+  border-color: #1c608e;
+}
+
+.btn-success:hover {
+  background-color: #388697; /* Color #2445c5 en hover para el botón Agregar */
+  border-color: #388697;
+}
+
+/* Botón Eliminar */
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Botón Modificar */
+.btn-warning {
+  color: #262626;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
   color: #fff;
 }
 
-.btn-primary:hover {
-  background-color: #2770dede;
-  color: #fff;
+/* Botón Buscar */
+.input-group .btn-primary {
+  border-radius: 0 0.375rem 0.375rem 0;
+  background-color: #232ead; /* Color #3423ad para el botón de búsqueda */
+  border-color: #232ead;
 }
-/* Responsivo para dispositivos móviles */
+
+.input-group .btn-primary:hover {
+  background-color: #2c45c5; /* Color #2c45c5 para hover en el botón de búsqueda */
+  border-color: #2c45c5;
+}
+
+/* Buscador */
+.input-group {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group .form-control {
+  border-radius: 0.375rem 0 0 0.375rem;
+  border-color: #dee2e6;
+}
+
+/* Estilos Responsivos */
 @media (max-width: 768px) {
+  .containerTabla {
+    padding: 0 4%;
+  }
+  
+  .table {
+    font-size: 14px;
+  }
+
   .d-flex.flex-wrap.justify-content-between.mb-3.align-items-center {
     flex-direction: column;
   }
+
   .col-md-4 {
     width: 100%;
     margin-bottom: 10px;
   }
+
   .text-md-end {
     text-align: center;
   }
-  .input-group .form-control,
-  .input-group .btn-primary {
-    height: auto;
-  }
-  .table {
-    font-size: 14px;
-  }
-  th,
-  td {
-    padding: 8px;
-  }
-}
-/* Estilos para el contenido al estar en dispositivos con ancho máximo de 1024px */
-@media (max-width: 1024px) {
-  section .contentbx .form {
-    width: 90%; /* Reducido el ancho para adaptarse mejor a pantallas de laptops */
-  }
 }
 
+@media (max-width: 1024px) {
+  section .contentbx .form {
+    width: 90%;
+  }
+}

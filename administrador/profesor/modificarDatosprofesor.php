@@ -20,7 +20,7 @@ if ($validar == null || $validar = '') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/formModificar.css">
-    <title>Modificar</title>
+    <title>ROEH: Modificar</title>
 </head>
 
 <?php
@@ -82,8 +82,8 @@ if (isset($_GET["cedProf"])) {
         <div class="contentbx">
             <div class="form">
                 <h2>Modificar Profesor</h2><br>
-                <form method="POST" class="custom-form-style">                
-                    <div class="form-floating mb-3">
+                <form method="POST" class="custom-form-style">
+                    <div class="form-floating mb-3"> 
                         <?php include "actualizar_profesor.php"; ?>
                         <label for="nom" class="form-label">Nombre</label>
                         <input type="text" id="nom" class="form-control" name="nom" pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+" title="Solo se permiten letras mayúsculas y minúsculas" value="<?php echo $datos->nombre; ?>" required>
@@ -108,16 +108,18 @@ if (isset($_GET["cedProf"])) {
                         <input type="text" id="pass" name="pass" class="form-control" value="<?php echo $datos->contraseña; ?>" required>
                     </div>
                     <div class="inputbx2">
-                    <div class="row p-4 ">
-                        <div class="col-6">
-                            <center><button type="submit" class="btn btn-success" name="btn_Modificar" value="ok">Modificar</button></center>
+                        <div class="row p-4 ">
+                            <div class="col-6">
+                                <center><button type="submit" class="btn btn-success" name="btn_Modificar" value="ok">Modificar</button></center>
+                            </div>
+                            <div class="col-6">
+                                <center><a href="tablaProfesor.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <center><a href="tablaProfesor.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
-                        </div>
-                    </div>  </div> 
+                    </div>
+
+                </form>
             </div>
-            </form>
         </div>
     </section>
 

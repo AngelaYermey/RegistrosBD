@@ -17,10 +17,8 @@ if ($validar == null || $validar == '') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/formModificar.css">
     <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: Modificar</title>
 </head>
 
@@ -56,29 +54,37 @@ if (isset($_GET["codAsig"])) {
         include("../../menuFooter/encabezadoA.html");
         ?>
     </header>
-    <form method="POST" class="custom-form-style">
-        <br>
-        <h3>Modificar Asignatura</h3><br>
-        <?php include "actualizar_asignatura.php"; ?>
-        <div class="col-md-12">
-            <label for="codigo" class="form-label">Código</label>
-            <input type="text" id="codigo" class="form-control" name="codigo" value="<?php echo $datos->codigo_asignatura; ?>" required>
-             <!-- Campo oculto para almacenar la codigo antigua por si se modifica este campo-->
-             <input type="hidden" name="codAntiguo" value="<?php echo $datos->codigo_asignatura; ?>">
-        </div>
-        <div class="col-md-12">
-            <label for="nom" class="form-label">Nombre</label>
-            <input type="text" id="nom" class="form-control" name="nom" value="<?php echo $datos->nombre; ?>" required>
-        </div>
-        <div class="row p-4 ">
-            <div class="col-6">
-                <center><button type="submit" class="btn btn-success" name="btnModificar">Modificar</button></center>
+    <section>
+        <div class="contentbx">
+            <div class="form">
+                <h2>Modificar Asignatura</h2>
+                <form method="POST" class="custom-form-style">
+                    <div class="form-floating mb-3">
+                        <?php include "actualizar_asignatura.php"; ?>
+                        <label for="codigo" class="form-label">Código</label>
+                        <input type="text" id="codigo" class="form-control" name="codigo" value="<?php echo $datos->codigo_asignatura; ?>" required>
+                        <!-- Campo oculto para almacenar la codigo antigua por si se modifica este campo-->
+                        <input type="hidden" name="codAntiguo" value="<?php echo $datos->codigo_asignatura; ?>">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="nom" class="form-label">Nombre</label>
+                        <input type="text" id="nom" class="form-control" name="nom" value="<?php echo $datos->nombre; ?>" required>
+                    </div>
+                    <div class="inputbx2">
+                    <div class="row p-4 ">
+                            <div class="col-6">
+                                <center><button type="submit" class="btn btn-success" name="btnModificar">Modificar</button></center>
+                            </div>
+                            <div class="col-6">
+                                <center><a href="tablaAsignatura.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
             </div>
-            <div class="col-6">
-                <center><a href="tablaAsignatura.php" name="Cancelar" class="btn btn-secondary">Cancelar</a></center>
-            </div>
         </div>
-    </form>
+    </section>
     <footer class="footer">
         <?php
         include("../../menuFooter/footerA.html");

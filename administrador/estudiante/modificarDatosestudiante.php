@@ -17,8 +17,8 @@ if ($validar == null || $validar == '') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/DiseñoCuenta.css">
     <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: modificar estudiante</title>
 </head>
 
@@ -98,8 +98,8 @@ $resultCentros = $conn->query($query);
                     </div>
 
                     <div class="form-floating mb-3">
-                        <label for="cr" class="form-label">Centro Regional:</label>
-                        <select class="form-control" aria-label="Disabled select example" required>
+                        <label for="cr">Centro Regional:</label>
+                        <select id="cr" name="id_centroRegional" class="form-select" required>
                             <option value="">Escoger opción...</option>
                             <?php while ($row = $resultCentros->fetch_assoc()) : ?>
                                 <option value="<?php echo $row['id_centroRegional']; ?>" <?php echo $datos->id_centroRegional == $row['id_centroRegional'] ? "selected" : ""; ?>>
@@ -129,6 +129,7 @@ $resultCentros = $conn->query($query);
                     </div>
                 </form>
             </div>
+        </div>
     </section>
     <footer class="footer">
         <?php

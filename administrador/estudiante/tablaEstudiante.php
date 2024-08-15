@@ -35,9 +35,7 @@ if ($validar == null || $validar == '') {
         <section class="holy-grail-content">
             <div class="container">
                 <h2 class="titulo">Tabla de Estudiantes</h2>
-
                 <div class="containerTabla">
-
                     <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
                         <div class="col-md-4 mb-2 mb-md-0">
                             <a href="../adminUsuario.php" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Volver</a>
