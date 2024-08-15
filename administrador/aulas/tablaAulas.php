@@ -21,6 +21,7 @@ if ($validar == null || $validar = '') {
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../../css/tabla.css">
+    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
 </head>
 
 <body class="holy-grail">

@@ -22,7 +22,8 @@ if ($validar == null || $validar == '') {
 
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/formModificar.css">
-    <title>Modificar</title>
+    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <title>ROEH: Modificar</title>
 </head>
 
 <?php

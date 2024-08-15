@@ -20,7 +20,8 @@ if ($validar == null || $validar == '') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/formModificar.css">
-    <title>Modificar</title>
+    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <title>ROEH: Modificar</title>
 </head>
 
 <?php
