@@ -32,7 +32,7 @@ if ($validar == null || $validar = '') {
     <div class="holy-grail-body">
         <section class="holy-grail-content">
             <div class="container">
-                <h2 class="text-center p-4">Tabla de Aulas</h2>
+                <h2 class="titulo">Tabla de Aulas</h2>
 
                 <div class="containerTabla">
                     <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">

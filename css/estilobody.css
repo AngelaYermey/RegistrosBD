@@ -124,4 +124,17 @@
   transition: all 450ms ease-in-out;
   border: 1.5px solid white;
 }
+
+/*título */
+section .textAdmin{
+  color: #494a48;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #0099ff;
+  display: inline-block;
+  margin-bottom: 20px; 
+  text-align: center; /* Centrar el texto */
+}
  /* fin de caja de usuario */

@@ -31,9 +31,7 @@ if ($validar == null || $validar = '') {
     <div class="holy-grail-body">
         <section class="holy-grail-content">
             <div class="container">
-                <h2 class="text-center p-4">Clases Registradas</h2>
-
-
+                <h2 class="titulo">Clases Registradas</h2>
                 <div class="containerTabla">
                     <form action="" method="GET" class="d-flex flex-wrap justify-content-between mb-3 align-items-center">
                         <div class="col-md-4 mb-2 mb-md-0">
@@ -49,7 +47,7 @@ if ($validar == null || $validar = '') {
                     <!-- Filtro de fecha -->
                     <div class="row justify-content-center">
                         <div class="col-md-4">
-                            <label for="orderFecha">Ordenar por fecha:</label>
+                            <label for="orderFecha"><h4>Ordenar por fecha:</h4></label>
                             <select id="orderFecha" class="form-control">
                                 <option value="asc">Más antigua a más reciente</option>
                                 <option value="desc">Más reciente a más antigua</option>

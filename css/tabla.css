@@ -11,6 +11,19 @@ h2 {
   margin-bottom: 5px;
   color: #0d0c22;
 }
+ /* Estilos para el título del formulario de tablas*/
+ section .titulo{
+  color: #494a48;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #0099ff;
+  display: inline-block;
+  margin-bottom: 30px; /* Espacio debajo del título */
+  text-align: center; /* Centrar el texto */
+}
+
 .botonInfo{
   color: #0d0c22;
 }

@@ -34,7 +34,7 @@ if ($validar == null || $validar == '') {
     <div class="holy-grail-body">
         <section class="holy-grail-content">
             <div class="container">
-                <h2 class="text-center p-4">Tabla de Estudiantes</h2>
+                <h2 class="titulo">Tabla de Estudiantes</h2>
 
                 <div class="containerTabla">
 
