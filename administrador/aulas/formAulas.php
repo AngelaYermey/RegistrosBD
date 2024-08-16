@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../index.php");
     die();
 }
@@ -26,7 +26,7 @@ $result = $conn->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/formRegistro.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <title>ROEH</title>
 </head>
 
@@ -41,11 +41,11 @@ $result = $conn->query($query);
         <div class="contentbx">
             <div class="form">
                 <h2>Registrar Aulas</h2><br>
-                <form action="registrosAula.php" method="POST" class="formulario_Crear_Cuenta">
+                <form autocomplete="off" action="registrosAula.php" method="POST" class="formulario_Crear_Cuenta">
                     <div class="inputbx">
                         <div class="form-floating mb-3">
                             <label for="ape">Codigo o numero del aula</label>
-                            <input type="text" id="CodAula" class="form-control" name="CodAula" data-form-lastname required>
+                            <input type="text" id="CodAula" pattern="^[A-Za-z0-9]+$" class="form-control" name="CodAula" data-form-lastname required>
                         </div>
 
                         <div class="form-floating mb-3">

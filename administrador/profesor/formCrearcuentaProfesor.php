@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../index.php");
     die();
 }
@@ -19,7 +19,7 @@ if ($validar == null || $validar = '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/formRegistro.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <title>ROEH: Registro</title>
 </head>
 
@@ -33,7 +33,7 @@ if ($validar == null || $validar = '') {
         <div class="contentbx">
             <div class="form">
                 <h2>Registrar usuarios</h2><br>
-                <form action="registroProfesor.php" method="POST" class="formulario_Crear_Cuenta">
+                <form autocomplete="off" action="registroProfesor.php" method="POST" class="formulario_Crear_Cuenta">
                     <div class="inputbx">
                         <div class="form-floating mb-3">
                             <label for="nom">Nombre</label>
@@ -57,7 +57,7 @@ if ($validar == null || $validar = '') {
 
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
-                            <input type="password" id="pass" name="pass" class="form-control" data-form-pass required>
+                            <input type="password" id="pass" name="pass" class="form-control" pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[\W_]).{8,}" data-form-pass required>
                         </div>
                     </div>
                     <div class="inputbx">

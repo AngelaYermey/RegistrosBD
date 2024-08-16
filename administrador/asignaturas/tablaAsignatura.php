@@ -3,7 +3,7 @@ session_start();
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../index.php");
     die();
 }

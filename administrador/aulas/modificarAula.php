@@ -66,7 +66,7 @@ error_reporting(E_ALL);
                     <div class="mb-3">
                         <?php include "actualizarDatosaula.php"; ?>
                         <label for="nom" class="form-label">Codigo</label>
-                        <input type="text" id="codigoAula" class="form-control" name="codigoAula" value="<?php echo $datos->numero_aula; ?>" required>
+                        <input type="text" id="codigoAula" class="form-control" pattern="^[A-Za-z0-9]+$" name="codigoAula" value="<?php echo $datos->numero_aula; ?>" required>
                         <!-- Campo oculto para almacenar la cédula antigua por si necesita modificar este campo-->
                         <input type="hidden" name="numAntiguo" value="<?php echo $datos->numero_aula; ?>">
                     </div>

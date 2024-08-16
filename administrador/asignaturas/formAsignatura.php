@@ -19,7 +19,7 @@ if ($validar == null || $validar == '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/formRegistro.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <title>ROEH: Reistro de asignaturas</title>
 </head>
 
@@ -34,7 +34,7 @@ if ($validar == null || $validar == '') {
         <div class="contentbx">
             <div class="form">
                 <h2>Registrar asignaturas</h2><br>
-                <form action="registroAsignatura.php" method="POST" class="formulario_Crear_Cuenta" >
+                <form autocomplete="off" action="registroAsignatura.php" method="POST" class="formulario_Crear_Cuenta" >
                     <div class="inputbx">
                     <div class="form-floating mb-3">
                             <label for="ape">Codigo</label>

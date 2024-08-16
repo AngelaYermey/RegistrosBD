@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../index.php");
     die();
 }
@@ -17,7 +17,7 @@ if ($validar == null || $validar = '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/tabla.css">
 </head>

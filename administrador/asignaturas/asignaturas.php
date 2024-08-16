@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
   header("Location: ../../index.php");
   die();
 }
@@ -26,7 +26,7 @@ $result = $conn->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/formRegistro.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <title>ROEH: Reistro de asignaturas</title>
 </head>
 

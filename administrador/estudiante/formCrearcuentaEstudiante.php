@@ -9,6 +9,10 @@ if ($validar == null || $validar == '') {
     die();
 }
 
+// Añadir estos encabezados para evitar el caché
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 include '../../db_Conexion/conector.php';
 
@@ -31,7 +35,7 @@ $resultAulas = $conn->query($queryAulas);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/formRegistro.css">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <title>ROEH: Reistro</title>
 </head>
 
@@ -46,7 +50,7 @@ $resultAulas = $conn->query($queryAulas);
         <div class="contentbx">
             <div class="form">
                 <h2>Registrar Estudiantes</h2><br>
-                <form action="registroEstudiante.php" method="POST" class="formulario_Crear_Cuenta">
+                <form autocomplete="off" action="registroEstudiante.php" method="POST" class="formulario_Crear_Cuenta">
                     <div class="inputbx">
                         <div class="form-floating mb-3">
                             <label for="nom">Nombre</label>
@@ -104,7 +108,7 @@ $resultAulas = $conn->query($queryAulas);
 
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
-                            <input type="password" id="pass" name="pass" class="form-control" data-form-pass required>
+                            <input type="password" id="pass" name="pass" pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[\W_]).{8,}" class="form-control" data-form-pass required>
                         </div>
                     </div>
                     <div class="inputbx">

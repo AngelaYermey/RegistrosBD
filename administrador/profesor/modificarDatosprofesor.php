@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
 
     header("Location: ../../index.php");
     die();
@@ -18,7 +18,7 @@ if ($validar == null || $validar = '') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/formModificar.css">
     <title>ROEH: Modificar</title>
 </head>
@@ -105,7 +105,7 @@ if (isset($_GET["cedProf"])) {
 
                     <div class="mb-3">
                         <label for="pass" class="form-label">Contraseña</label>
-                        <input type="text" id="pass" name="pass" class="form-control" value="<?php echo $datos->contraseña; ?>" required>
+                        <input type="text" id="pass" name="pass" class="form-control" pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[\W_]).{8,}" value="<?php echo $datos->contraseña; ?>" required>
                     </div>
                     <div class="inputbx2">
                         <div class="row p-4 ">

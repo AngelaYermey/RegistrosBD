@@ -124,7 +124,7 @@ $resultAulas = $conn->query($queryAulas);
 
                     <div class="mb-3">
                         <label for="pass" class="form-label">Contraseña</label>
-                        <input type="text" id="pass" name="pass" class="form-control" value="<?php echo $datos->contraseña; ?>" required>
+                        <input type="text" id="pass" name="pass" class="form-control" pattern="(?=.*\d)(?=.*[A-Za-z])(?=.*[\W_]).{8,}" value="<?php echo $datos->contraseña; ?>" required>
                     </div>
                     <div class="inputbx2">
                         <div class="row p-4 ">

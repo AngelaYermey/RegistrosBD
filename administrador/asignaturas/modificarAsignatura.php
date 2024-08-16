@@ -80,7 +80,6 @@ if (isset($_GET["codAsig"])) {
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
