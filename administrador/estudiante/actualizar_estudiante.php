@@ -67,7 +67,7 @@ if (isset($_POST["btnModificar"])) {
         } else {
         ?>
             <div class="alert alert-warning" role="alert">
-                <?php echo "No se realizó ninguna actualización en el registro"; ?>
+                <?php echo "No se realizó ninguna actualización en el registro o ocurrio un error"; ?>
             </div>
         <?php
         }

@@ -4,7 +4,7 @@ error_reporting(0);
 
 $validar = $_SESSION['usuario'];
 
-if ($validar == null || $validar = '') {
+if ($validar == null || $validar == '') {
     header("Location: ../../index.php");
     die();
 }
@@ -17,6 +17,10 @@ $conn = $conexion_obj->conectar();
 
 $query = "SELECT id_centroRegional, nombre_centro FROM centros_regionales";
 $result = $conn->query($query);
+
+// Consulta para obtener las aulas
+$queryAulas = "SELECT numero_aula, id_centroRegional FROM aula";
+$resultAulas = $conn->query($queryAulas);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +79,7 @@ $result = $conn->query($query);
 
                         <div class="form-floating mb-3">
                             <label for="año">Año:</label>
-                            <input type="text" id="año" name="año" pattern="[1-5]" required>
+                            <input type="text" id="año" name="año" pattern="^[1-5]|(I|II|III|IV|V)$" title="Ingrese un número del I al V" required>
                         </div>
 
                         <div class="form-floating mb-3">
@@ -88,9 +92,16 @@ $result = $conn->query($query);
                             </select>
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="aula">N° Aula</label>
-                            <input type="text" id="aula" name="aula" title="Por favor, ingrese el número del aula." required><br>
+                            <label for="numAula">Número de Aula:</label>
+                            <select id="aula" name="aula" class="form-select" required>
+                                <option value="">Escoger opción...</option>
+                                <?php while ($row = $resultAulas->fetch_assoc()) : ?>
+                                    <option value="<?php echo $row['numero_aula']; ?>"><?php echo $row['numero_aula']; ?></option>
+                                <?php endwhile; ?>
+                            </select>
                         </div>
+
+
                         <div class="form-floating mb-3">
                             <label for="pass">Contraseña</label>
                             <input type="password" id="pass" name="pass" class="form-control" data-form-pass required>

@@ -12,13 +12,12 @@ body {
 }
 
 /* Estilo del Título */
-h2,
-.titulo {
+.container h2.titulo {
   color: #494a48; /* Mantener el color original del título */
   font-weight: 550;
   font-size: 1.8em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   margin-top: 20px;
   text-align: center;
   border-bottom: 4px solid #0099ff; 

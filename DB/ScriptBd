@@ -37,7 +37,7 @@ CREATE TABLE estudiantes (
     email VARCHAR(100) NOT NULL,
     facultad VARCHAR(50) NOT NULL,
     carrera VARCHAR(100) NOT NULL,
-    año INT NOT NULL,    
+    año INT NOT NULL,    -- año VARCHAR(10) NOT NULL no si en romano o en numeros normales
     id_centroRegional INT NOT NULL,
     numero_aula VARCHAR(50) NOT NULL,
     contraseña VARCHAR(100) NOT NULL,

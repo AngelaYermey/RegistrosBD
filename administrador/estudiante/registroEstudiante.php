@@ -93,8 +93,7 @@ if (isset($_POST['btnCrear'])) {
    
     // Verificar el número de filas devueltas por la consulta
     if ($result->num_rows > 0) {
-        echo '<div class="alert alert-danger"></div>';
-        echo '<div class="card-success">
+        echo '<div class="alert alert-danger">
         <p class="success-message">Error: Ya existe una cuenta registrada con esta cédula</p>
     </div>';
         echo "<script>
@@ -113,14 +112,14 @@ if (isset($_POST['btnCrear'])) {
        <p class="success-message">Registrado correctamente</p>
    </div>';
             echo "<script>
-       // Esperar 4 segundos antes de redirigir
+       // Esperar Unos segundos antes de redirigir
        setTimeout(function() {
            // Redirigir a otra página
            window.location.href = 'formCrearcuentaEstudiante.php';
        }, 3500); 
    </script>";
         } else {
-            echo '<div class="card-success">
+            echo '<div class="card-danger">
             <p class="success-message">Ocurrio un error al registrar el usuario</p>
         </div>';
                  echo "<script>

@@ -20,8 +20,8 @@ if ($validar == null || $validar == '') {
     <link rel="stylesheet" href="../../css/tabla.css">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../../img/iconoRetinanuevo.png" type="image/x-icon">
-   
-    
+
+
 </head>
 
 <body class="holy-grail">
@@ -43,7 +43,7 @@ if ($validar == null || $validar == '') {
                         <div class="col-md-4 mb-2 mb-md-0">
                             <div class="input-group">
                                 <input placeholder="Ingrese el dato que desee buscar" name="busqueda" type="search" class="form-control">
-                                <button type="submit" name="buscador" class="btn btn-primary">Buscar</button>
+                                <button type="submit" name="buscador" class="btn btn-primary" aria-label="Buscar estudiantes">Buscar</button>
                             </div>
                         </div>
                         <div class="col-md-4 text-md-end">
@@ -161,10 +161,7 @@ if ($validar == null || $validar == '') {
             </div>
         </section>
     </div>
-    <!-- fin de content -->
 
-    <!-- JS de Bootstrap (opcional, solo si necesitas funcionalidades como el cierre de las alertas) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -190,6 +187,7 @@ if ($validar == null || $validar == '') {
             });
         }
     </script>
+
     <footer class="footer">
         <?php
         include("../../menuFooter/footerA.html");
