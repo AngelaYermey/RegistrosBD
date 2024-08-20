@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./css/complelogin.css">
     <link rel="shortcut icon" href="./img/iconoRetinanuevo.png" type="image/x-icon">
     <!-- librearias -->
-
     <title>ROEH</title>
 </head>
 
@@ -36,7 +35,7 @@
                     </li>
                     <li class="icon twitter">
                         <span class="tooltip">X</span>
-                        <a href="https://twitter.com/utppanama" target="_blank">
+                        <a href="https://x.com/UTPCocle" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-twitter">
@@ -47,7 +46,7 @@
                     </li>
                     <li class="icon instagram">
                         <span class="tooltip">Instagram</span>
-                        <a href="https://www.instagram.com/utppanama" target="_blank">
+                        <a href="https://www.instagram.com/utpcocle/" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-instagram">
@@ -59,7 +58,7 @@
                     </li>
                     <li class="icon facebook">
                         <span class="tooltip">Facebook</span>
-                        <a href="https://www.facebook.com/paginautp" target="_blank">
+                        <a href="https://www.facebook.com/utpcocle/" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-facebook">
@@ -69,13 +68,35 @@
                     </li>
                     <li class="icon youtubed">
                         <span class="tooltip">Youtubed</span>
-                        <a href="https://www.youtube.com/@UTPPanama507" target="_blank">
+                        <a href="https://www.youtube.com/c/centroregionaldecocle" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-youtube">
                                 <path
                                     d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                                 <path d="m10 15 5-3-5-3z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="icon utp">
+                        <span class="tooltip">UTP Coclé</span>
+                        <a href="https://cc.utp.ac.pa/" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss">
+                                <path d="M4 11a9 9 0 0 1 9 9" />
+                                <path d="M4 4a16 16 0 0 1 16 16" />
+                                <circle cx="5" cy="19" r="1" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="icon team">
+                        <span class="tooltip">Equipo desarrollador</span>
+                        <a href="./creadores.php">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-contact">
+                                <path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2" />
+                                <rect width="18" height="18" x="3" y="4" rx="2" />
+                                <circle cx="12" cy="10" r="2" />
+                                <line x1="8" x2="8" y1="2" y2="4" />
+                                <line x1="16" x2="16" y1="2" y2="4" />
                             </svg>
                         </a>
                     </li>

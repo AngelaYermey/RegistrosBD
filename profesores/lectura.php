@@ -51,7 +51,7 @@ if ($Usuarioprofesor == null || $Usuarioprofesor == '') {
 
         <section class="holy-grail-content">
             <!-- espacio donde se realiza la transcripcion -->
-            <div class="texts">
+            <div class="texts" id="textContent">
 
             </div>
             <!-- fin de espacio transcripcion -->

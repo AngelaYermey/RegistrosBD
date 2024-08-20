@@ -65,7 +65,7 @@ if (isset($_GET['clase'])) {
     </div>
     <header class="container">
         <?php
-        include("../menuFooter/menuLectura.html");
+        include("../menuFooter/menuLecturaEstudi.html");
         ?>
     </header>
     <!-- informacion de la clase segun lo seleccionado -->
@@ -73,7 +73,7 @@ if (isset($_GET['clase'])) {
         <section class="holy-grail-content">
             <div class="container">
                 <h2 class="text-center p-4">Tema: <?php echo $tema_clase; ?></h2>
-                <div class="texts">
+                <div class="texts" id="textContent">
                     <p><?php echo $texto_clase; ?></p>
                 </div>
             </div>

@@ -192,7 +192,7 @@ if ($validar == null || $validar == '') {
         <?php
         include("../../menuFooter/footerA.html");
         ?>
-
+ 
     </footer>
 </body>
 

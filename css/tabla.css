@@ -1,8 +1,5 @@
-/* General Styles */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+.botonInfo{
+  color: #000000;
 }
 
 /* Contenedor de la Tabla */
@@ -102,6 +99,18 @@ body {
 }
 
 .btn-secondary:hover {
+  background-color: #567de4; /* Color #2c45c5 en hover para el botón Volver */
+  border-color: #567de4;
+}
+
+/* boton de transcripcion de texto a voz */
+.btn-secondary2{
+  color: #fff;
+  background-color: #115dce; /* Color #3423ad para el botón Volver */
+  border-color: #727b91;
+}
+
+.btn-secondary2:hover {
   background-color: #567de4; /* Color #2c45c5 en hover para el botón Volver */
   border-color: #567de4;
 }

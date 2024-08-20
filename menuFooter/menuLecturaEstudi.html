@@ -1,0 +1,72 @@
+<head>
+
+    <link rel="stylesheet" href="../css/lectura.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilobody.css">
+    <link rel="stylesheet" href="../css/footer.css">
+</head>
+<div class="imgMain">
+    <!-- imagen de footer -->
+    <img class="imagenMain" src="../img/NuevoLogo.png" alt="">
+</div>
+<div class="button-container">
+
+
+
+    <button id="playButton" title="Leer Texto" class="btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-audio-lines">
+            <path d="M2 10v3" />
+            <path d="M6 6v11" />
+            <path d="M10 3v18" />
+            <path d="M14 8v7" />
+            <path d="M18 5v13" />
+            <path d="M22 10v3" />
+        </svg>
+        <span class="text">Leer Texto</span>
+    </button>
+
+    <div class="language-selection-container">
+        <label class="language-label">Elige el idioma:</label>
+        <div class="radio-inputs">
+            <label>
+                <input class="radio-input" type="radio" name="language" value="es-ES" checked>
+                <span class="radio-tile">
+                    <span class="radio-icon">
+                        <!-- Icono para español, si lo deseas -->
+                    </span>
+                    <span class="radio-label">Español</span>
+                </span>
+            </label>
+            <label>
+                <input class="radio-input" type="radio" name="language" value="en-US">
+                <span class="radio-tile">
+                    <span class="radio-icon">
+                        <!-- Icono para inglés, si lo deseas -->
+                    </span>
+                    <span class="radio-label">Inglés</span>
+                </span>
+            </label>
+        </div>
+    </div>
+    
+
+
+    <button id="stopButton" title="Detener" class="btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-stop">
+            <circle cx="12" cy="12" r="10" />
+            <rect width="6" height="6" x="9" y="9" />
+        </svg>
+        <span class="text">Detener </span>
+    </button>
+
+
+    <label for="fileUpload" class="invisibleButton">
+        
+        <input type="file" id="fileUpload" accept=".txt">
+    </label>
+
+    
+   
+</div>

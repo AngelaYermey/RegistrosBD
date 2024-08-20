@@ -277,3 +277,18 @@ body {
   background: #ff002f;
   color: #fff;
 }
+
+
+.wrapper .utp:hover,
+.wrapper .utp:hover .tooltip,
+.wrapper .utp:hover .tooltip::before {
+  background: #11005b6c;
+  color: #fff;
+}
+
+.wrapper .team:hover,
+.wrapper .team:hover .tooltip,
+.wrapper .team:hover .tooltip::before {
+  background: #10b586de;
+  color: #fff;
+}

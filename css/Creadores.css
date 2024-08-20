@@ -1,0 +1,216 @@
+.team-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.team-member {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 20px;
+  background-image: linear-gradient(
+      90deg,
+      rgba(165, 165, 165, 0.03) 0%,
+      rgba(165, 165, 165, 0.03) 8%,
+      rgba(235, 235, 235, 0.03) 8%,
+      rgba(235, 235, 235, 0.03) 9%,
+      rgba(7, 7, 7, 0.03) 9%,
+      rgba(7, 7, 7, 0.03) 14%,
+      rgba(212, 212, 212, 0.03) 14%,
+      rgba(212, 212, 212, 0.03) 17%,
+      rgba(219, 219, 219, 0.03) 17%,
+      rgba(219, 219, 219, 0.03) 95%,
+      rgba(86, 86, 86, 0.03) 95%,
+      rgba(86, 86, 86, 0.03) 100%
+    ),
+    linear-gradient(
+      67.5deg,
+      rgba(80, 80, 80, 0.03) 0%,
+      rgba(80, 80, 80, 0.03) 11%,
+      rgba(138, 138, 138, 0.03) 11%,
+      rgba(138, 138, 138, 0.03) 17%,
+      rgba(122, 122, 122, 0.03) 17%,
+      rgba(122, 122, 122, 0.03) 24%,
+      rgba(166, 166, 166, 0.03) 24%,
+      rgba(166, 166, 166, 0.03) 27%,
+      rgba(245, 245, 245, 0.03) 27%,
+      rgba(245, 245, 245, 0.03) 89%,
+      rgba(88, 88, 88, 0.03) 89%,
+      rgba(88, 88, 88, 0.03) 100%
+    ),
+    linear-gradient(
+      67.5deg,
+      rgba(244, 244, 244, 0.03) 0%,
+      rgba(244, 244, 244, 0.03) 4%,
+      rgba(16, 16, 16, 0.03) 4%,
+      rgba(16, 16, 16, 0.03) 10%,
+      rgba(157, 157, 157, 0.03) 10%,
+      rgba(157, 157, 157, 0.03) 20%,
+      rgba(212, 212, 212, 0.03) 20%,
+      rgba(212, 212, 212, 0.03) 83%,
+      rgba(5, 5, 5, 0.03) 83%,
+      rgba(5, 5, 5, 0.03) 84%,
+      rgba(237, 237, 237, 0.03) 84%,
+      rgba(237, 237, 237, 0.03) 100%
+    ),
+    linear-gradient(90deg, #ffffff, #ffffff);
+}
+
+.team-member.reverse {
+  flex-direction: row-reverse;
+}
+
+.image-container {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.image-container::before,
+.image-container::after {
+  content: "";
+  position: absolute;
+  background-image: radial-gradient(
+      circle at 85% 1%,
+      hsla(190, 0%, 93%, 0.05) 0%,
+      hsla(190, 0%, 93%, 0.05) 96%,
+      transparent 96%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 14% 15%,
+      hsla(190, 0%, 93%, 0.05) 0%,
+      hsla(190, 0%, 93%, 0.05) 1%,
+      transparent 1%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 60% 90%,
+      hsla(190, 0%, 93%, 0.05) 0%,
+      hsla(190, 0%, 93%, 0.05) 20%,
+      transparent 20%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 79% 7%,
+      hsla(190, 0%, 93%, 0.05) 0%,
+      hsla(190, 0%, 93%, 0.05) 78%,
+      transparent 78%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 55% 65%,
+      hsla(190, 0%, 93%, 0.05) 0%,
+      hsla(190, 0%, 93%, 0.05) 52%,
+      transparent 52%,
+      transparent 100%
+    ),
+    linear-gradient(135deg, rgb(37, 56, 222), rgb(96, 189, 244));
+  z-index: 0;
+}
+
+.image-container::after {
+  width: calc(100% - 120px);
+  height: 50px;
+  top: 50%;
+  left: 120px;
+  transform: translateY(-50%);
+}
+
+.team-image {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.member-info {
+  flex: 1 1 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.member-info h2 {
+  font-size: 2em;
+  margin: 10px 0;
+  color: #0072ff; /* Blue color for headings */
+}
+
+.member-info p {
+  color: #333;
+  font-size: 1em;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.social-icons a:hover img {
+  transform: scale(1.2);
+}
+
+.general-info {
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(189, 189, 189, 0.1) 0px,
+      rgba(189, 189, 189, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
+}
+
+.general-info h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #0072ff; /* Blue color for headings */
+}
+
+.general-info p {
+  color: #000000;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+.team-member {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    opacity 0.6s ease-in-out;
+  opacity: 0;
+}
+
+.team-member.visible {
+  opacity: 1;
+}
+
+.team-member.fade-in {
+  opacity: 1;
+}
