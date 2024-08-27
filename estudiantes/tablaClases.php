@@ -203,7 +203,7 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
                     </ul>
                 </nav>
             </div>
-        </div>
+        </section>
     </div>
 
     <footer class="footer">

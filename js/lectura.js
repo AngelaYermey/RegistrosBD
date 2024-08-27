@@ -74,8 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-
 document.getElementById('goToTranscripcion').addEventListener('click', () => {
     if (window.speechSynthesis) {
         window.speechSynthesis.cancel(); // Cancelar cualquier síntesis de voz en curso
