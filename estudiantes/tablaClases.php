@@ -21,7 +21,7 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clases</title>
+    <title>ROEH: Clases Disponibles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="../img/iconoRetinanuevo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/5ef4b61a8f.js" crossorigin="anonymous"></script>
@@ -38,7 +38,8 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
     </header>
     <div class="holy-grail-body">
         <section class="holy-grail-content">
-            <h2 class="text-center p-4 botonInfo">Clases Disponibles</h2>
+        <div class="container">
+            <h2 class="titulo">Clases Disponibles</h2>
 
             <div class="containerTabla">
 
@@ -49,7 +50,7 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
                                 <a href="../sesion/cerrar.php" class="btn btn-secondary"><i class="fa-solid fa-door-open"></i> Salir</a>
                             </div>
                             <div class="col">
-                                <a href="../estudiantes/lecturaEstu.php" class="btn btn-secondary2"><i class="fa-solid fa-volume-high"></i>Transcribir texto a voz</a>
+                                <a href="../estudiantes/lecturaEstu.php" class="btn btn-secondary2"><i class="fa-solid fa-volume-high"></i> Transcribir Texto a Voz</a>
                             </div>
                             <div class="col">
                                 <div class="input-group">
@@ -165,8 +166,8 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
                                                 <?php echo $datos->apellido_profesor; ?>
                                             </td>
                                             <td>
-                                                <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-success"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
-                                                <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-danger"><i class="fa-solid fa-download"></i> Descargar</a>
+                                                <a href="verClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-outline-primary"><i class="fa-solid fa-up-right-from-square"></i> Abrir</a>
+                                                <a href="descargarClase.php?clase=<?= $datos->codigo_asignatura ?>" class="btn btn-outline-success"><i class="fa-solid fa-download"></i> Descargar</a>
                                             </td>
                                         </tr>
                                     <?php endwhile; ?>
@@ -202,6 +203,7 @@ $inicio = ($pagina > 1) ? ($pagina * $limite) - $limite : 0; // Índice de inici
                         <?php endif; ?>
                     </ul>
                 </nav>
+                </div>
             </div>
         </section>
     </div>

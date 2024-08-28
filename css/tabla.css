@@ -107,12 +107,13 @@
 .btn-secondary2{
   color: #fff;
   background-color: #115dce; /* Color #3423ad para el botón Volver */
-  border-color: #727b91;
+  border-color: #115dce;
 }
 
 .btn-secondary2:hover {
-  background-color: #567de4; /* Color #2c45c5 en hover para el botón Volver */
-  border-color: #567de4;
+  background-color: #2973e2; /* Color #2c45c5 en hover para el botón Volver */
+  border-color: #1969e2;
+  color: #fff;
 }
 
 /* Botón Agregar */
