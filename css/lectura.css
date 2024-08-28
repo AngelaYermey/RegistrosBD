@@ -168,6 +168,15 @@
 
 /* fin de css de radio button */
 
+#btnImportan{
+  display: flex;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan en una nueva línea si es necesario */
+  align-items: center; /* Alinea verticalmente los botones en el centro */
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 10px; /* Espacio entre los botones */
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+}
+
 .invisibleButton{
   z-index: -9999;
 }

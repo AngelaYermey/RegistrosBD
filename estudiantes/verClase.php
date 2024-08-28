@@ -41,7 +41,7 @@ if (isset($_GET['clase'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reconocimiento de Voz en Tiempo Real | Lectura</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
@@ -61,6 +61,10 @@ if (isset($_GET['clase'])) {
             <span class="text">Volver atrás</span>
         </button>
 
+
+    </div>
+    <!-- barra de espacio -->
+    <div class="barSpace">
 
     </div>
     <header class="container">
@@ -90,7 +94,7 @@ if (isset($_GET['clase'])) {
     <script src="../js/script.js"></script>
     <script src="../js/lectura.js"></script>
     <script src="../js/Controles.js"></script>
- 
+
 </body>
 
 </html>

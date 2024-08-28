@@ -40,6 +40,13 @@ if ($UsuarioEstudiante == null || $UsuarioEstudiante == '') {
 
 
     </div>
+
+    <!-- barra de espacio -->
+    <div class="barSpace">
+
+    </div>
+
+
     <header class="container">
         <?php
         include("../menuFooter/menuLectura.html");
